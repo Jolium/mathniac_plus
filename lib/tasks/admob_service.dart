@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class AdMobService {
   String getAdMobAppId() {
     if (Platform.isIOS) {
-      return 'ca-app-pub-2334510780816542~6726672523';
+      return 'ca-app-pub-4259634083772880~8976810502'; // mine
     } else if (Platform.isAndroid) {
       return 'ca-app-pub-4259634083772880~7378704091'; // mine
     }
@@ -15,7 +15,7 @@ class AdMobService {
   String getBannerAdId() {
     if (Platform.isIOS) {
 //      return 'ca-app-pub-2334510780816542/6833456062';
-      return 'ca-app-pub-3940256099942544/2934735716';
+      return "ca-app-pub-4259634083772880/7531866890"; // mine
     } else if (Platform.isAndroid) {
       // return 'ca-app-pub-3940256099942544/6300978111';
       return "ca-app-pub-4259634083772880/3567451592"; // mine
@@ -37,7 +37,7 @@ class AdMobService {
   String getRewardedAdId() {
     if (Platform.isIOS) {
 //      return '';
-      return 'ca-app-pub-3940256099942544/4411468910';
+      return "ca-app-pub-4259634083772880/4905703552"; // mine
     } else if (Platform.isAndroid) {
 //      return '';
       return "ca-app-pub-4259634083772880/3212405984"; // mine
