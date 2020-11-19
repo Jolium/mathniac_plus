@@ -27,7 +27,6 @@ class ScoresScreen extends StatefulWidget {
 }
 
 class _ScoresScreenState extends State<ScoresScreen> {
-  final ams = AdMobService();
   double _widthRatio = 1.1;
   double _heightRatio = 2;
   double _borderRatio = 10;
@@ -146,9 +145,9 @@ class _ScoresScreenState extends State<ScoresScreen> {
                                 ),
                                 child: AdmobBanner(
                                   /// TODO
-                                  // adUnitId: ams.getBannerAdId(),
-                                  adUnitId:
-                                      'ca-app-pub-3940256099942544/6300978111',
+                                  adUnitId: AdMobService().getBannerAdId(),
+                                  // adUnitId:
+                                  //     'ca-app-pub-3940256099942544/6300978111',
                                   adSize: AdmobBannerSize.BANNER,
                                   nonPersonalizedAds: true,
                                 ),

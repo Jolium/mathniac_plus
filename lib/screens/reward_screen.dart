@@ -1,19 +1,20 @@
-import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-import 'package:mathniac_plus/tasks/admob_service.dart';
+import 'package:firebase_admob/firebase_admob.dart';
 
 import 'package:mathniac_plus/settings/vars.dart';
 import 'package:mathniac_plus/settings/constants.dart';
+
 import 'package:mathniac_plus/tasks/tasks_functions.dart';
+import 'package:mathniac_plus/tasks/admob_service.dart';
 
 import 'package:mathniac_plus/widgets/my_button.dart';
 import 'package:mathniac_plus/widgets/custom_header.dart';
+import 'package:mathniac_plus/widgets/pop_up.dart';
 
 import 'package:mathniac_plus/screens/home_screen.dart';
-import 'package:mathniac_plus/widgets/pop_up.dart';
 
 class RewardScreen extends StatefulWidget {
   @override
@@ -57,8 +58,8 @@ class _RewardScreenState extends State<RewardScreen> {
         .load(
 
             /// TODO
-            adUnitId: RewardedVideoAd.testAdUnitId,
-            // adUnitId: AdMobService().getRewardedAdId(),
+            // adUnitId: RewardedVideoAd.testAdUnitId,
+            adUnitId: AdMobService().getRewardedAdId(),
             targetingInfo: targetingInfo)
         .catchError((e) => print("error in loading 1st time"))
         .then((v) => setState(() => _loaded = v));
@@ -71,8 +72,8 @@ class _RewardScreenState extends State<RewardScreen> {
             .load(
 
                 /// TODO
-                adUnitId: RewardedVideoAd.testAdUnitId,
-                // adUnitId: AdMobService().getRewardedAdId(),
+                // adUnitId: RewardedVideoAd.testAdUnitId,
+                adUnitId: AdMobService().getRewardedAdId(),
                 targetingInfo: targetingInfo)
             .catchError((e) => print("error in loading again"))
             .then((v) => setState(() => _loaded = v));

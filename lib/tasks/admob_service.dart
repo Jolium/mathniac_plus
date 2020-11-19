@@ -1,6 +1,6 @@
 import 'dart:io';
 // import 'package:firebase_admob/firebase_admob.dart';
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 
 class AdMobService {
   String getAdMobAppId() {
@@ -36,10 +36,8 @@ class AdMobService {
 
   String getRewardedAdId() {
     if (Platform.isIOS) {
-//      return '';
       return "ca-app-pub-4259634083772880/4905703552"; // mine
     } else if (Platform.isAndroid) {
-//      return '';
       return "ca-app-pub-4259634083772880/3212405984"; // mine
     }
     return null;
