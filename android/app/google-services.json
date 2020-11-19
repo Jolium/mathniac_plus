@@ -1,0 +1,84 @@
+{
+  "project_info": {
+    "project_number": "143647895105",
+    "firebase_url": "https://mathniac-aea8f.firebaseio.com",
+    "project_id": "mathniac-aea8f",
+    "storage_bucket": "mathniac-aea8f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:143647895105:android:12fbde0eee54438ba0e0c0",
+        "android_client_info": {
+          "package_name": "com.linchoplus.mathniac"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "143647895105-ccc2a1sdic6bvvks9uta335i0d292bvq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBsAKzPvEUA0jL0F2r_NDCDhc3H9CwnC8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "143647895105-ccc2a1sdic6bvvks9uta335i0d292bvq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "143647895105-jc5vgkajj7os7mmtus1stpvk1086io14.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.linchoplus.rooster"
+              }
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-4259634083772880~2954619219"
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:143647895105:android:a4f74c50bebf05eba0e0c0",
+        "android_client_info": {
+          "package_name": "com.linchoplus.mathniac_plus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "143647895105-ccc2a1sdic6bvvks9uta335i0d292bvq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBsAKzPvEUA0jL0F2r_NDCDhc3H9CwnC8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "143647895105-ccc2a1sdic6bvvks9uta335i0d292bvq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "143647895105-jc5vgkajj7os7mmtus1stpvk1086io14.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.linchoplus.rooster"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

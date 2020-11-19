@@ -1,0 +1,84 @@
+name: mathniac_plus
+description: Mathniac the game
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.8+8
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.0
+  spring: ^1.0.4
+  provider: ^4.3.2+2
+  audioplayers: '0.16.1'
+#  audioplayers: ^0.17.0
+  hive: ^1.4.4+1
+  path_provider: ^1.6.18
+  firebase_core: ^0.5.0+1
+  #  firebase_auth: ^0.18.1+2
+  firebase_admob: ^0.10.2
+  cloud_firestore: ^0.14.1+3
+  #  modal_progress_hud: ^0.1.3
+  admob_flutter: ^1.0.1
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+#  flutter_launcher_icons: ^0.8.1
+#  flutter_launcher_name: ^0.0.1
+#
+#flutter_launcher_name:
+#  name: "Mathniac"
+#
+#flutter_icons:
+#  android: true
+#  ios: true
+#  image_path_android: "images/icons/icon_android.png"
+#  image_path_ios: "images/icons/icon_ios.png"
+
+# The following section is specific to Flutter.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+
+  assets:
+    - images/
+    - images/icons/
+    - assets/sounds/
+    - assets/fonts/
+
+
+  fonts:
+    - family: Niconne
+      fonts:
+        - asset: assets/fonts/Niconne-Regular.ttf
+
+    - family: Dancing
+      fonts:
+        - asset: assets/fonts/DancingScript-Medium.ttf
+
+    - family: Courgette
+      fonts:
+        - asset: assets/fonts/Courgette-Regular.ttf
+
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+

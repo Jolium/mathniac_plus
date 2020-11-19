@@ -1,0 +1,111 @@
+import 'package:hive/hive.dart';
+
+import 'package:mathniac_plus/settings/constants.dart';
+import 'package:mathniac_plus/settings/lists.dart';
+import 'package:mathniac_plus/settings/vars.dart';
+
+Box<String> tasksBox = Hive.box<String>(kHiveBoxName);
+
+class TaskHive {
+  void updateLevel(int value) {
+    tasksBox.put('level', '$value');
+    vMagicLevel = value;
+  }
+
+  int get level {
+    var _level = tasksBox.get('level');
+    if (_level == null) {
+      tasksBox.put('level', '1');
+      return 1;
+    } else {
+      return int.parse(_level);
+    }
+  }
+
+  void updateSound(bool value) {
+    tasksBox.put('sound', '$value');
+    vPlaySound = value;
+  }
+
+  bool get sound {
+    var _sound = tasksBox.get('sound');
+    if (_sound == null) {
+      tasksBox.put('sound', 'true');
+      return true;
+    } else {
+      if (_sound == 'true') {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+
+  void updateBackground(bool value) {
+    tasksBox.put('background', '$value');
+    vBackground = value;
+  }
+
+  bool get background {
+    var _background = tasksBox.get('background');
+    if (_background == null) {
+      tasksBox.put('background', 'true');
+      return true;
+    } else {
+      if (_background == 'true') {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+
+  void updateHighScore(int value) {
+    tasksBox.put('highScore', '$value');
+    listOfScorePoints[14] = value;
+  }
+
+  int get highScore {
+    var _highScore = tasksBox.get('highScore');
+    if (_highScore == null) {
+      tasksBox.put('highScore', '0');
+      return 0;
+    } else {
+      return int.parse(_highScore);
+    }
+  }
+
+  void saveNickname(String nickname) {
+    tasksBox.put('nickname', '$nickname');
+    vNickname = nickname;
+  }
+
+  String get nickname {
+    var _nickname = tasksBox.get('nickname');
+    if (_nickname == null) {
+      tasksBox.put('nickname', '');
+      return '';
+    } else {
+      return _nickname;
+    }
+  }
+
+  void uploadScore(bool value) {
+    tasksBox.put('uploadScore', '$value');
+    vUploadScore = value;
+  }
+
+  bool get getUploadScore {
+    var _uploadScore = tasksBox.get('uploadScore');
+    if (_uploadScore == null) {
+      tasksBox.put('uploadScore', 'false');
+      return false;
+    } else if (_uploadScore == 'false') {
+      vUploadScore = false;
+      return false;
+    } else {
+      vUploadScore = true;
+      return true;
+    }
+  }
+}
