@@ -39,6 +39,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
     double _edgeInsets = _buttonSize / _marginRatio;
 
     Widget _alertDialog = AlertDialog(
+      elevation: 24.0,
+      buttonPadding: EdgeInsets.all(_borderRadius / 4),
+      backgroundColor: Colors.black,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(
+          Radius.circular(_borderRadius / 2),
+        ),
+        side: BorderSide(color: Colors.white60, width: _edgeInsets / 4),
+      ),
       title: Text(
         'Reset values?',
         style: TextStyle(
@@ -116,15 +125,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
         ),
       ],
-      elevation: 24.0,
-      buttonPadding: EdgeInsets.all(_borderRadius / 4),
-      backgroundColor: Colors.black,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(
-          Radius.circular(_borderRadius / 2),
-        ),
-        side: BorderSide(color: Colors.white60, width: _edgeInsets / 4),
-      ),
     );
 
     return Scaffold(

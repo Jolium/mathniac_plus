@@ -66,6 +66,9 @@ class _StartButtonState extends State<StartButton> {
     Color _shadow = kShadow1;
 
     void _onTapDown(TapDownDetails details) {
+      // Player have to play at least one time to watch ads again
+      if (!vWatchAds) {vWatchAds = true;}
+
       // Update Randoms List
       if (vCountdownValue != 0) {
         AudioPlayer().soundPlayer('start_all_buttons.mp3');

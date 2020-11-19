@@ -111,8 +111,20 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Spacer(),
               MyButton(
-                contentColor: Colors.orangeAccent,
-                onTap: () {},
+                contentColor: Colors.yellowAccent,
+                onTap: () async {
+                  // Check internet connection
+                  try {
+                    final result = await InternetAddress.lookup('google.com');
+                    if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+                      print('connected');
+                      vInternetConnection = true;
+                    }
+                  } on SocketException catch (_) {
+                    print('not connected');
+                    vInternetConnection = false;
+                  }
+                },
                 text: ' Level Up ',
                 navigator: RewardScreen(),
               ),

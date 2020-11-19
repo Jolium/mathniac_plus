@@ -63,7 +63,7 @@ class _IntroScreenState extends State<IntroScreen> {
                   padding: EdgeInsets.all(_edgeInsets),
                   decoration: BoxDecoration(
                     border:
-                        Border.all(color: Colors.white, width: _edgeInsets / 4),
+                        Border.all(color: Colors.white, width: _edgeInsets / 6),
                     color: Colors.black.withAlpha(155),
                     borderRadius: BorderRadius.all(
                       Radius.circular(_borderRadius),
@@ -88,7 +88,7 @@ class _IntroScreenState extends State<IntroScreen> {
                   padding: EdgeInsets.all(_edgeInsets),
                   decoration: BoxDecoration(
                     border:
-                        Border.all(color: Colors.white, width: _edgeInsets / 4),
+                        Border.all(color: Colors.white, width: _edgeInsets / 6),
                     color: Colors.black.withAlpha(155),
                     borderRadius: BorderRadius.all(
                       Radius.circular(_borderRadius),
@@ -126,7 +126,7 @@ class _IntroScreenState extends State<IntroScreen> {
                   padding: EdgeInsets.all(_edgeInsets),
                   decoration: BoxDecoration(
                     border:
-                        Border.all(color: Colors.white, width: _edgeInsets / 4),
+                        Border.all(color: Colors.white, width: _edgeInsets / 6),
                     color: Colors.black.withAlpha(155),
                     borderRadius: BorderRadius.all(
                       Radius.circular(_borderRadius - (_borderRadius / 10)),
