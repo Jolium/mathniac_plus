@@ -18,7 +18,7 @@ class IntroScreen extends StatefulWidget {
 }
 
 class _IntroScreenState extends State<IntroScreen> {
-  double _widthRatio = 1.1;
+  double _widthRatio = 1.15;
   double _heightRatio = 1.1;
   double _borderRatio = 10;
   double _marginRatio = 20;

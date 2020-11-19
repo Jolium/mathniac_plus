@@ -318,6 +318,7 @@ class _RewardScreenState extends State<RewardScreen> {
                   }
                 },
                 text: ' Watch Ad ',
+                textRatio: 3.5,
                 // navigator: HomeScreen(),
               ),
               Spacer(),

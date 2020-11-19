@@ -10,7 +10,7 @@ class CustomHeader extends StatefulWidget {
     this.shadow = Colors.black,
     this.colorText = Colors.white,
     this.shadowText = Colors.black,
-    this.widthRatio = 1.1,
+    this.widthRatio = 1.2,
     this.heightRatio = 10,
     this.textRatio = 2,
     // this.borderRatio = 3,

@@ -78,7 +78,7 @@ class _ScoresScreenState extends State<ScoresScreen> {
 
                 return Padding(
                   padding: EdgeInsets.symmetric(
-                    horizontal: _screenSize.width / 20,
+                    horizontal: _screenSize.width / 50,
                     vertical: 4.0,
                   ),
                   child: _place % 5 == 0 && _place != kTopScores
@@ -102,7 +102,7 @@ class _ScoresScreenState extends State<ScoresScreen> {
                                 ),
                                 CustomHeader(
                                   text: _nickname,
-                                  widthRatio: 2,
+                                  widthRatio: 2.25,
                                   heightRatio: 9,
                                 ),
                                 SizedBox(
@@ -145,6 +145,7 @@ class _ScoresScreenState extends State<ScoresScreen> {
                                   ),
                                 ),
                                 child: AdmobBanner(
+                                  /// TODO
                                   // adUnitId: ams.getBannerAdId(),
                                   adUnitId:
                                       'ca-app-pub-3940256099942544/6300978111',
@@ -173,7 +174,7 @@ class _ScoresScreenState extends State<ScoresScreen> {
                             ),
                             CustomHeader(
                               text: _nickname,
-                              widthRatio: 2,
+                              widthRatio: 2.25,
                               heightRatio: 9,
                             ),
                             SizedBox(
