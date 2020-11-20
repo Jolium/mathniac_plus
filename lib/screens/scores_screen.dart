@@ -1,19 +1,11 @@
-// import 'package:flutter/foundation.dart';
-// import 'dart:io';
-
-// import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:firebase_core/firebase_core.dart';
 import 'package:admob_flutter/admob_flutter.dart';
 
 import 'package:mathniac_plus/settings/constants.dart';
-// import 'package:mathniac_plus/settings/lists.dart';
 import 'package:mathniac_plus/settings/vars.dart';
 
-// import 'package:mathniac_plus/tasks/task_hive.dart';
-// import 'package:mathniac_plus/tasks/tasks_functions.dart';
 import 'package:mathniac_plus/tasks/admob_service.dart';
 
 import 'package:mathniac_plus/widgets/my_button.dart';
@@ -52,7 +44,6 @@ class _ScoresScreenState extends State<ScoresScreen> {
     double _borderRadius = _buttonSize / _borderRatio;
     double _edgeInsets = _buttonSize / _marginRatio;
 
-    // if (true) {
     return StreamBuilder(
       stream: _firebase.snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -77,15 +68,13 @@ class _ScoresScreenState extends State<ScoresScreen> {
 
                 return Padding(
                   padding: EdgeInsets.symmetric(
-                    horizontal: _screenSize.width / 50,
                     vertical: 4.0,
                   ),
                   child: _place % 5 == 0 && _place != kTopScores
                       ? Column(
                           children: [
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              // mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 MyButton(
                                   onTap: () {},
@@ -99,10 +88,12 @@ class _ScoresScreenState extends State<ScoresScreen> {
                                 SizedBox(
                                   width: _screenSize.height / 50,
                                 ),
-                                CustomHeader(
-                                  text: _nickname,
-                                  widthRatio: 2.25,
-                                  heightRatio: 9,
+                                Container(
+                                  width: _screenSize.width / 2.25,
+                                  child: CustomHeader(
+                                    text: _nickname,
+                                    heightRatio: 9,
+                                  ),
                                 ),
                                 SizedBox(
                                   width: _screenSize.height / 50,
@@ -123,7 +114,6 @@ class _ScoresScreenState extends State<ScoresScreen> {
                             Padding(
                               padding: const EdgeInsets.symmetric(
                                 vertical: 8.0,
-                                horizontal: 5.0,
                               ),
                               child: Container(
                                 // width: _buttonWidth / 1.5,
@@ -156,8 +146,7 @@ class _ScoresScreenState extends State<ScoresScreen> {
                           ],
                         )
                       : Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          // mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             MyButton(
                               onTap: () {},
@@ -171,10 +160,12 @@ class _ScoresScreenState extends State<ScoresScreen> {
                             SizedBox(
                               width: _screenSize.height / 50,
                             ),
-                            CustomHeader(
-                              text: _nickname,
-                              widthRatio: 2.25,
-                              heightRatio: 9,
+                            Container(
+                              width: _screenSize.width / 2.25,
+                              child: CustomHeader(
+                                text: _nickname,
+                                heightRatio: 9,
+                              ),
                             ),
                             SizedBox(
                               width: _screenSize.height / 50,
@@ -190,9 +181,6 @@ class _ScoresScreenState extends State<ScoresScreen> {
                           ],
                         ),
                 );
-                // }
-                // if (_place == kTopScores) {
-                //   _place = 0;
               } else {
                 _place = 0;
                 return Container();
@@ -207,7 +195,6 @@ class _ScoresScreenState extends State<ScoresScreen> {
   @override
   Widget build(BuildContext context) {
     var _screenSize = MediaQuery.of(context).size;
-    // List<Widget> list = generateRowElements();
 
     double _buttonHeight = _screenSize.width / _heightRatio;
     double _buttonWidth = _screenSize.width / _widthRatio;
@@ -228,28 +215,25 @@ class _ScoresScreenState extends State<ScoresScreen> {
                 : kBackgroundOn
             : kBackgroundOff,
         child: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: _screenSize.height / 30,
-              ),
-              CustomHeader(
-                text: ' Leaderboard ',
-              ),
-              SizedBox(
-                height: _screenSize.height / 20,
-              ),
-              Visibility(
-                visible: !vInternetConnection,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: _screenSize.width / 20,
-                  ),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: _screenSize.width / 30),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: _screenSize.height / 30,
+                ),
+                CustomHeader(
+                  text: ' Leaderboard ',
+                ),
+                SizedBox(
+                  height: _screenSize.height / 20,
+                ),
+                Visibility(
+                  visible: !vInternetConnection,
                   child: Column(
                     children: [
                       Container(
-                        // width: _buttonWidth / 1.5,
                         alignment: Alignment.center,
                         padding: EdgeInsets.all(_edgeInsets),
                         decoration: BoxDecoration(
@@ -281,22 +265,22 @@ class _ScoresScreenState extends State<ScoresScreen> {
                     ],
                   ),
                 ),
-              ),
-              Expanded(
-                child: _scoresListStreamer(),
-              ),
-              SizedBox(
-                height: _screenSize.height / 20,
-              ),
-              MyButton(
-                onTap: () {},
-                text: ' Home ',
-                navigator: HomeScreen(),
-              ),
-              SizedBox(
-                height: _screenSize.height / 30,
-              ),
-            ],
+                Expanded(
+                  child: _scoresListStreamer(),
+                ),
+                SizedBox(
+                  height: _screenSize.height / 20,
+                ),
+                MyButton(
+                  onTap: () {},
+                  text: ' Home ',
+                  navigator: HomeScreen(),
+                ),
+                SizedBox(
+                  height: _screenSize.height / 30,
+                ),
+              ],
+            ),
           ),
         ),
       ),

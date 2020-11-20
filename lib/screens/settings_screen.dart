@@ -136,124 +136,133 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 : kBackgroundOn
             : kBackgroundOff,
         child: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: _screenSize.height / 30,
-              ),
-              CustomHeader(
-                text: ' Settings ',
-              ),
-              SizedBox(
-                height: _screenSize.height / 10,
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  CustomHeader(
-                    text: ' Sound ',
-                    widthRatio: 2,
-                    heightRatio: 8,
-                  ),
-                  SizedBox(
-                    width: _screenSize.width / 30,
-                  ),
-                  MyButton(
-                    widthRatio: 5,
-                    icon: vPlaySound ? Icons.volume_up : Icons.volume_off,
-                    contentColor:
-                        vPlaySound ? Colors.yellowAccent : Colors.white,
-                    shadow: vPlaySound ? Colors.yellowAccent : Colors.black,
-                    onTap: () {
-                      setState(() {
-                        if (vPlaySound) {
-                          vPlaySound = false;
-                        } else {
-                          vPlaySound = true;
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: _screenSize.width / 30),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: _screenSize.height / 30,
+                ),
+                CustomHeader(
+                  text: ' Settings ',
+                ),
+                SizedBox(
+                  height: _screenSize.height / 10,
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      width: _screenSize.width / 2,
+                      child: CustomHeader(
+                        text: ' Sound ',
+                        heightRatio: 8,
+                      ),
+                    ),
+                    SizedBox(
+                      width: _screenSize.width / 30,
+                    ),
+                    MyButton(
+                      widthRatio: 5,
+                      icon: vPlaySound ? Icons.volume_up : Icons.volume_off,
+                      contentColor:
+                          vPlaySound ? Colors.yellowAccent : Colors.white,
+                      shadow: vPlaySound ? Colors.yellowAccent : Colors.black,
+                      onTap: () {
+                        setState(() {
+                          if (vPlaySound) {
+                            vPlaySound = false;
+                          } else {
+                            vPlaySound = true;
+                          }
+                        });
+                        if (!kIsWeb) {
+                          TaskHive().updateSound(vPlaySound);
                         }
-                      });
-                      if (!kIsWeb) {
-                        TaskHive().updateSound(vPlaySound);
-                      }
-                    },
-                  )
-                ],
-              ),
-              SizedBox(
-                height: _screenSize.height / 20,
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  CustomHeader(
-                    text: ' Background ',
-                    widthRatio: 2,
-                    heightRatio: 8,
-                  ),
-                  SizedBox(
-                    width: _screenSize.width / 30,
-                  ),
-                  MyButton(
-                    widthRatio: 5,
-                    icon: vBackground ? Icons.check : Icons.close,
-                    contentColor:
-                        vBackground ? Colors.yellowAccent : Colors.white,
-                    shadow: vBackground ? Colors.yellowAccent : Colors.black,
-                    onTap: () {
-                      setState(() {
-                        if (vBackground) {
-                          vBackground = false;
-                        } else {
-                          vBackground = true;
+                      },
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: _screenSize.height / 20,
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      width: _screenSize.width / 2,
+                      child: CustomHeader(
+                        text: ' Background ',
+                        heightRatio: 8,
+                      ),
+                    ),
+                    SizedBox(
+                      width: _screenSize.width / 30,
+                    ),
+                    MyButton(
+                      widthRatio: 5,
+                      icon: vBackground ? Icons.check : Icons.close,
+                      contentColor:
+                          vBackground ? Colors.yellowAccent : Colors.white,
+                      shadow: vBackground ? Colors.yellowAccent : Colors.black,
+                      onTap: () {
+                        setState(() {
+                          if (vBackground) {
+                            vBackground = false;
+                          } else {
+                            vBackground = true;
+                          }
+                        });
+                        if (!kIsWeb) {
+                          TaskHive().updateBackground(vBackground);
                         }
-                      });
-                      if (!kIsWeb) {
-                        TaskHive().updateBackground(vBackground);
-                      }
-                    },
-                  )
-                ],
-              ),
-              SizedBox(
-                height: _screenSize.height / 20,
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  CustomHeader(
-                    text: ' Reset ',
-                    widthRatio: 2,
-                    heightRatio: 8,
-                  ),
-                  SizedBox(
-                    width: _screenSize.width / 30,
-                  ),
-                  MyButton(
-                    widthRatio: 5,
-                    icon: Icons.restore,
-                    contentColor: kColorRed,
-                    shadow: kColorRed,
-                    onTap: () {
-                      showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return _alertDialog;
-                          });
-                    },
-                  )
-                ],
-              ),
-              Spacer(),
-              MyButton(
-                onTap: () {},
-                text: ' Home ',
-                navigator: HomeScreen(),
-              ),
-              SizedBox(
-                height: _screenSize.height / 30,
-              ),
-            ],
+                      },
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: _screenSize.height / 20,
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      width: _screenSize.width / 2,
+                      child: CustomHeader(
+                        text: ' Reset ',
+                        heightRatio: 8,
+                      ),
+                    ),
+                    SizedBox(
+                      width: _screenSize.width / 30,
+                    ),
+                    MyButton(
+                      widthRatio: 5,
+                      icon: Icons.restore,
+                      contentColor: kColorRed,
+                      shadow: kColorRed,
+                      onTap: () {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return _alertDialog;
+                            });
+                      },
+                    )
+                  ],
+                ),
+                Spacer(),
+                MyButton(
+                  onTap: () {},
+                  text: ' Home ',
+                  navigator: HomeScreen(),
+                ),
+                SizedBox(
+                  height: _screenSize.height / 30,
+                ),
+              ],
+            ),
           ),
         ),
       ),

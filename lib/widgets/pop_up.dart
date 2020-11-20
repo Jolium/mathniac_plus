@@ -42,11 +42,6 @@ class _PopUpState extends State<PopUp> {
       actions: [
         FlatButton(
           onPressed: widget.onPressed,
-          // () {
-          // Navigator.of(context).pushReplacement(
-          //   CustomRoute(builder: (context) => LoginPage()),
-          // );
-          // },
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(32),

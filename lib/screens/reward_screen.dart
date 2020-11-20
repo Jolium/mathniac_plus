@@ -1,9 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 import 'package:firebase_admob/firebase_admob.dart';
 
+import 'package:mathniac_plus/settings/lists.dart';
 import 'package:mathniac_plus/settings/vars.dart';
 import 'package:mathniac_plus/settings/constants.dart';
 
@@ -29,19 +29,12 @@ class _RewardScreenState extends State<RewardScreen> {
   double _textRatio = 20;
 
   MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
-    keywords: <String>[
-      'games',
-      'flutter',
-      'math',
-      'strategy',
-      'hobby',
-      'google play',
-      'flutterio',
-      'beautiful apps'
-    ],
-    contentUrl: 'https://flutter.io',
+    keywords: listOfKeyWords,
+    contentUrl: 'https://play.google.com/store/apps',
     childDirected: false,
-    testDevices: <String>[], // Android emulators are considered test devices
+    testDevices: <String>[
+      kTestDevice
+    ], // Android emulators are considered test devices
   );
 
   bool _loaded = false;
@@ -170,9 +163,6 @@ class _RewardScreenState extends State<RewardScreen> {
     double _textSize = _buttonSize / _textRatio;
     double _borderRadius = _buttonSize / _borderRatio;
     double _edgeInsets = _buttonSize / _marginRatio;
-    // double _shadowRadius = _buttonHeight / _marginRatio;
-
-    print('\n=== Is Ad loaded: $_loaded ===');
 
     return Scaffold(
       body: Container(
@@ -182,27 +172,23 @@ class _RewardScreenState extends State<RewardScreen> {
                 : kBackgroundOn
             : kBackgroundOff,
         child: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: _screenSize.height / 30,
-              ),
-              CustomHeader(text: ' Level Up '),
-
-              Visibility(
-                visible: !vInternetConnection,
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: _screenSize.width / 20,
-                  ),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: _screenSize.width / 30),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: _screenSize.height / 30,
+                ),
+                CustomHeader(text: ' Level Up '),
+                Visibility(
+                  visible: !vInternetConnection,
                   child: Column(
                     children: [
                       SizedBox(
                         height: _screenSize.height / 20,
                       ),
                       Container(
-                        // width: _buttonWidth / 1.5,
                         alignment: Alignment.center,
                         padding: EdgeInsets.all(_edgeInsets),
                         decoration: BoxDecoration(
@@ -234,104 +220,90 @@ class _RewardScreenState extends State<RewardScreen> {
                     ],
                   ),
                 ),
-              ),
-              Spacer(),
-              Container(
-                width: _buttonWidth,
-                alignment: Alignment.center,
-                padding: EdgeInsets.all(_edgeInsets),
-                decoration: BoxDecoration(
-                  border:
-                      Border.all(color: Colors.white, width: _edgeInsets / 6),
-                  color: Colors.black.withAlpha(155),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(_borderRadius / 1.5),
+                Spacer(),
+                Container(
+                  alignment: Alignment.center,
+                  padding: EdgeInsets.all(_edgeInsets),
+                  decoration: BoxDecoration(
+                    border:
+                        Border.all(color: Colors.white, width: _edgeInsets / 6),
+                    color: Colors.black.withAlpha(155),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(_borderRadius / 1.5),
+                    ),
+                  ),
+                  child: Text(
+                    vMagicLevel < 15
+                        ? 'Watch this ad to move to the next level.\n\n'
+                            'Currently you are on Level $vMagicLevel and after watching '
+                            'this ad you will move to Level ${vMagicLevel + 1}.\n\n'
+                            'You have to play at least 1 time the new unlocked level before watch a new ad.'
+                        : 'Watch this ad to move to the next level.\n\n'
+                            'Currently you are on Level 15 and after watching '
+                            'this ad you will move to Level 15.\n\n'
+                            'You have to play at least 1 time the new unlocked level before watch a new ad.',
+                    textAlign: TextAlign.justify,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: _textSize,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
-                child: Text(
-                  vMagicLevel < 15
-                      ? 'Watch this ad to move to the next level.\n\n'
-                          'Currently you are on Level $vMagicLevel and after watching '
-                          'this ad you will move to Level ${vMagicLevel + 1}.\n\n'
-                          'You have to play at least 1 time the new unlocked level before watch a new ad.'
-                      : 'Watch this ad to move to the next level.\n\n'
-                          'Currently you are on Level 15 and after watching '
-                          'this ad you will move to Level 15.\n\n'
-                          'You have to play at least 1 time the new unlocked level before watch a new ad.',
-                  textAlign: TextAlign.justify,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: _textSize,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              Spacer(),
-              // Builder(
-              //   builder: (context) {
-              //     return RaisedButton(
-              //       onPressed: () {
-              //         Scaffold.of(context).showSnackBar(SnackBar(
-              //           content: Text('content'),
-              //           duration: Duration(milliseconds: 1500),
-              //         ));
-              //       },
-              //     );
-              //   },
-              // ),
-              MyButton(
-                contentColor: Colors.yellowAccent,
-                onTap: () async {
-                  print('\n=== Is Ad loaded onTap: $_loaded ===');
-                  if (vWatchAds) {
-                    if (_loaded) {
-                      await RewardedVideoAd.instance.show().catchError(
-                          (e) => print("error in showing ad: ${e.toString()}"));
-                      setState(() => _loaded = false);
+                Spacer(),
+                MyButton(
+                  contentColor: Colors.yellowAccent,
+                  onTap: () async {
+                    print('\n=== Is Ad loaded onTap: $_loaded ===');
+                    if (vWatchAds) {
+                      if (_loaded) {
+                        await RewardedVideoAd.instance.show().catchError((e) =>
+                            print("error in showing ad: ${e.toString()}"));
+                        setState(() => _loaded = false);
+                      } else {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return PopUp(
+                                title: 'Something went wrong!',
+                                content:
+                                    '\nAt this moment is not possible to show Ads.\n'
+                                    'Please, try it again later.',
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              );
+                            });
+                      }
                     } else {
                       showDialog(
                           context: context,
                           builder: (BuildContext context) {
                             return PopUp(
-                              title: 'Something went wrong!',
+                              title: 'Not authorized!',
                               content:
-                                  '\nAt this moment is not possible to show Ads.\n'
-                                  'Please, try it again later.',
+                                  '\nYou have to play at least 1 time the new unlocked level before watch a new ad.',
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
                             );
                           });
                     }
-                  } else {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return PopUp(
-                            title: 'Not authorized!',
-                            content:
-                                '\nYou have to play at least 1 time the new unlocked level before watch a new ad.',
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                          );
-                        });
-                  }
-                },
-                text: ' Watch Ad ',
-                textRatio: 3.5,
-                // navigator: HomeScreen(),
-              ),
-              Spacer(),
-              MyButton(
-                onTap: () {},
-                text: ' Home ',
-                navigator: HomeScreen(),
-              ),
-              SizedBox(
-                height: _screenSize.height / 30,
-              ),
-            ],
+                  },
+                  text: ' Watch Ad ',
+                  textRatio: 3.5,
+                ),
+                Spacer(),
+                MyButton(
+                  onTap: () {},
+                  text: ' Home ',
+                  navigator: HomeScreen(),
+                ),
+                SizedBox(
+                  height: _screenSize.height / 30,
+                ),
+              ],
+            ),
           ),
         ),
       ),

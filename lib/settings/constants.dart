@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
+const String kTestDevice = 'd6191d4a-9b03-4074-af7a-7c65f6662c94';
+
 const String kAppName = 'Mathniac';
 
 const int kTopScores = 10;
 const String kHiveBoxName = 'tasks';
 const bool kAnimation = true;
-const bool kSplashScreen = false;
+const bool kSplashScreen = true;
 
 const double kMaxSize = 700;
 const double kSizeRatio = 1.2;

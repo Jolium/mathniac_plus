@@ -1,4 +1,3 @@
-// import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:async';
@@ -27,7 +26,6 @@ class GameScreen extends StatefulWidget {
 }
 
 class _GameScreenState extends State<GameScreen> {
-  // double _widthRatio = 2;
   Timer _timer;
 
   @override
@@ -99,9 +97,11 @@ class _GameScreenState extends State<GameScreen> {
                 children: [
                   Column(
                     children: [
-                      CustomHeader(
-                        text: ' Timer ',
-                        widthRatio: 5,
+                      Container(
+                        width: _screenSize.width / 5,
+                        child: CustomHeader(
+                          text: ' Timer ',
+                        ),
                       ),
                       CountDown(),
                     ],
@@ -109,9 +109,11 @@ class _GameScreenState extends State<GameScreen> {
                   // CountDown(),
                   Column(
                     children: [
-                      CustomHeader(
-                        text: _scorePointsLevel.toString(),
-                        widthRatio: 3,
+                      Container(
+                        width: _screenSize.width / 3,
+                        child: CustomHeader(
+                          text: _scorePointsLevel.toString(),
+                        ),
                       ),
                       MyButton(
                         onTap: () {},
@@ -125,9 +127,11 @@ class _GameScreenState extends State<GameScreen> {
                   ),
                   Column(
                     children: [
-                      CustomHeader(
-                        text: ' Goal ',
-                        widthRatio: 5,
+                      Container(
+                        width: _screenSize.width / 5,
+                        child: CustomHeader(
+                          text: ' Goal ',
+                        ),
                       ),
                       MyButton(
                         onTap: () {},

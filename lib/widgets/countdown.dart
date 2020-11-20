@@ -1,4 +1,3 @@
-// import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
@@ -18,15 +17,6 @@ class CountDown extends StatefulWidget {
 
 class _CountDownState extends State<CountDown> {
   int _scoreLevelPoints = listOfScorePoints[vMagicLevel - 1];
-  // IconData icon;
-  // String text;
-  // Color contentColor;
-  // Function onTap;
-  // Color colorPrimary;
-  // Color colorSecondary;
-  // Color shadow;
-  // Widget navigator;
-  // double _iconRatio;
   double _widthRatio = 5;
   double _heightRatio = 5;
   double _textRatio = 2;
@@ -61,40 +51,21 @@ class _CountDownState extends State<CountDown> {
       AudioPlayer().soundPlayer('beep.mp3');
     }
 
-    // print('vActualScoreValue: $vActualScoreValue');
-    // print('_scoreLevelPoints: $_scoreLevelPoints');
-
     if (vCountdownValue == 0 && vIsTimerTicking == true) {
       AudioPlayer().soundPlayer('beep_end.mp3');
       vIsTimerTicking = false;
-      // vCountdownValue = vStartCountdownValue;
       if (vActualScoreValue >= _scorePointsLevel && vMagicLevel != 15) {
-        // print('00000000');
-        // UpdateValues().getNewLevelValue();
         vButtonText = ' Next ';
         vButtonGradient = true;
       } else {
-        // if (vActualScoreValue > _scorePointsLevel && vMagicLevel == 15) {
-        //   // Update high score on level 15
-        //   listOfScorePoints[14] = vActualScoreValue;
-        //   if (!kIsWeb) {
-        //     TaskHive().updateHighScore(vActualScoreValue);
-        //   }
-        // }
-
-        // print('vActualScoreValue2: $vActualScoreValue');
-        // print('_scoreLevelPoints2: $_scoreLevelPoints');
-
         // If score is own high score
         if (vMagicLevel == 15 && vActualScoreValue > _scoreLevelPoints) {
-          // print('111111111');
           TaskHive().updateHighScore(vActualScoreValue);
           TaskHive().uploadScore(true);
           listOfScorePoints[14] = vActualScoreValue;
           vButtonText = ' Next ';
           vButtonGradient = true;
         } else {
-          // print('222222222');
           vButtonText = ' Again ';
           vButtonGradient = false;
         }
@@ -116,7 +87,6 @@ class _CountDownState extends State<CountDown> {
       vPlayLevelUp = false;
     }
 
-    // Provider.of<CounterValue>(context).newValue;
     int _intValue =
         int.parse(vCountdownValue.toString().padLeft(3, '0').substring(0, 2));
 
