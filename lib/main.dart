@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:io';
 
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:firebase_admob/firebase_admob.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
@@ -20,20 +18,14 @@ import 'package:mathniac_plus/tasks/tasks_functions.dart';
 import 'package:mathniac_plus/tasks/my_splash.dart';
 import 'package:mathniac_plus/tasks/task_hive.dart';
 
-///TODO
 import 'package:mathniac_plus/screens/home_screen.dart';
-
-// final _firebase = FirebaseFirestore.instance.collection("scores");
-// int _topScores = kTopScores;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   FirebaseApp app = await Firebase.initializeApp();
   assert(app != null);
 
-  // FirebaseAdMob.instance
-  //     .initialize(appId: 'ca-app-pub-4259634083772880~2954619219');
-  Admob.initialize(testDeviceIds: ['ca-app-pub-4259634083772880~2954619219']);
+  Admob.initialize(testDeviceIds: [kTestDevice]);
   // Admob.initialize();
 
   // Check internet connection
@@ -93,10 +85,10 @@ class MyApp extends StatelessWidget {
               title: kAppName,
               debugShowCheckedModeBanner: false,
               home: MySplash(
+                logoSize: 300.0,
                 imagePath: 'images/launch_image.png',
                 backGroundColor: Colors.black,
-                animationEffect: 'zoom-in',
-                // logoSize: 200.0,
+                animationEffect: 'zoom-out',
                 home: HomeScreen(),
                 duration: 1600,
                 type: MySplashType.StaticDuration,

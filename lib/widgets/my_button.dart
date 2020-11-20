@@ -67,10 +67,6 @@ class _MyButtonState extends State<MyButton> {
     double _buttonSize =
         _buttonHeight <= _buttonWidth ? _buttonHeight : _buttonWidth;
 
-    // print('size: $_screenSize');
-    // print('height: ${_screenSize.height}');
-    // print('width: ${_screenSize.width}');
-
     double _borderRadius = _buttonSize / widget.borderRatio * _sizeRatio;
     double _edgeInsets = _buttonSize / widget.marginRatio * _sizeRatio;
     double _shadowRadius = _buttonSize / widget.marginRatio * _sizeRatio;
@@ -113,20 +109,21 @@ class _MyButtonState extends State<MyButton> {
           width: _screenSize.width / widget.widthRatio * _sizeRatio,
           height: _screenSize.width / widget.heightRatio * _sizeRatio,
           child: SizedBox(
-            width: _screenSize.width * _sizedBox / widget.widthRatio * _sizeRatio,
+            width:
+                _screenSize.width * _sizedBox / widget.widthRatio * _sizeRatio,
             height:
                 _screenSize.width * _sizedBox / widget.heightRatio * _sizeRatio,
             child: Container(
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(
-                  Radius.circular(_borderRadius,
+                  Radius.circular(
+                    _borderRadius,
                   ),
                 ),
                 gradient: LinearGradient(
-                  begin: widget.diagonal
-                      ? Alignment.topLeft
-                      : Alignment.topRight,
+                  begin:
+                      widget.diagonal ? Alignment.topLeft : Alignment.topRight,
                   end: Alignment.bottomRight,
                   colors: [
                     widget.colorSecondary,
@@ -134,7 +131,8 @@ class _MyButtonState extends State<MyButton> {
                     widget.colorSecondary,
                   ],
                 ),
-                border: Border.all(color: widget.contentColor,
+                border: Border.all(
+                  color: widget.contentColor,
                   width: _edgeInsets,
                 ),
                 boxShadow: [

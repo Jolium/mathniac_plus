@@ -10,7 +10,7 @@ class CustomHeader extends StatefulWidget {
     this.shadow = Colors.black,
     this.colorText = Colors.white,
     this.shadowText = Colors.black,
-    this.widthRatio = 1.2,
+    this.widthRatio = 1, // 1.2
     this.heightRatio = 10,
     this.textRatio = 2,
     // this.borderRatio = 3,
@@ -48,7 +48,7 @@ class _CustomHeaderState extends State<CustomHeader> {
     double _textSize = _screenSize.height / 20 / widget.textRatio;
 
     return Container(
-      width: _screenSize.width / widget.widthRatio * _sizeRatio,
+      // width: _screenSize.width / widget.widthRatio * _sizeRatio,
       height: _screenSize.width / widget.heightRatio * _sizeRatio,
       decoration: BoxDecoration(
         color: widget.colorSecondary,

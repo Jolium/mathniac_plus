@@ -59,7 +59,6 @@ class _StartButtonState extends State<StartButton> {
     double _shadowRadius = _buttonSize / _marginRatio * _sizeRatio;
     double _textSize = _buttonSize / _textRatio;
 
-    int _highScore = listOfScorePoints[14];
     String _text = vButtonText;
     Color _colorPrimary = kColorSilver;
     Color _colorSecondary = levelColor();
@@ -67,7 +66,9 @@ class _StartButtonState extends State<StartButton> {
 
     void _onTapDown(TapDownDetails details) {
       // Player have to play at least one time to watch ads again
-      if (!vWatchAds) {vWatchAds = true;}
+      if (!vWatchAds) {
+        vWatchAds = true;
+      }
 
       // Update Randoms List
       if (vCountdownValue != 0) {
@@ -93,7 +94,6 @@ class _StartButtonState extends State<StartButton> {
         setState(() {
           // decreases the button size
           _sizedBox = 0.9;
-          // vButtonText = ' Update ';
           vButtonText = ' Refresh ';
           vButtonGradient = false;
         });

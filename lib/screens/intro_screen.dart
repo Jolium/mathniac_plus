@@ -10,7 +10,6 @@ import 'package:mathniac_plus/widgets/my_button.dart';
 import 'package:mathniac_plus/widgets/custom_header.dart';
 
 import 'package:mathniac_plus/screens/home_screen.dart';
-// import 'package:mathniac_plus/screens/upload_screen.dart';
 
 class IntroScreen extends StatefulWidget {
   @override
@@ -47,123 +46,132 @@ class _IntroScreenState extends State<IntroScreen> {
             : kBackgroundOff,
         child: SafeArea(
           child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  height: _screenSize.height / 30,
-                ),
-                CustomHeader(text: ' Introduction '),
-                SizedBox(
-                  height: _screenSize.height / 30,
-                ),
-                Container(
-                  width: _buttonWidth,
-                  alignment: Alignment.center,
-                  padding: EdgeInsets.all(_edgeInsets),
-                  decoration: BoxDecoration(
-                    border:
-                        Border.all(color: Colors.white, width: _edgeInsets / 6),
-                    color: Colors.black.withAlpha(155),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(_borderRadius),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: _screenSize.width / 30),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: _screenSize.height / 30,
+                  ),
+                  CustomHeader(text: ' Introduction '),
+                  SizedBox(
+                    height: _screenSize.height / 30,
+                  ),
+                  Container(
+                    // width: _buttonWidth,
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.all(_edgeInsets),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.white,
+                        width: _edgeInsets / 6,
+                      ),
+                      color: Colors.black.withAlpha(155),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(_borderRadius),
+                      ),
+                    ),
+                    child: Text(
+                      text1,
+                      textAlign: TextAlign.justify,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: _textSize,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
-                  child: Text(
-                    text1,
-                    textAlign: TextAlign.justify,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: _textSize,
-                      fontWeight: FontWeight.bold,
+                  SizedBox(
+                    height: _screenSize.height / 30,
+                  ),
+                  Container(
+                    // width: _buttonWidth,
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.all(_edgeInsets),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.white,
+                        width: _edgeInsets / 6,
+                      ),
+                      color: Colors.black.withAlpha(155),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(_borderRadius),
+                      ),
+                    ),
+                    child: Column(
+                      children: [
+                        Text(
+                          text2_1,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: _textSize * 1.1,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          text2_2,
+                          textAlign: TextAlign.justify,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: _textSize,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: _screenSize.height / 30,
-                ),
-                Container(
-                  width: _buttonWidth,
-                  alignment: Alignment.center,
-                  padding: EdgeInsets.all(_edgeInsets),
-                  decoration: BoxDecoration(
-                    border:
-                        Border.all(color: Colors.white, width: _edgeInsets / 6),
-                    color: Colors.black.withAlpha(155),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(_borderRadius),
+                  SizedBox(
+                    height: _screenSize.height / 30,
+                  ),
+                  Container(
+                    // width: _buttonWidth,
+                    alignment: Alignment.center,
+                    padding: EdgeInsets.all(_edgeInsets),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.white,
+                        width: _edgeInsets / 6,
+                      ),
+                      color: Colors.black.withAlpha(155),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(_borderRadius - (_borderRadius / 10)),
+                      ),
+                    ),
+                    child: Column(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(
+                            _borderRadius - (_borderRadius / 5),
+                          ),
+                          child: Image.asset('images/game_screen.png'),
+                        ),
+                        Text(
+                          text3,
+                          textAlign: TextAlign.justify,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: _textSize,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  child: Column(
-                    children: [
-                      Text(
-                        text2_1,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: _textSize * 1.1,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        text2_2,
-                        textAlign: TextAlign.justify,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: _textSize,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
+                  SizedBox(
+                    height: _screenSize.height / 30,
                   ),
-                ),
-                SizedBox(
-                  height: _screenSize.height / 30,
-                ),
-                Container(
-                  width: _buttonWidth,
-                  alignment: Alignment.center,
-                  padding: EdgeInsets.all(_edgeInsets),
-                  decoration: BoxDecoration(
-                    border:
-                        Border.all(color: Colors.white, width: _edgeInsets / 6),
-                    color: Colors.black.withAlpha(155),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(_borderRadius - (_borderRadius / 10)),
-                    ),
+                  MyButton(
+                    onTap: () {},
+                    text: ' Home ',
+                    navigator: HomeScreen(),
                   ),
-                  child: Column(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(
-                          _borderRadius - (_borderRadius / 5),
-                        ),
-                        child: Image.asset('images/game_screen.png'),
-                      ),
-                      Text(
-                        text3,
-                        textAlign: TextAlign.justify,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: _textSize,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
+                  SizedBox(
+                    height: _screenSize.height / 30,
                   ),
-                ),
-                SizedBox(
-                  height: _screenSize.height / 30,
-                ),
-                MyButton(
-                  onTap: () {},
-                  text: ' Home ',
-                  navigator: HomeScreen(),
-                ),
-                SizedBox(
-                  height: _screenSize.height / 30,
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

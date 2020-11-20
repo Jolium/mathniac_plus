@@ -1,6 +1,3 @@
-import 'package:firebase_admob/firebase_admob.dart';
-import 'package:mathniac_plus/tasks/admob_service.dart';
-
 /// Level vars
 int vMagicLevel = 1; // 1..4...8...12..15
 

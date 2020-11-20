@@ -98,8 +98,8 @@ class _MySplashState extends State<MySplash>
       case 'zoom-out':
         {
           return ScaleTransition(
-            scale: Tween(begin: 1.5, end: 0.6).animate(CurvedAnimation(
-                parent: _animationController, curve: Curves.easeInCirc)),
+            scale: Tween(begin: 1.0, end: 0.0).animate(CurvedAnimation(
+                parent: _animationController, curve: Curves.linear)),
             child: Center(
               child:
                   SizedBox(height: _logoSize, child: Image.asset(_imagePath)),

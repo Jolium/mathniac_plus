@@ -1,3 +1,18 @@
+/// List of keywords for AdMob
+List<String> listOfKeyWords = [
+  'games',
+  'flutter',
+  'math',
+  'numbers',
+  'app',
+  'casual',
+  'strategy',
+  'hobby',
+  'google play',
+  'flutter',
+  'beautiful apps'
+];
+
 /// List of randoms number to each button (max = 18 buttons)
 List<int> listOfRandoms = [
   0,
@@ -86,44 +101,6 @@ List<int> listOfScorePoints = [
   0,
 ];
 
-// List<int> listOfScorePoints = [
-//   120,//130
-//   140,//150
-//   160,//170
-//
-//   200,//200
-//   225,//230
-//   250,//260
-//   275,//290
-//
-//   300,//330
-//   330,//370
-//   360,//410
-//   390,//450
-//
-//   420,//500
-//   455,//550
-//   490,//600
-//   0,
-// ];
-// List<int> listOfScorePoints = [
-//   500,
-//   750,
-//   1000,
-//   2000,
-//   2500,
-//   3000,
-//   3500,
-//   5250,
-//   6000,
-//   6750,
-//   7500,
-//   10000,
-//   11000,
-//   12000,
-//   0,
-// ];
-
 /// List of seconds for each level (milliseconds)
 List<int> listOfSeconds = [
   300,
@@ -142,25 +119,3 @@ List<int> listOfSeconds = [
   700,
   750,
 ];
-
-// List<int> listOfSeconds = [
-//   300,
-//   300,
-//   300,
-//   400,
-//   400,
-//   400,
-//   400,
-//   500,
-//   500,
-//   500,
-//   500,
-//   600,
-//   600,
-//   600,
-//   750,
-// ];
-
-/// Firebase
-List<dynamic> listOfAllNames = [];
-List<dynamic> listOfScores = [];

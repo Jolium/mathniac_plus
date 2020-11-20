@@ -1,4 +1,3 @@
-// import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
@@ -23,12 +22,9 @@ class LevelsScreen extends StatefulWidget {
 }
 
 class _LevelsScreenState extends State<LevelsScreen> {
-  double _widthRatio = 2;
-
   @override
   Widget build(BuildContext context) {
     var _screenSize = MediaQuery.of(context).size;
-    double _buttonWidth = _screenSize.height / _widthRatio;
 
     String _stringValue = vStartCountdownValue.toString().substring(0, 2);
     int _scoreLevel = listOfScorePoints[vMagicLevel - 1];
@@ -45,65 +41,71 @@ class _LevelsScreenState extends State<LevelsScreen> {
             SizedBox(
               height: _screenSize.height / 30,
             ),
-            CustomHeader(text: ' Unlocked Levels '),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: _screenSize.width / 30),
+              child: CustomHeader(text: ' Unlocked Levels '),
+            ),
             Spacer(),
             LevelsLayout(),
             Spacer(),
-            Container(
-              width: _buttonWidth,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Column(
-                    children: [
-                      CustomHeader(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Column(
+                  children: [
+                    Container(
+                      width: _screenSize.width / 5,
+                      child: CustomHeader(
                         text: ' Timer ',
-                        widthRatio: 5,
                       ),
-                      MyButton(
-                        onTap: () {},
-                        active: false,
-                        text: _stringValue,
-                        widthRatio: 5,
-                        textRatio: 2,
-                        colorPrimary: levelColor(),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      CustomHeader(
+                    ),
+                    MyButton(
+                      onTap: () {},
+                      active: false,
+                      text: _stringValue,
+                      widthRatio: 5,
+                      textRatio: 2,
+                      colorPrimary: levelColor(),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Container(
+                      width: _screenSize.width / 3,
+                      child: CustomHeader(
                         text: ' Score ',
-                        widthRatio: 3,
                       ),
-                      MyButton(
-                        onTap: () {},
-                        active: false,
-                        text: _scoreLevel.toString(),
-                        widthRatio: 3,
-                        textRatio: 2,
-                        colorPrimary: levelColor(),
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      CustomHeader(
+                    ),
+                    MyButton(
+                      onTap: () {},
+                      active: false,
+                      text: _scoreLevel.toString(),
+                      widthRatio: 3,
+                      textRatio: 2,
+                      colorPrimary: levelColor(),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Container(
+                      width: _screenSize.width / 5,
+                      child: CustomHeader(
                         text: ' Goal ',
-                        widthRatio: 5,
                       ),
-                      MyButton(
-                        onTap: () {},
-                        active: false,
-                        text: vGoalValue.toString(),
-                        widthRatio: 5,
-                        textRatio: 2,
-                        colorPrimary: levelColor(),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                    MyButton(
+                      onTap: () {},
+                      active: false,
+                      text: vGoalValue.toString(),
+                      widthRatio: 5,
+                      textRatio: 2,
+                      colorPrimary: levelColor(),
+                    ),
+                  ],
+                ),
+              ],
             ),
             Spacer(),
             Row(

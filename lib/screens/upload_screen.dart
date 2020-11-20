@@ -1,9 +1,8 @@
-// import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'dart:io';
 
-import 'package:flutter/material.dart';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/services.dart';
 
 import 'package:mathniac_plus/settings/constants.dart';
 import 'package:mathniac_plus/settings/lists.dart';
@@ -25,6 +24,7 @@ class UploadScreen extends StatefulWidget {
 
 class _UploadScreenState extends State<UploadScreen> {
   bool _nicknameExist;
+  List<String> listOfAllNames = [];
 
   @override
   void initState() {
@@ -33,6 +33,7 @@ class _UploadScreenState extends State<UploadScreen> {
     } else {
       _nicknameExist = true;
     }
+    _checkInternetConnectivity();
     super.initState();
   }
 
@@ -59,20 +60,12 @@ class _UploadScreenState extends State<UploadScreen> {
       QuerySnapshot querySnapshot = await _firebase.get();
       for (int i = 0; i < querySnapshot.docs.length; i++) {
         var a = querySnapshot.docs[i];
-        // print(a['score']);
-        // print("${a.id} : ${a['score']}");
-
-        // print('====== 111 ========');
         listOfAllNames.add(a['name']);
       }
     } catch (e) {
       QuerySnapshot querySnapshot = await _firebase.get();
       for (int i = 0; i < querySnapshot.docs.length; i++) {
         var a = querySnapshot.docs[i];
-        // print(a['score']);
-        // print("${a.id} : ${a['score']}");
-
-        // print('====== 222 ========');
         listOfAllNames.add(a.id);
       }
     }
@@ -93,7 +86,11 @@ class _UploadScreenState extends State<UploadScreen> {
 
   @override
   Widget build(BuildContext context) {
-    _checkInternetConnectivity();
+    // Hide bottom bar and top bar
+    SystemChrome.setEnabledSystemUIOverlays([]);
+
+    // _checkInternetConnectivity();
+
     var _screenSize = MediaQuery.of(context).size;
     double _sizeRatio = _screenSize.height / _screenSize.width / 2;
     double _buttonHeight = _screenSize.width / _heightRatio * _sizeRatio;
@@ -114,7 +111,7 @@ class _UploadScreenState extends State<UploadScreen> {
         'Internet connection',
         style: TextStyle(
           color: Colors.white,
-          fontSize: _textSize / 1.8,
+          fontSize: _textSize * 1.1,
           fontFamily: kLetterType1,
         ),
       ),
@@ -122,27 +119,28 @@ class _UploadScreenState extends State<UploadScreen> {
         'You have no internet connection!\n'
         'Your score will be saved.',
         style: TextStyle(
-          fontSize: _textSize / 2,
+          fontSize: _textSize,
           color: Colors.white,
         ),
       ),
       actions: [
         FlatButton(
-            onPressed: () {
-              Navigator.of(context).pushReplacement(
-                  CustomRoute(builder: (context) => GameScreen()));
-            },
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(_borderRadius),
-              ),
+          onPressed: () {
+            Navigator.of(context).pushReplacement(
+                CustomRoute(builder: (context) => GameScreen()));
+          },
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(_borderRadius),
             ),
-            child: Text(
-              'Ok',
-              style: TextStyle(
-                fontSize: _textSize / 1.5,
-              ),
-            )),
+          ),
+          child: Text(
+            'Ok',
+            style: TextStyle(
+              fontSize: _textSize * 1.5,
+            ),
+          ),
+        ),
       ],
       elevation: 24.0,
       backgroundColor: Colors.black,
@@ -167,51 +165,155 @@ class _UploadScreenState extends State<UploadScreen> {
                 child: Column(
                   children: <Widget>[
                     Expanded(
-                      // A flexible child that will grow to fit the viewport but
-                      // still be at least as big as necessary to fit its contents.
                       child: Container(
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: [
-                                Colors.black,
-                                Colors.black,
-                                kColorSilver,
-                                Colors.black,
-                                kColorBronze,
-                                Colors.yellow,
-                                kColorBronze,
-                                Colors.black,
-                                kColorSilver,
-                                Colors.black,
-                                Colors.black,
-                              ]),
-                        ),
-                        // decoration: kBackground15,
+                        decoration: kBackground15,
                         child: SafeArea(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height: _screenSize.height / 30,
-                              ),
-                              CustomHeader(
-                                text: ' Congratulations ',
-                              ),
-                              Spacer(),
-                              // SizedBox(
-                              //   height: _screenSize.height / 30,
-                              // ),
-                              SizedBox(
-                                width: _nicknameExist ? 0 : _buttonWidth,
-                                height: _nicknameExist ? 0 : null,
-                                child: Container(
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: _screenSize.width / 30,
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: _screenSize.height / 30,
+                                ),
+                                CustomHeader(
+                                  text: ' Congratulations ',
+                                ),
+                                Spacer(),
+                                Visibility(
+                                  visible: !_nicknameExist,
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    padding: EdgeInsets.all(_edgeInsets),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: _warningsColor,
+                                        width: _edgeInsets / 4,
+                                      ),
+                                      color: Colors.black.withAlpha(155),
+                                      borderRadius: BorderRadius.all(
+                                        Radius.circular(_borderRadius),
+                                      ),
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          'Choose your nickname',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                            color: _warningsColor,
+                                            fontSize: _textSize * 1.1,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Text(
+                                          '- Between 4 and 12 characters long\n'
+                                          '- Not yet in use',
+                                          textAlign: TextAlign.justify,
+                                          style: TextStyle(
+                                            color: _warningsColor,
+                                            fontSize: _textSize,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: _screenSize.height / 30,
+                                ),
+                                Column(
+                                  children: [
+                                    Stack(
+                                        alignment:
+                                            AlignmentDirectional.bottomCenter,
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: _screenSize.width / 7,
+                                            ),
+                                            child: CustomHeader(
+                                              text: ' $_nickname ',
+                                              heightRatio: 7.5,
+                                            ),
+                                          ),
+                                          Visibility(
+                                            visible: !_nicknameExist,
+                                            child: Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                horizontal:
+                                                    _screenSize.width / 5,
+                                              ),
+                                              child: TextField(
+                                                autofocus: _nicknameExist
+                                                    ? false
+                                                    : true,
+                                                keyboardType:
+                                                    TextInputType.name,
+                                                textCapitalization:
+                                                    TextCapitalization.words,
+                                                // maxLength: 12,
+                                                style: TextStyle(
+                                                  fontSize: _textSize * 1.5,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
+                                                ),
+                                                textAlign: TextAlign.center,
+                                                controller:
+                                                    messageTextController,
+                                                onChanged: (value) {
+                                                  // between 4 and 12 letters
+                                                  // is already a used name and player has no name
+                                                  if ("$value".length >= 4 &&
+                                                          "$value".length <=
+                                                              12 ||
+                                                      listOfAllNames.contains(
+                                                              '$vNickname') &&
+                                                          !_nicknameExist) {
+                                                    setState(() {
+                                                      _warningsColor =
+                                                          Colors.white;
+                                                      vNickname = value;
+                                                    });
+                                                  } else {
+                                                    setState(() {
+                                                      vNickname = '';
+                                                      if (_warningsColor ==
+                                                          Colors.white) {
+                                                        _warningsColor =
+                                                            kColorRed;
+                                                      }
+                                                    });
+                                                  }
+                                                },
+                                              ),
+                                            ),
+                                          ),
+                                        ]),
+                                    SizedBox(
+                                      height: 10.0,
+                                    ),
+                                    MyButton(
+                                      onTap: () {},
+                                      active: false,
+                                      text: _highScore.toString(),
+                                      widthRatio: 2,
+                                      heightRatio: 5,
+                                      textRatio: 1.5,
+                                      colorPrimary: levelColor(),
+                                    ),
+                                  ],
+                                ),
+                                Spacer(),
+                                Container(
                                   alignment: Alignment.center,
                                   padding: EdgeInsets.all(_edgeInsets),
                                   decoration: BoxDecoration(
                                     border: Border.all(
-                                      color: _warningsColor,
+                                      color: Colors.white,
                                       width: _edgeInsets / 4,
                                     ),
                                     color: Colors.black.withAlpha(155),
@@ -219,184 +321,72 @@ class _UploadScreenState extends State<UploadScreen> {
                                       Radius.circular(_borderRadius),
                                     ),
                                   ),
-                                  child: Column(
-                                    children: [
-                                      Text(
-                                        'Choose your nickname',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          color: _warningsColor,
-                                          fontSize: _textSize * 1.1,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      Text(
-                                        '- Between 4 and 12 characters long\n'
-                                        '- Not yet in use',
-                                        textAlign: TextAlign.justify,
-                                        style: TextStyle(
-                                          color: _warningsColor,
-                                          fontSize: _textSize,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ],
+                                  child: Text(
+                                    'After press Upload, restart the application to see the complete new leaderboard!',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: _textSize,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              SizedBox(
-                                height: _screenSize.height / 30,
-                              ),
-                              Column(
-                                children: [
-                                  Stack(
-                                      alignment:
-                                          AlignmentDirectional.bottomCenter,
-                                      children: [
-                                        CustomHeader(
-                                          text: ' $_nickname ',
-                                          heightRatio: 10,
-                                          widthRatio: 2,
-                                        ),
-                                        SizedBox(
-                                          width: _nicknameExist
-                                              ? 0
-                                              : _buttonWidth / 2,
-                                          child: TextField(
-                                            autofocus:
-                                                _nicknameExist ? false : true,
-                                            // maxLength: 12,
-                                            style: TextStyle(
-                                              fontSize: _textSize * 1.1,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white,
-                                            ),
-                                            textAlign: TextAlign.center,
-                                            controller: messageTextController,
-                                            onChanged: (value) {
-                                              // between 4 and 12 letters
-                                              // is already a used name and player has no name
-                                              if ("$value".length >= 4 &&
-                                                      "$value".length <= 12 ||
-                                                  listOfAllNames.contains(
-                                                          '$vNickname') &&
-                                                      !_nicknameExist) {
-                                                setState(() {
-                                                  _warningsColor = Colors.white;
-                                                  vNickname = value;
-                                                });
-                                              } else {
-                                                setState(() {
-                                                  vNickname = '';
-                                                  if (_warningsColor ==
-                                                      Colors.white) {
-                                                    _warningsColor = kColorRed;
-                                                  }
-                                                });
-                                              }
-                                            },
-                                          ),
-                                        ),
-                                      ]),
-                                  MyButton(
-                                    onTap: () {},
-                                    active: false,
-                                    text: _highScore.toString(),
-                                    widthRatio: 2,
-                                    heightRatio: 5,
-                                    textRatio: 1.5,
-                                    colorPrimary: levelColor(),
-                                  ),
-                                ],
-                              ),
-                              // SizedBox(
-                              //   height: _screenSize.height / 30,
-                              // ),
-                              Spacer(),
-                              Container(
-                                width: _buttonWidth,
-                                alignment: Alignment.center,
-                                padding: EdgeInsets.all(_edgeInsets),
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Colors.white,
-                                    width: _edgeInsets / 4,
-                                  ),
-                                  color: Colors.black.withAlpha(155),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(_borderRadius),
-                                  ),
-                                ),
-                                child: Text(
-                                  'After press Upload, restart the application to see the complete new leaderboard!',
-                                  textAlign: TextAlign.justify,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: _textSize,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                              Spacer(),
-                              // SizedBox(
-                              //   height: _screenSize.height / 30,
-                              // ),
-                              MyButton(
-                                text: ' Upload ',
-                                active: vNickname == '' ? false : true,
-                                // widthRatio: vNickname == '' ? 3 : 3,
-                                // heightRatio: vNickname == '' ? 5 : 5,
-                                onTap: () {
-                                  print('nickname1: $vNickname');
-                                  print('Internet: $vInternetConnection');
+                                Spacer(),
+                                MyButton(
+                                  text: ' Upload ',
+                                  active: vNickname == '' ? false : true,
+                                  onTap: () {
+                                    print('nickname1: $vNickname');
+                                    print('Internet: $vInternetConnection');
 
-                                  if (vInternetConnection) {
-                                    if (listOfAllNames.contains('$vNickname') &&
-                                        _nicknameExist) {
-                                      // Update existing score
-                                      try {
-                                        _firebase.doc('$vNickname').update({
+                                    if (vInternetConnection) {
+                                      if (listOfAllNames
+                                              .contains('$vNickname') &&
+                                          _nicknameExist) {
+                                        // Update existing score
+                                        try {
+                                          _firebase.doc('$vNickname').update({
+                                            'name': vNickname,
+                                            'score': _highScore,
+                                          });
+                                        } catch (e) {
+                                          _firebase.doc('$vNickname').update({
+                                            // 'name': vNickname,
+                                            'score': _highScore,
+                                          });
+                                        }
+                                      } else {
+                                        // Add new score
+                                        _firebase.doc('$vNickname').set({
+                                          'score': _highScore,
                                           'name': vNickname,
-                                          'score': _highScore,
-                                        });
-                                      } catch (e) {
-                                        _firebase.doc('$vNickname').update({
-                                          // 'name': vNickname,
-                                          'score': _highScore,
                                         });
                                       }
+                                      TaskHive().saveNickname(vNickname);
+                                      TaskHive().uploadScore(false);
                                     } else {
-                                      // Add new score
-                                      _firebase.doc('$vNickname').set({
-                                        'score': _highScore,
-                                        'name': vNickname,
-                                      });
+                                      // true to update on restart
+                                      TaskHive().uploadScore(true);
+                                      showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return _alertDialog;
+                                          });
                                     }
-                                    TaskHive().saveNickname(vNickname);
-                                    TaskHive().uploadScore(false);
-                                  } else {
-                                    // true to update on restart
-                                    TaskHive().uploadScore(true);
-                                    showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) {
-                                          return _alertDialog;
-                                        });
-                                  }
-                                  vUploadScore = false;
-                                  // Navigator.pop(context);
-                                },
-                                navigator: vNickname == ''
-                                    ? null
-                                    : vInternetConnection
-                                        ? GameScreen()
-                                        : null,
-                              ),
-                              // Spacer(),
-                              SizedBox(
-                                height: _screenSize.height / 30,
-                              ),
-                            ],
+                                    vUploadScore = false;
+                                    // Navigator.pop(context);
+                                  },
+                                  navigator: vNickname == ''
+                                      ? null
+                                      : vInternetConnection
+                                          ? GameScreen()
+                                          : null,
+                                ),
+                                SizedBox(
+                                  height: _screenSize.height / 30,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),

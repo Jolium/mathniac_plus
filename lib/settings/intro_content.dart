@@ -33,5 +33,5 @@ String text3 = """
 3- Points currently achieved.\n
 4- Each level has it's own 'Goal' value. You must continue adding numbers until you reach the 'Goal' value to earn points.\n
 5- Playground (select the numbers you want to add until the 'Goal' value is added).\n
-6- Update all Playground numbers. You can press this button whenever you want and it will generate new random numbers.
+6- Refresh all Playground numbers. You can press this button whenever you want and it will generate new random numbers.
 """;
