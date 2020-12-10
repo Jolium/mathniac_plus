@@ -13,13 +13,13 @@ import 'package:mathniac_plus/tasks/tasks_provider.dart';
 import 'package:mathniac_plus/widgets/my_button.dart';
 import 'package:mathniac_plus/widgets/custom_header.dart';
 
-import 'package:mathniac_plus/screens/reward_screen.dart';
+import 'package:mathniac_plus/screens/reward_screen2.dart';
 import 'package:mathniac_plus/screens/settings_screen.dart';
 import 'package:mathniac_plus/screens/levels_screen.dart';
 import 'package:mathniac_plus/screens/intro_screen.dart';
 import 'package:mathniac_plus/screens/scores_screen.dart';
 import 'package:mathniac_plus/screens/game_screen.dart';
-import 'package:mathniac_plus/screens/upload_screen.dart';
+import 'package:mathniac_plus/screens/authentication.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -155,7 +155,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           _isSelected.setIsSelectedList();
                         },
                   text: ' Play ',
-                  navigator: checkLeaderboard() ? UploadScreen() : GameScreen(),
+                  navigator:
+                      checkLeaderboard() ? Authentication() : GameScreen(),
                 ),
                 SizedBox(
                   height: _screenSize.height / 30,

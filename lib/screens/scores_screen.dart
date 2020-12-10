@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:admob_flutter/admob_flutter.dart';
 
 import 'package:mathniac_plus/settings/constants.dart';
+import 'package:mathniac_plus/settings/lists.dart';
 import 'package:mathniac_plus/settings/vars.dart';
 
 import 'package:mathniac_plus/tasks/admob_service.dart';
@@ -27,6 +28,15 @@ class _ScoresScreenState extends State<ScoresScreen> {
   int _place = 0;
 
   List<Widget> rowElements = [];
+
+  // Banner Unit Id
+  String _bannerUnitId = AdMobService().getBannerAdId();
+
+  @override
+  void initState() {
+    super.initState();
+    Admob.initialize(testDeviceIds: listOfTestDevices);
+  }
 
   Widget _scoresListStreamer() {
     final _firebase = FirebaseFirestore.instance
@@ -134,10 +144,7 @@ class _ScoresScreenState extends State<ScoresScreen> {
                                   ),
                                 ),
                                 child: AdmobBanner(
-                                  /// TODO
-                                  adUnitId: AdMobService().getBannerAdId(),
-                                  // adUnitId:
-                                  //     'ca-app-pub-3940256099942544/6300978111',
+                                  adUnitId: _bannerUnitId,
                                   adSize: AdmobBannerSize.BANNER,
                                   nonPersonalizedAds: true,
                                 ),

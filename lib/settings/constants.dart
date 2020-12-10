@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-const String kTestDevice = 'd6191d4a-9b03-4074-af7a-7c65f6662c94';
+/// AdMob settings
+// const String kTestDevice = 'B9D20103E9FE7FC4F19DD3A0A03C4BB8';
+const bool kTestAds = false; // In production = false
 
 const String kAppName = 'Mathniac';
 

@@ -1,6 +1,7 @@
 /// List of keywords for AdMob
 List<String> listOfKeyWords = [
   'games',
+  'game',
   'flutter',
   'math',
   'numbers',
@@ -10,7 +11,13 @@ List<String> listOfKeyWords = [
   'hobby',
   'google play',
   'flutter',
-  'beautiful apps'
+  'beautiful apps',
+  'puzzle',
+];
+
+/// List of Test Devices
+List<String> listOfTestDevices = [
+  'B9D20103E9FE7FC4F19DD3A0A03C4BB8',
 ];
 
 /// List of randoms number to each button (max = 18 buttons)

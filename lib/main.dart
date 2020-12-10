@@ -25,7 +25,7 @@ void main() async {
   FirebaseApp app = await Firebase.initializeApp();
   assert(app != null);
 
-  Admob.initialize(testDeviceIds: [kTestDevice]);
+  // Admob.initialize(testDeviceIds: listOfTestDevices);
   // Admob.initialize();
 
   // Check internet connection

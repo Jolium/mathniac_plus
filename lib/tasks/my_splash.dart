@@ -64,8 +64,8 @@ class _MySplashState extends State<MySplash>
 
   @override
   void dispose() {
-    super.dispose();
     _animationController.reset();
+    super.dispose();
   }
 
   navigator(home) {

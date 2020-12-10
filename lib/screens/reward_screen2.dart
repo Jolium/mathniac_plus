@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
+// import 'package:device_info/device_info.dart';
 import 'package:firebase_admob/firebase_admob.dart';
+// import 'package:admob_flutter/admob_flutter.dart';
 
 import 'package:mathniac_plus/settings/lists.dart';
 import 'package:mathniac_plus/settings/vars.dart';
@@ -42,44 +44,41 @@ class _RewardScreenState extends State<RewardScreen> {
   //An instance to be called in the init state
   RewardedVideoAd _videoAd = RewardedVideoAd.instance;
 
+  // Rewarded Unit Id
+  String _rewardedUnitId = AdMobService().getRewardedAdId();
+
   @override
   void initState() {
     super.initState();
 
-    // load ad in the beginning
-    _videoAd
-        .load(
+    // print(' Unit ID: $_rewardedUnitId');
 
-            /// TODO
-            // adUnitId: RewardedVideoAd.testAdUnitId,
-            adUnitId: AdMobService().getRewardedAdId(),
-            targetingInfo: targetingInfo)
-        .catchError((e) => print("error in loading 1st time"))
-        .then((v) => setState(() => _loaded = v));
+    if (vWatchAds) {
+      // load ad in the beginning
+      _videoAd
+          .load(adUnitId: _rewardedUnitId, targetingInfo: targetingInfo)
+          .catchError((e) => print("error in loading 1st time"))
+          .then((v) => setState(() => _loaded = v));
+    }
 
     // ad listener
     _videoAd.listener =
         (RewardedVideoAdEvent event, {String rewardType, int rewardAmount}) {
       if (event == RewardedVideoAdEvent.completed) {
         RewardedVideoAd.instance
-            .load(
-
-                /// TODO
-                // adUnitId: RewardedVideoAd.testAdUnitId,
-                adUnitId: AdMobService().getRewardedAdId(),
-                targetingInfo: targetingInfo)
+            .load(adUnitId: _rewardedUnitId, targetingInfo: targetingInfo)
             .catchError((e) => print("error in loading again"))
             .then((v) => setState(() => _loaded = v));
       }
 
-      //On every other event change pass the values to the _handleEvent Method.
+      // On every other event change pass the values to the _handleEvent Method.
       _handleEvent(event, rewardType, 'Reward', rewardAmount);
     };
   }
 
   @override
   void dispose() {
-    // TODO: Remove Rewarded Ad event listener
+    /// TODO: Remove Rewarded Ad event listener
     RewardedVideoAd.instance.listener = null;
 
     super.dispose();
@@ -92,27 +91,22 @@ class _RewardScreenState extends State<RewardScreen> {
     switch (event) {
       case RewardedVideoAdEvent.loaded:
         // print('\n=== 1 === $event === 1 ===');
-        // _showSnackBar('New Admob $adType Ad loaded!', 1500);
         break;
 
       case RewardedVideoAdEvent.opened:
         // print('\n=== 2 === $event === 2 ===');
-        // _showSnackBar('Admob $adType Ad opened!', 1500);
         break;
 
       case RewardedVideoAdEvent.started:
         // print('\n=== 3 === $event === 3 ===');
-        // _showSnackBar('Admob $adType Ad started!', 1500);
         break;
 
       case RewardedVideoAdEvent.completed:
         // print('\n=== 4 === $event === 4 ===');
-        // _showSnackBar('Admob $adType Ad completed!', 1500);
         break;
 
       case RewardedVideoAdEvent.failedToLoad:
         // print('\n=== 5 === $event === 5 ===');
-        // _showSnackBar('Admob $adType failed to load.', 1500);
         break;
 
       case RewardedVideoAdEvent.rewarded:
@@ -122,34 +116,17 @@ class _RewardScreenState extends State<RewardScreen> {
 
         // print('\n=== 6 === $event === 6 ===');
         print('\n\n=== REWARDED ==');
-        // _showSnackBar('Rewarded $rewardAmount', 3000);
+        // print('===== New level is $vMagicLevel =====');
         break;
 
-      //This is by calling the video to be loaded when the other rewarded video is closed.
       case RewardedVideoAdEvent.closed:
         // print('\n=== 7 === $event === 7 ===');
-        // _videoAd
-        //     .load(
-        //         /// TODO
-        //         adUnitId: RewardedVideoAd.testAdUnitId,
-        //         // adUnitId: AdMobService().getRewardedAdId(),
-        //         targetingInfo: targetingInfo)
-        //     .catchError((e) => print('Error in loading.'));
-        // _showSnackBar('Admob $adType Ad closed!', 1500);
         break;
 
       default:
-      // print('\n===== $event =======');
+        print('\n===== $event =======');
     }
   }
-
-  // //Snackbar shown with ad status
-  // void _showSnackBar(String content, int duration) {
-  //   Scaffold.of(context).showSnackBar(SnackBar(
-  //     content: Text(content),
-  //     duration: Duration(milliseconds: duration),
-  //   ));
-  // }
 
   @override
   Widget build(BuildContext context) {
