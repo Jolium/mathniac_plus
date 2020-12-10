@@ -3,7 +3,7 @@ description: Mathniac the game
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.8+8
+version: 1.0.9+9
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -59,7 +59,7 @@ flutter:
 
   assets:
     - images/
-    - images/icons/
+#    - images/icons/
     - assets/sounds/
     - assets/fonts/
 
