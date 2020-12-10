@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:admob_flutter/admob_flutter.dart';
 
-import 'package:mathniac_plus/settings/constants.dart';
-import 'package:mathniac_plus/settings/lists.dart';
-import 'package:mathniac_plus/settings/vars.dart';
+import '../settings/constants.dart';
+import '../settings/lists.dart';
+import '../settings/vars.dart';
 
-import 'package:mathniac_plus/tasks/admob_service.dart';
+import '../tasks/admob_service.dart';
 
-import 'package:mathniac_plus/widgets/my_button.dart';
-import 'package:mathniac_plus/widgets/custom_header.dart';
+import '../widgets/my_button.dart';
+import '../widgets/custom_header.dart';
 
-import 'package:mathniac_plus/screens/home_screen.dart';
+import 'home_screen.dart';
 
 class ScoresScreen extends StatefulWidget {
   @override

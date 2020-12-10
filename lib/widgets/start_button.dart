@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:mathniac_plus/tasks/task_hive.dart';
 
 import 'package:provider/provider.dart';
 
-import 'package:mathniac_plus/screens/levels_screen.dart';
-import 'package:mathniac_plus/screens/upload_screen.dart';
+import '../settings/constants.dart';
+import '../settings/vars.dart';
+import '../settings/lists.dart';
 
-import 'package:mathniac_plus/settings/constants.dart';
-import 'package:mathniac_plus/settings/vars.dart';
-import 'package:mathniac_plus/settings/lists.dart';
+import '../tasks/tasks_functions.dart';
+import '../tasks/tasks_provider.dart';
+import '../tasks/task_hive.dart';
+import '../tasks/custom_route.dart';
 
-import 'package:mathniac_plus/tasks/tasks_functions.dart';
-import 'package:mathniac_plus/tasks/tasks_provider.dart';
-import 'package:mathniac_plus/tasks/custom_route.dart';
+import '../screens/levels_screen.dart';
+import '../screens/upload_screen.dart';
 
 class StartButton extends StatefulWidget {
   @override

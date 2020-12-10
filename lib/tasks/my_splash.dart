@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
+// import 'package:flutter/cupertino.dart';
 
-import 'package:mathniac_plus/tasks/custom_route.dart';
+import 'custom_route.dart';
 
 Widget _home;
 Function _customFunction;

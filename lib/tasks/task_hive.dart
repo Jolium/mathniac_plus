@@ -1,8 +1,8 @@
 import 'package:hive/hive.dart';
 
-import 'package:mathniac_plus/settings/constants.dart';
-import 'package:mathniac_plus/settings/lists.dart';
-import 'package:mathniac_plus/settings/vars.dart';
+import '../settings/constants.dart';
+import '../settings/lists.dart';
+import '../settings/vars.dart';
 
 Box<String> tasksBox = Hive.box<String>(kHiveBoxName);
 

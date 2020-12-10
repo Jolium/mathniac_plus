@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
-import 'package:mathniac_plus/settings/vars.dart';
-import 'package:mathniac_plus/settings/constants.dart';
-import 'package:mathniac_plus/settings/lists.dart';
+import '../settings/vars.dart';
+import '../settings/constants.dart';
+import '../settings/lists.dart';
 
-import 'package:mathniac_plus/tasks/tasks_provider.dart';
-import 'package:mathniac_plus/tasks/tasks_functions.dart';
-import 'package:mathniac_plus/tasks/score_system.dart';
+import 'tasks_provider.dart';
+import 'tasks_functions.dart';
+import 'score_system.dart';
 
 class ButtonsLayout extends StatefulWidget {
   final double size = 1;
@@ -178,7 +178,8 @@ class _ButtonsLayoutState extends State<ButtonsLayout> {
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(
-                  Radius.circular(_borderRadius,
+                  Radius.circular(
+                    _borderRadius,
                   ),
                 ),
                 gradient: LinearGradient(
@@ -186,7 +187,8 @@ class _ButtonsLayoutState extends State<ButtonsLayout> {
                   end: Alignment.bottomRight,
                   colors: _colorsList,
                 ),
-                border: Border.all(color: _color,
+                border: Border.all(
+                  color: _color,
                   width: _edgeInsets,
                 ),
                 boxShadow: [

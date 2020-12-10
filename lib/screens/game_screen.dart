@@ -4,21 +4,21 @@ import 'dart:async';
 
 import 'package:provider/provider.dart';
 
-import 'package:mathniac_plus/settings/constants.dart';
-import 'package:mathniac_plus/settings/lists.dart';
-import 'package:mathniac_plus/settings/vars.dart';
+import '../settings/constants.dart';
+import '../settings/lists.dart';
+import '../settings/vars.dart';
 
-import 'package:mathniac_plus/tasks/layout_buttons.dart';
-import 'package:mathniac_plus/tasks/tasks_functions.dart';
-import 'package:mathniac_plus/tasks/tasks_provider.dart';
+import '../tasks/layout_buttons.dart';
+import '../tasks/tasks_functions.dart';
+import '../tasks/tasks_provider.dart';
 
-import 'package:mathniac_plus/widgets/custom_header.dart';
-import 'package:mathniac_plus/widgets/my_button.dart';
-import 'package:mathniac_plus/widgets/start_button.dart';
-import 'package:mathniac_plus/widgets/countdown.dart';
+import '../widgets/custom_header.dart';
+import '../widgets/my_button.dart';
+import '../widgets/start_button.dart';
+import '../widgets/countdown.dart';
 
-import 'package:mathniac_plus/screens/home_screen.dart';
-import 'package:mathniac_plus/screens/levels_screen.dart';
+import 'home_screen.dart';
+import 'levels_screen.dart';
 
 class GameScreen extends StatefulWidget {
   @override

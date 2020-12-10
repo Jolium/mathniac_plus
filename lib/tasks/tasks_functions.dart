@@ -3,17 +3,14 @@ import 'package:flutter/foundation.dart';
 import 'dart:math';
 import 'dart:io';
 
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:firebase_core/firebase_core.dart';
 import 'package:audioplayers/audio_cache.dart';
-// import 'package:flutter/services.dart';
 
-import 'package:mathniac_plus/tasks/task_hive.dart';
-import 'package:mathniac_plus/tasks/tasks_provider.dart';
+import '../settings/vars.dart';
+import '../settings/constants.dart';
+import '../settings/lists.dart';
 
-import 'package:mathniac_plus/settings/vars.dart';
-import 'package:mathniac_plus/settings/constants.dart';
-import 'package:mathniac_plus/settings/lists.dart';
+import 'task_hive.dart';
+import 'tasks_provider.dart';
 
 class ClearOnlyButtons {
   /// Deselect ONLY selected buttons and only UPDATE the list of selected buttons

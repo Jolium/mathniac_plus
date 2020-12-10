@@ -4,22 +4,22 @@ import 'dart:io';
 
 import 'package:provider/provider.dart';
 
-import 'package:mathniac_plus/settings/constants.dart';
-import 'package:mathniac_plus/settings/vars.dart';
+import '../settings/constants.dart';
+import '../settings/vars.dart';
 
-import 'package:mathniac_plus/tasks/tasks_functions.dart';
-import 'package:mathniac_plus/tasks/tasks_provider.dart';
+import '../tasks/tasks_functions.dart';
+import '../tasks/tasks_provider.dart';
 
-import 'package:mathniac_plus/widgets/my_button.dart';
-import 'package:mathniac_plus/widgets/custom_header.dart';
+import '../widgets/my_button.dart';
+import '../widgets/custom_header.dart';
 
-import 'package:mathniac_plus/screens/reward_screen2.dart';
-import 'package:mathniac_plus/screens/settings_screen.dart';
-import 'package:mathniac_plus/screens/levels_screen.dart';
-import 'package:mathniac_plus/screens/intro_screen.dart';
-import 'package:mathniac_plus/screens/scores_screen.dart';
-import 'package:mathniac_plus/screens/game_screen.dart';
-import 'package:mathniac_plus/screens/authentication.dart';
+import 'reward_screen.dart';
+import 'settings_screen.dart';
+import 'levels_screen.dart';
+import 'intro_screen.dart';
+import 'scores_screen.dart';
+import 'game_screen.dart';
+import 'authentication.dart';
 
 class HomeScreen extends StatefulWidget {
   @override

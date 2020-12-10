@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:mathniac_plus/settings/constants.dart';
+import '../settings/constants.dart';
 
 class AdMobService {
   String getAdMobAppId() {

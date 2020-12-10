@@ -1,4 +1,3 @@
-import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,16 +8,16 @@ import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:hive/hive.dart';
 
-import 'package:mathniac_plus/settings/vars.dart';
-import 'package:mathniac_plus/settings/lists.dart';
-import 'package:mathniac_plus/settings/constants.dart';
+import './settings/vars.dart';
+import './settings/lists.dart';
+import './settings/constants.dart';
 
-import 'package:mathniac_plus/tasks/tasks_provider.dart';
-import 'package:mathniac_plus/tasks/tasks_functions.dart';
-import 'package:mathniac_plus/tasks/my_splash.dart';
-import 'package:mathniac_plus/tasks/task_hive.dart';
+import './tasks/tasks_provider.dart';
+import './tasks/tasks_functions.dart';
+import './tasks/my_splash.dart';
+import './tasks/task_hive.dart';
 
-import 'package:mathniac_plus/screens/home_screen.dart';
+import './screens/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

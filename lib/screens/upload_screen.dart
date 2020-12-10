@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/services.dart';
 
-import 'package:mathniac_plus/settings/constants.dart';
-import 'package:mathniac_plus/settings/lists.dart';
-import 'package:mathniac_plus/settings/vars.dart';
+import '../settings/constants.dart';
+import '../settings/lists.dart';
+import '../settings/vars.dart';
 
-import 'package:mathniac_plus/tasks/task_hive.dart';
-import 'package:mathniac_plus/tasks/custom_route.dart';
-import 'package:mathniac_plus/tasks/tasks_functions.dart';
+import '../tasks/task_hive.dart';
+import '../tasks/custom_route.dart';
+import '../tasks/tasks_functions.dart';
 
-import 'package:mathniac_plus/widgets/my_button.dart';
-import 'package:mathniac_plus/widgets/custom_header.dart';
+import '../widgets/my_button.dart';
+import '../widgets/custom_header.dart';
 
-import 'package:mathniac_plus/screens/game_screen.dart';
+import 'game_screen.dart';
 
 class UploadScreen extends StatefulWidget {
   @override

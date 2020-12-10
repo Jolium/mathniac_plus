@@ -1,4 +1,4 @@
-import 'package:mathniac_plus/settings/vars.dart';
+import '../settings/vars.dart';
 
 class ScoreSystem {
   int _newValue = 0;

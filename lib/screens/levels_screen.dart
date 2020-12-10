@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
-import 'package:mathniac_plus/screens/game_screen.dart';
-import 'package:mathniac_plus/screens/home_screen.dart';
+import '../settings/constants.dart';
+import '../settings/lists.dart';
+import '../settings/vars.dart';
 
-import 'package:mathniac_plus/settings/constants.dart';
-import 'package:mathniac_plus/settings/lists.dart';
-import 'package:mathniac_plus/settings/vars.dart';
+import '../tasks/layout_level.dart';
+import '../tasks/tasks_functions.dart';
+import '../tasks/tasks_provider.dart';
 
-import 'package:mathniac_plus/tasks/layout_level.dart';
-import 'package:mathniac_plus/tasks/tasks_functions.dart';
-import 'package:mathniac_plus/tasks/tasks_provider.dart';
+import '../widgets/my_button.dart';
+import '../widgets/custom_header.dart';
 
-import 'package:mathniac_plus/widgets/my_button.dart';
-import 'package:mathniac_plus/widgets/custom_header.dart';
+import 'game_screen.dart';
+import 'home_screen.dart';
 
 class LevelsScreen extends StatefulWidget {
   @override

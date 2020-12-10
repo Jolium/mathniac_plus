@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:mathniac_plus/settings/constants.dart';
+import '../settings/constants.dart';
 
 class CustomHeader extends StatefulWidget {
   CustomHeader({

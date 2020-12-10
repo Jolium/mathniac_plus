@@ -1,4 +1,4 @@
-import 'package:mathniac_plus/settings/vars.dart';
+import '../settings/vars.dart';
 
 String text1 = """
 Add different numbers until you reach the 'Goal' value.\n

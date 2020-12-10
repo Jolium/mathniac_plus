@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-import 'package:mathniac_plus/settings/constants.dart';
-import 'package:mathniac_plus/settings/lists.dart';
+import '../settings/constants.dart';
+import '../settings/lists.dart';
 
 class LevelsLayout extends StatefulWidget {
   @override

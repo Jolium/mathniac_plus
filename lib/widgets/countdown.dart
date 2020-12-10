@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
-import 'package:mathniac_plus/tasks/task_hive.dart';
-import 'package:mathniac_plus/tasks/tasks_provider.dart';
-import 'package:mathniac_plus/tasks/tasks_functions.dart';
+import '../tasks/task_hive.dart';
+import '../tasks/tasks_provider.dart';
+import '../tasks/tasks_functions.dart';
 
-import 'package:mathniac_plus/settings/constants.dart';
-import 'package:mathniac_plus/settings/lists.dart';
-import 'package:mathniac_plus/settings/vars.dart';
+import '../settings/constants.dart';
+import '../settings/lists.dart';
+import '../settings/vars.dart';
 
 class CountDown extends StatefulWidget {
   @override

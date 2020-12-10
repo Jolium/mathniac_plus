@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'package:mathniac_plus/screens/upload_screen.dart';
+import 'upload_screen.dart';
 
 class Authentication extends StatelessWidget {
   Future<void> _signInAnonymously() async {

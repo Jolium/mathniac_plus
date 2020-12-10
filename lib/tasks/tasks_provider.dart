@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'dart:math';
 
-import 'package:mathniac_plus/settings/vars.dart';
-import 'package:mathniac_plus/settings/lists.dart';
+import '../settings/vars.dart';
+import '../settings/lists.dart';
 
 class Randoms extends ChangeNotifier {
   /// Creates a new list with random integers ///

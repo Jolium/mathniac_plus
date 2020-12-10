@@ -2,14 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-import 'package:mathniac_plus/settings/vars.dart';
-import 'package:mathniac_plus/settings/constants.dart';
-import 'package:mathniac_plus/settings/intro_content.dart';
+import '../settings/vars.dart';
+import '../settings/constants.dart';
+import '../settings/intro_content.dart';
 
-import 'package:mathniac_plus/widgets/my_button.dart';
-import 'package:mathniac_plus/widgets/custom_header.dart';
+import '../widgets/my_button.dart';
+import '../widgets/custom_header.dart';
 
-import 'package:mathniac_plus/screens/home_screen.dart';
+import 'home_screen.dart';
 
 class IntroScreen extends StatefulWidget {
   @override
