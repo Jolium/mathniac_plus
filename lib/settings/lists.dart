@@ -3,6 +3,8 @@ List<String> listOfKeyWords = [
   'games',
   'game',
   'flutter',
+  'react native',
+  'unity',
   'math',
   'numbers',
   'app',
@@ -13,6 +15,10 @@ List<String> listOfKeyWords = [
   'flutter',
   'beautiful apps',
   'puzzle',
+  'action',
+  'movies',
+  'google play',
+  'play store',
 ];
 
 /// List of Test Devices

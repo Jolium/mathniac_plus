@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "143647895105-qh939qnq0rjkj6f4lbkt1oklm8qi1f0f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.linchoplus.mathniac",
+            "certificate_hash": "e8c1e966da4afa4beb931ebf2cd7a88e7afe3577"
+          }
+        },
+        {
           "client_id": "143647895105-ccc2a1sdic6bvvks9uta335i0d292bvq.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -52,6 +60,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "143647895105-h80kdg5mvrfl8hd5jq4evdl5q3r6rdie.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.linchoplus.mathniac_plus",
+            "certificate_hash": "e8c1e966da4afa4beb931ebf2cd7a88e7afe3577"
+          }
+        },
+        {
           "client_id": "143647895105-ccc2a1sdic6bvvks9uta335i0d292bvq.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -77,7 +93,8 @@
             }
           ]
         }
-      }
+      },
+      "admob_app_id": "ca-app-pub-4259634083772880~7378704091"
     }
   ],
   "configuration_version": "1"

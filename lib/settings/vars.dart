@@ -35,5 +35,5 @@ bool vInternetConnection = false;
 bool vUploadScore = false;
 int vLeaderboardScore = 0;
 
-/// Ads
+/// Ads - only watch new ad after pay once
 bool vWatchAds = true;

@@ -41,6 +41,9 @@ class _RewardScreenState extends State<RewardScreen> {
 
   bool _loaded = false;
 
+  // Ad button active
+  bool _adButtonActive = false;
+
   //An instance to be called in the init state
   RewardedVideoAd _videoAd = RewardedVideoAd.instance;
 
@@ -59,6 +62,9 @@ class _RewardScreenState extends State<RewardScreen> {
           .load(adUnitId: _rewardedUnitId, targetingInfo: targetingInfo)
           .catchError((e) => print("error in loading 1st time"))
           .then((v) => setState(() => _loaded = v));
+    } else {
+      // Activate button to show pop-up showing warning 'You have to play at least 1 time...'
+      _adButtonActive = true;
     }
 
     // ad listener
@@ -71,8 +77,13 @@ class _RewardScreenState extends State<RewardScreen> {
             .then((v) => setState(() => _loaded = v));
       }
 
-      // On every other event change pass the values to the _handleEvent Method.
-      _handleEvent(event, rewardType, 'Reward', rewardAmount);
+      // Check rewarded event
+      _handleEvent(event);
+
+      if (kTestAds) {
+        // On every other event change pass the values to the _handleEvent Method.
+        _infoEvent(event, rewardType, 'Reward', rewardAmount);
+      }
     };
   }
 
@@ -84,43 +95,53 @@ class _RewardScreenState extends State<RewardScreen> {
     super.dispose();
   }
 
+  // Handle rewarded event
+  void _handleEvent(RewardedVideoAdEvent event) {
+    if (event == RewardedVideoAdEvent.rewarded) {
+      // Update level
+      UpdateValues().getNewLevelValue();
+      vWatchAds = false;
+    }
+    if (event == RewardedVideoAdEvent.loaded) {
+      setState(() {
+        _adButtonActive = true;
+      });
+    }
+  }
+
   //---- Useful function to know exactly what is being done ----//
-  void _handleEvent(RewardedVideoAdEvent event, String rewardType,
-      String adType, int rewardAmount) {
+  void _infoEvent(RewardedVideoAdEvent event, String rewardType, String adType,
+      int rewardAmount) {
     print('\n=== 0 === $event === 0 ===');
     switch (event) {
       case RewardedVideoAdEvent.loaded:
-        // print('\n=== 1 === $event === 1 ===');
+        print('\n=== 1 === $event === 1 ===');
         break;
 
       case RewardedVideoAdEvent.opened:
-        // print('\n=== 2 === $event === 2 ===');
+        print('\n=== 2 === $event === 2 ===');
         break;
 
       case RewardedVideoAdEvent.started:
-        // print('\n=== 3 === $event === 3 ===');
+        print('\n=== 3 === $event === 3 ===');
         break;
 
       case RewardedVideoAdEvent.completed:
-        // print('\n=== 4 === $event === 4 ===');
+        print('\n=== 4 === $event === 4 ===');
         break;
 
       case RewardedVideoAdEvent.failedToLoad:
-        // print('\n=== 5 === $event === 5 ===');
+        print('\n=== 5 === $event === 5 ===');
         break;
 
       case RewardedVideoAdEvent.rewarded:
-        // Update level
-        UpdateValues().getNewLevelValue();
-        vWatchAds = false;
-
-        // print('\n=== 6 === $event === 6 ===');
+        print('\n=== 6 === $event === 6 ===');
         print('\n\n=== REWARDED ==');
-        // print('===== New level is $vMagicLevel =====');
+        print('===== New level is $vMagicLevel =====');
         break;
 
       case RewardedVideoAdEvent.closed:
-        // print('\n=== 7 === $event === 7 ===');
+        print('\n=== 7 === $event === 7 ===');
         break;
 
       default:
@@ -229,9 +250,12 @@ class _RewardScreenState extends State<RewardScreen> {
                 ),
                 Spacer(),
                 MyButton(
-                  contentColor: Colors.yellowAccent,
+                  contentColor:
+                      _adButtonActive ? Colors.yellowAccent : Colors.grey,
                   text: ' Watch Ad ',
                   textRatio: 3.5,
+                  active: _adButtonActive,
+                  decreaseSizeOnTap: false,
                   onTap: () async {
                     print('\n=== Is Ad loaded onTap: $_loaded ===');
                     if (vWatchAds) {

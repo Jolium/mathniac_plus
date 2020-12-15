@@ -86,4 +86,5 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:26.1.0')
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.android.gms:play-services-ads:19.6.0'
+    implementation 'com.google.ads.mediation:unity:3.5.1.1'
 }

@@ -23,6 +23,7 @@ class MyButton extends StatefulWidget {
     this.marginRatio = 20,
     this.active = true,
     this.diagonal = true,
+    this.decreaseSizeOnTap = true,
   }) : assert(
           (icon != null || text != null),
           'One of the parameters must be provided ("icon" or "text")',
@@ -44,6 +45,7 @@ class MyButton extends StatefulWidget {
   final double marginRatio;
   final bool active;
   final bool diagonal;
+  final bool decreaseSizeOnTap;
 
   @override
   _MyButtonState createState() => _MyButtonState();
@@ -79,8 +81,10 @@ class _MyButtonState extends State<MyButton> {
         AudioPlayer().soundPlayer('pressed_button.mp3');
 
         setState(() {
-          // decreases the button size
-          _sizedBox = 0.9;
+          if (widget.decreaseSizeOnTap) {
+            // decreases the button size
+            _sizedBox = 0.9;
+          }
 
           if (widget.navigator != null) {
             Navigator.of(context).pushReplacement(

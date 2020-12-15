@@ -12,7 +12,7 @@ import '../tasks/task_hive.dart';
 import '../tasks/custom_route.dart';
 
 import '../screens/levels_screen.dart';
-import '../screens/upload_screen.dart';
+import '../screens/authentication.dart';
 
 class StartButton extends StatefulWidget {
   @override
@@ -115,7 +115,7 @@ class _StartButtonState extends State<StartButton> {
 
           // Change screen
           Navigator.of(context).pushReplacement(
-              CustomRoute(builder: (context) => UploadScreen()));
+              CustomRoute(builder: (context) => Authentication()));
         }
 
         if (vMagicLevel == 15 || vActualScoreValue < _scoreLevelPoints) {
