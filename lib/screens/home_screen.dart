@@ -4,7 +4,7 @@ import 'dart:io';
 
 import 'package:provider/provider.dart';
 
-import '../settings/constants.dart';
+import '../settings/backgrounds.dart';
 import '../settings/vars.dart';
 
 import '../tasks/tasks_functions.dart';

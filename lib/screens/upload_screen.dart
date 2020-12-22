@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../settings/backgrounds.dart';
 import '../settings/constants.dart';
 import '../settings/lists.dart';
 import '../settings/vars.dart';

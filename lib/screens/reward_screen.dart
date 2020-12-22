@@ -8,6 +8,7 @@ import 'package:firebase_admob/firebase_admob.dart';
 import '../settings/lists.dart';
 import '../settings/vars.dart';
 import '../settings/constants.dart';
+import '../settings/backgrounds.dart';
 
 import '../tasks/tasks_functions.dart';
 import '../tasks/admob_service.dart';

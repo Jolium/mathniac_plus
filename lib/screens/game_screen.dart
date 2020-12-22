@@ -4,7 +4,7 @@ import 'dart:async';
 
 import 'package:provider/provider.dart';
 
-import '../settings/constants.dart';
+import '../settings/backgrounds.dart';
 import '../settings/lists.dart';
 import '../settings/vars.dart';
 

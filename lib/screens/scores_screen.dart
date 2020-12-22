@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:admob_flutter/admob_flutter.dart';
 
+import '../settings/backgrounds.dart';
 import '../settings/constants.dart';
 import '../settings/lists.dart';
 import '../settings/vars.dart';

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 import '../settings/vars.dart';
-import '../settings/constants.dart';
+import '../settings/backgrounds.dart';
 import '../settings/intro_content.dart';
 
 import '../widgets/my_button.dart';
