@@ -84,6 +84,8 @@ class _UploadScreenState extends State<UploadScreen> {
   double _textRatio = 10; // 2.5
 
   Color _warningsColor = kColorRed;
+  Color _warningsColorText1 = kColorRed;
+  Color _warningsColorText2 = kColorRed;
 
   @override
   Widget build(BuildContext context) {
@@ -210,11 +212,19 @@ class _UploadScreenState extends State<UploadScreen> {
                                           ),
                                         ),
                                         Text(
-                                          '- Between 4 and 12 characters long\n'
+                                          '- Between 4 and 12 characters long',
+                                          textAlign: TextAlign.justify,
+                                          style: TextStyle(
+                                            color: _warningsColorText1,
+                                            fontSize: _textSize,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Text(
                                           '- Not yet in use',
                                           textAlign: TextAlign.justify,
                                           style: TextStyle(
-                                            color: _warningsColor,
+                                            color: _warningsColorText2,
                                             fontSize: _textSize,
                                             fontWeight: FontWeight.bold,
                                           ),
@@ -266,19 +276,43 @@ class _UploadScreenState extends State<UploadScreen> {
                                                 controller:
                                                     messageTextController,
                                                 onChanged: (value) {
-                                                  // between 4 and 12 letters
-                                                  // is already a used name and player has no name
-                                                  if ("$value".length >= 4 &&
-                                                          "$value".length <=
-                                                              12 ||
-                                                      listOfAllNames.contains(
-                                                              '$vNickname') &&
-                                                          !_nicknameExist) {
+                                                  /// between 4 and 12 letters
+                                                  if (value.length >= 4 &&
+                                                      value.length <= 12) {
                                                     setState(() {
-                                                      _warningsColor =
+                                                      _warningsColorText1 =
                                                           Colors.white;
                                                       vNickname = value;
                                                     });
+                                                  } else {
+                                                    setState(() {
+                                                      _warningsColorText1 =
+                                                          kColorRed;
+                                                    });
+                                                  }
+
+                                                  /// is already a used name and player has no name
+                                                  if (!listOfAllNames
+                                                          .contains(value) &&
+                                                      !_nicknameExist) {
+                                                    setState(() {
+                                                      _warningsColorText2 =
+                                                          Colors.white;
+                                                      vNickname = value;
+                                                    });
+                                                  } else {
+                                                    setState(() {
+                                                      _warningsColorText2 =
+                                                          kColorRed;
+                                                    });
+                                                  }
+                                                  if (_warningsColorText1 ==
+                                                          Colors.white &&
+                                                      _warningsColorText2 ==
+                                                          Colors.white) {
+                                                    _warningsColor =
+                                                        Colors.white;
+                                                    vNickname = value;
                                                   } else {
                                                     setState(() {
                                                       vNickname = '';

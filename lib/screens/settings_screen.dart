@@ -91,6 +91,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 if (!kIsWeb) {
                   TaskHive().updateLevel(1);
                   TaskHive().updateHighScore(0);
+                  TaskHive().saveNickname('');
                 }
                 vBackground = true;
                 UpdateValues().getStartTimerValue();
