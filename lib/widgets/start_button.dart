@@ -107,6 +107,8 @@ class _StartButtonState extends State<StartButton> {
 
           // Update level
           UpdateValues().getNewLevelValue();
+
+          vActualScoreValue = 0;
         }
 
         // If score is own best score
