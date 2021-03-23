@@ -14,8 +14,8 @@ import 'authentication.dart';
 import 'game_screen.dart';
 import 'intro_screen.dart';
 import 'levels_screen.dart';
-import 'reward_screen.dart';
-import 'scores_screen.dart';
+import 'reward_screen2.dart';
+import 'scores_screen2.dart';
 import 'settings_screen.dart';
 
 class HomeScreen extends StatefulWidget {
