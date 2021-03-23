@@ -4,12 +4,7 @@ import 'package:flutter/rendering.dart';
 import '../settings/constants.dart';
 import '../settings/lists.dart';
 
-class LevelsLayout extends StatefulWidget {
-  @override
-  _LevelsLayoutState createState() => _LevelsLayoutState();
-}
-
-class _LevelsLayoutState extends State<LevelsLayout> {
+class LevelsLayout extends StatelessWidget {
   final double _widthRatio = 5; // 1.1
   final double _heightRatio = 5; // 1.1
   final double _borderRatio = 3; // 10
@@ -17,9 +12,9 @@ class _LevelsLayoutState extends State<LevelsLayout> {
   final double _textRatio = 3;
   final double _shadowRatio = 15;
 
-  List<Widget> rowElements = [];
+  // List<Widget> rowElements = [];
 
-  List<Widget> generateRowElements(double size) {
+  List<Widget> generateRowElements(BuildContext context, double size) {
     final Size _screenSize = MediaQuery.of(context).size;
     final double _sizeRatio = _screenSize.height / _screenSize.width / 2;
     final double _buttonHeight = _screenSize.width / _heightRatio * _sizeRatio;
@@ -32,7 +27,8 @@ class _LevelsLayoutState extends State<LevelsLayout> {
     final double _edgeInsets = _buttonSize / _marginRatio * _sizeRatio;
     final double _shadowRadius = _buttonHeight / 5 / _shadowRatio;
 
-    rowElements.clear();
+    final List<Widget> rowElements = [];
+    // rowElements.clear();
 
     for (int i = 0; i < listGotLevel.length; i++) {
       Color _starColor;
@@ -175,9 +171,9 @@ class _LevelsLayoutState extends State<LevelsLayout> {
 
     for (int i = 0; i <= 14; i++) {
       if (i == 14) {
-        list.add(generateRowElements(3)[i]);
+        list.add(generateRowElements(context, 3)[i]);
       } else {
-        list.add(generateRowElements(1)[i]);
+        list.add(generateRowElements(context, 1)[i]);
       }
     }
 

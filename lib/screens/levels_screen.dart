@@ -12,12 +12,7 @@ import '../widgets/my_button.dart';
 import 'game_screen.dart';
 import 'home_screen.dart';
 
-class LevelsScreen extends StatefulWidget {
-  @override
-  _LevelsScreenState createState() => _LevelsScreenState();
-}
-
-class _LevelsScreenState extends State<LevelsScreen> {
+class LevelsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size _screenSize = MediaQuery.of(context).size;

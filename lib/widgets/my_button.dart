@@ -85,7 +85,7 @@ class _MyButtonState extends State<MyButton> {
         setState(() {
           if (widget.decreaseSizeOnTap) {
             // decreases the button size
-            _sizedBox = 0.9;
+            _sizedBox = 0.95;
           }
 
           if (widget.navigator != null) {

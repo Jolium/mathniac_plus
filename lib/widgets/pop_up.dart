@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class PopUp extends StatefulWidget {
+class PopUp extends StatelessWidget {
   final String title;
   final String content;
   final void Function() onPressed;
@@ -11,11 +11,6 @@ class PopUp extends StatefulWidget {
     @required this.onPressed,
   });
 
-  @override
-  _PopUpState createState() => _PopUpState();
-}
-
-class _PopUpState extends State<PopUp> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -29,7 +24,7 @@ class _PopUpState extends State<PopUp> {
         side: BorderSide(color: Colors.white60, width: 4),
       ),
       title: Text(
-        widget.title,
+        title,
         style: const TextStyle(
           color: Colors.white,
           fontSize: 16,
@@ -37,7 +32,7 @@ class _PopUpState extends State<PopUp> {
         ),
       ),
       content: Text(
-        widget.content,
+        content,
         style: const TextStyle(
           color: Colors.white,
           fontSize: 14,
@@ -45,7 +40,7 @@ class _PopUpState extends State<PopUp> {
       ),
       actions: [
         TextButton(
-          onPressed: widget.onPressed,
+          onPressed: onPressed,
           // shape: const RoundedRectangleBorder(
           //   borderRadius: BorderRadius.all(
           //     Radius.circular(32),

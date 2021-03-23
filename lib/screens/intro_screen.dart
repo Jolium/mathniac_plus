@@ -9,12 +9,7 @@ import '../widgets/custom_header.dart';
 import '../widgets/my_button.dart';
 import 'home_screen.dart';
 
-class IntroScreen extends StatefulWidget {
-  @override
-  _IntroScreenState createState() => _IntroScreenState();
-}
-
-class _IntroScreenState extends State<IntroScreen> {
+class IntroScreen extends StatelessWidget {
   final double _widthRatio = 1.15;
   final double _heightRatio = 1.1;
   final double _borderRatio = 10;

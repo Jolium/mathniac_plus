@@ -8,12 +8,7 @@ import '../tasks/task_hive.dart';
 import '../tasks/tasks_functions.dart';
 import '../tasks/tasks_provider.dart';
 
-class CountDown extends StatefulWidget {
-  @override
-  _CountDownState createState() => _CountDownState();
-}
-
-class _CountDownState extends State<CountDown> {
+class CountDown extends StatelessWidget {
   final int _scoreLevelPoints = listOfScorePoints[vMagicLevel - 1];
   final double _widthRatio = 5;
   final double _heightRatio = 5;

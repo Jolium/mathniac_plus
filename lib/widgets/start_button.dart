@@ -93,7 +93,7 @@ class _StartButtonState extends State<StartButton> {
 
         setState(() {
           // decreases the button size
-          _sizedBox = 0.9;
+          _sizedBox = 0.95;
           vButtonText = ' Refresh ';
           vButtonGradient = false;
         });
