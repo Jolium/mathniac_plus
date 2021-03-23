@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
@@ -24,6 +25,7 @@ Future<void> main() async {
 
   // Admob.initialize(testDeviceIds: listOfTestDevices);
   // Admob.initialize();
+  MobileAds.instance.initialize();
 
   // Check internet connection
   try {
@@ -53,6 +55,7 @@ Future<void> main() async {
   UpdateValues().getStartTimerValue();
   UpdateGoalValues().getGoalValue();
   runApp(MyApp());
+  // runApp(ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

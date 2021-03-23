@@ -18,6 +18,8 @@ dependencies:
   cupertino_icons: ^1.0.0
 #  spring: ^1.0.4
   provider: ^4.3.2+2
+  flutter_riverpod: ^0.13.1+1 # Null safety
+
   audioplayers: '0.16.1'
 #  audioplayers: ^0.17.0
   hive: ^1.4.4+1

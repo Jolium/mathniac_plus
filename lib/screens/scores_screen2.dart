@@ -42,7 +42,7 @@ class _ScoresScreenState extends State<ScoresScreen> {
     super.initState();
     // Admob.initialize(testDeviceIds: listOfTestDevices);
 
-    MobileAds.instance.initialize();
+    // MobileAds.instance.initialize();
 
     _bannerAd = BannerAd(
       // adUnitId: BannerAd.testAdUnitId,
