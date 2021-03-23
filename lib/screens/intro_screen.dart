@@ -2,13 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-import '../settings/vars.dart';
 import '../settings/backgrounds.dart';
 import '../settings/intro_content.dart';
-
-import '../widgets/my_button.dart';
+import '../settings/vars.dart';
 import '../widgets/custom_header.dart';
-
+import '../widgets/my_button.dart';
 import 'home_screen.dart';
 
 class IntroScreen extends StatefulWidget {
@@ -17,24 +15,24 @@ class IntroScreen extends StatefulWidget {
 }
 
 class _IntroScreenState extends State<IntroScreen> {
-  double _widthRatio = 1.15;
-  double _heightRatio = 1.1;
-  double _borderRatio = 10;
-  double _marginRatio = 20;
-  double _textRatio = 20;
+  final double _widthRatio = 1.15;
+  final double _heightRatio = 1.1;
+  final double _borderRatio = 10;
+  final double _marginRatio = 20;
+  final double _textRatio = 20;
 
   @override
   Widget build(BuildContext context) {
-    var _screenSize = MediaQuery.of(context).size;
-    double _sizeRatio = _screenSize.height / _screenSize.width / 2;
-    double _buttonHeight = _screenSize.width / _heightRatio * _sizeRatio;
-    double _buttonWidth = _screenSize.width / _widthRatio * _sizeRatio;
-    double _buttonSize =
+    final Size _screenSize = MediaQuery.of(context).size;
+    final double _sizeRatio = _screenSize.height / _screenSize.width / 2;
+    final double _buttonHeight = _screenSize.width / _heightRatio * _sizeRatio;
+    final double _buttonWidth = _screenSize.width / _widthRatio * _sizeRatio;
+    final double _buttonSize =
         _buttonHeight <= _buttonWidth ? _buttonHeight : _buttonWidth;
 
-    double _textSize = _buttonSize / _textRatio;
-    double _borderRadius = _buttonSize / _borderRatio;
-    double _edgeInsets = _buttonSize / _marginRatio;
+    final double _textSize = _buttonSize / _textRatio;
+    final double _borderRadius = _buttonSize / _borderRatio;
+    final double _edgeInsets = _buttonSize / _marginRatio;
     // double _shadowRadius = _buttonHeight / _marginRatio;
 
     return Scaffold(
@@ -54,7 +52,7 @@ class _IntroScreenState extends State<IntroScreen> {
                   SizedBox(
                     height: _screenSize.height / 30,
                   ),
-                  CustomHeader(text: ' Introduction '),
+                  const CustomHeader(text: ' Introduction '),
                   SizedBox(
                     height: _screenSize.height / 30,
                   ),

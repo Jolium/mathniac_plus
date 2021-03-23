@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../settings/constants.dart';
 
 class CustomHeader extends StatefulWidget {
-  CustomHeader({
+  const CustomHeader({
     @required this.text,
     this.colorPrimary = Colors.black,
     this.colorSecondary = Colors.white,
@@ -36,16 +36,18 @@ class CustomHeader extends StatefulWidget {
 class _CustomHeaderState extends State<CustomHeader> {
   @override
   Widget build(BuildContext context) {
-    var _screenSize = MediaQuery.of(context).size;
-    double _sizeRatio = _screenSize.height / _screenSize.width / 2;
-    double _buttonHeight = _screenSize.width / widget.heightRatio * _sizeRatio;
-    double _buttonWidth = _screenSize.width / widget.widthRatio * _sizeRatio;
-    double _buttonSize =
+    final Size _screenSize = MediaQuery.of(context).size;
+    final double _sizeRatio = _screenSize.height / _screenSize.width / 2;
+    final double _buttonHeight =
+        _screenSize.width / widget.heightRatio * _sizeRatio;
+    final double _buttonWidth =
+        _screenSize.width / widget.widthRatio * _sizeRatio;
+    final double _buttonSize =
         _buttonHeight <= _buttonWidth ? _buttonHeight : _buttonWidth;
 
-    double _edgeInsets = _buttonSize / widget.marginRatio * _sizeRatio;
-    double _shadowRadius = _buttonSize / widget.marginRatio * _sizeRatio;
-    double _textSize = _screenSize.height / 20 / widget.textRatio;
+    final double _edgeInsets = _buttonSize / widget.marginRatio * _sizeRatio;
+    final double _shadowRadius = _buttonSize / widget.marginRatio * _sizeRatio;
+    final double _textSize = _screenSize.height / 20 / widget.textRatio;
 
     return Container(
       // width: _screenSize.width / widget.widthRatio * _sizeRatio,

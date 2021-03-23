@@ -1,20 +1,21 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'dart:math';
 
-import '../settings/vars.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+
 import '../settings/lists.dart';
+import '../settings/vars.dart';
 
 class Randoms extends ChangeNotifier {
   /// Creates a new list with random integers ///
 
   final _random = Random();
-  List<int> _randomsList = listOfRandoms;
+  final List<int> _randomsList = listOfRandoms;
   List<int> get randomsList => _randomsList;
 
   void setRandomsList() {
     for (int index = 0; index < listIsSelected.length; index++) {
-      int _value = 1 + _random.nextInt(9);
+      final int _value = 1 + _random.nextInt(9);
       _randomsList[index] = _value;
     }
     notifyListeners();
@@ -33,7 +34,7 @@ class Randoms extends ChangeNotifier {
 class ClearAllButtons extends ChangeNotifier {
   /// Deselect ALL buttons and clear the list of selected buttons ///
 
-  List<bool> _isSelectedList = listIsSelected;
+  final List<bool> _isSelectedList = listIsSelected;
 
   List<bool> get isSelectedList => _isSelectedList;
 
@@ -89,7 +90,8 @@ class GoalValue extends ChangeNotifier {
   int get newValue => _newValue;
 
   void setNewValue() {
-    int _sumSelected = vListOfSelectedValues.fold(0, (prev, cur) => prev + cur);
+    final int _sumSelected =
+        vListOfSelectedValues.fold(0, (prev, cur) => prev + cur);
     _newValue = vGoalValue - _sumSelected;
     notifyListeners();
   }

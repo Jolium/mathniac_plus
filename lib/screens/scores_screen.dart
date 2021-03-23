@@ -1,18 +1,14 @@
-import 'package:flutter/material.dart';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:admob_flutter/admob_flutter.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
 import '../settings/backgrounds.dart';
 import '../settings/constants.dart';
 import '../settings/lists.dart';
 import '../settings/vars.dart';
-
 import '../tasks/admob_service.dart';
-
-import '../widgets/my_button.dart';
 import '../widgets/custom_header.dart';
-
+import '../widgets/my_button.dart';
 import 'home_screen.dart';
 
 class ScoresScreen extends StatefulWidget {
@@ -21,17 +17,17 @@ class ScoresScreen extends StatefulWidget {
 }
 
 class _ScoresScreenState extends State<ScoresScreen> {
-  double _widthRatio = 1.1;
-  double _heightRatio = 2;
-  double _borderRatio = 10;
-  double _marginRatio = 20;
-  double _textRatio = 10;
+  final double _widthRatio = 1.1;
+  final double _heightRatio = 2;
+  final double _borderRatio = 10;
+  final double _marginRatio = 20;
+  final double _textRatio = 10;
   int _place = 0;
 
   List<Widget> rowElements = [];
 
   // Banner Unit Id
-  String _bannerUnitId = AdMobService().getBannerAdId();
+  final String _bannerUnitId = AdMobService().getBannerAdId();
 
   @override
   void initState() {
@@ -45,21 +41,21 @@ class _ScoresScreenState extends State<ScoresScreen> {
         .orderBy('score', descending: true)
         .limit(kTopScores + 1);
 
-    var _screenSize = MediaQuery.of(context).size;
-    double _buttonHeight = _screenSize.width / _heightRatio;
-    double _buttonWidth = _screenSize.width / _widthRatio;
-    double _buttonSize =
+    final Size _screenSize = MediaQuery.of(context).size;
+    final double _buttonHeight = _screenSize.width / _heightRatio;
+    final double _buttonWidth = _screenSize.width / _widthRatio;
+    final double _buttonSize =
         _buttonHeight <= _buttonWidth ? _buttonHeight : _buttonWidth;
 
     // double _textSize = _screenSize.height / _textRatio / 5;
-    double _borderRadius = _buttonSize / _borderRatio;
-    double _edgeInsets = _buttonSize / _marginRatio;
+    final double _borderRadius = _buttonSize / _borderRatio;
+    final double _edgeInsets = _buttonSize / _marginRatio;
 
     return StreamBuilder(
       stream: _firebase.snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (!snapshot.hasData) {
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         } else {
@@ -67,7 +63,7 @@ class _ScoresScreenState extends State<ScoresScreen> {
             children: snapshot.data.docs.map((document) {
               if (_place < kTopScores) {
                 _place++;
-                String _nickname;
+                dynamic _nickname;
                 try {
                   _nickname = document['name'];
                 } catch (e) {
@@ -75,10 +71,10 @@ class _ScoresScreenState extends State<ScoresScreen> {
                   print('\n== ${document.id} has no field [name] ==\n');
                 }
 
-                String _score = document['score'].toString();
+                final String _score = document['score'].toString();
 
                 return Padding(
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                     vertical: 4.0,
                   ),
                   child: _place % 5 == 0 && _place != kTopScores
@@ -99,10 +95,10 @@ class _ScoresScreenState extends State<ScoresScreen> {
                                 SizedBox(
                                   width: _screenSize.height / 50,
                                 ),
-                                Container(
+                                SizedBox(
                                   width: _screenSize.width / 2.25,
                                   child: CustomHeader(
-                                    text: _nickname,
+                                    text: _nickname.toString(),
                                     heightRatio: 9,
                                   ),
                                 ),
@@ -119,7 +115,7 @@ class _ScoresScreenState extends State<ScoresScreen> {
                                 )
                               ],
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 4.0,
                             ),
                             Padding(
@@ -131,7 +127,7 @@ class _ScoresScreenState extends State<ScoresScreen> {
                                 alignment: Alignment.center,
                                 padding: EdgeInsets.all(_edgeInsets),
                                 decoration: BoxDecoration(
-                                  image: DecorationImage(
+                                  image: const DecorationImage(
                                     fit: BoxFit.scaleDown,
                                     image: AssetImage('images/banner.png'),
                                   ),
@@ -168,10 +164,10 @@ class _ScoresScreenState extends State<ScoresScreen> {
                             SizedBox(
                               width: _screenSize.height / 50,
                             ),
-                            Container(
+                            SizedBox(
                               width: _screenSize.width / 2.25,
                               child: CustomHeader(
-                                text: _nickname,
+                                text: _nickname.toString(),
                                 heightRatio: 9,
                               ),
                             ),
@@ -202,16 +198,16 @@ class _ScoresScreenState extends State<ScoresScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var _screenSize = MediaQuery.of(context).size;
+    final Size _screenSize = MediaQuery.of(context).size;
 
-    double _buttonHeight = _screenSize.width / _heightRatio;
-    double _buttonWidth = _screenSize.width / _widthRatio;
-    double _buttonSize =
+    final double _buttonHeight = _screenSize.width / _heightRatio;
+    final double _buttonWidth = _screenSize.width / _widthRatio;
+    final double _buttonSize =
         _buttonHeight <= _buttonWidth ? _buttonHeight : _buttonWidth;
 
-    double _textSize = _screenSize.height / _textRatio / 5;
-    double _borderRadius = _buttonSize / _borderRatio;
-    double _edgeInsets = _buttonSize / _marginRatio;
+    final double _textSize = _screenSize.height / _textRatio / 5;
+    final double _borderRadius = _buttonSize / _borderRatio;
+    final double _edgeInsets = _buttonSize / _marginRatio;
 
     return Scaffold(
       backgroundColor: Colors.black,
@@ -231,7 +227,7 @@ class _ScoresScreenState extends State<ScoresScreen> {
                 SizedBox(
                   height: _screenSize.height / 30,
                 ),
-                CustomHeader(
+                const CustomHeader(
                   text: ' Leaderboard ',
                 ),
                 SizedBox(

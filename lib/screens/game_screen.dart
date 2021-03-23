@@ -1,22 +1,19 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'dart:async';
 
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../settings/backgrounds.dart';
 import '../settings/lists.dart';
 import '../settings/vars.dart';
-
 import '../tasks/layout_buttons.dart';
 import '../tasks/tasks_functions.dart';
 import '../tasks/tasks_provider.dart';
-
+import '../widgets/countdown.dart';
 import '../widgets/custom_header.dart';
 import '../widgets/my_button.dart';
 import '../widgets/start_button.dart';
-import '../widgets/countdown.dart';
-
 import 'home_screen.dart';
 import 'levels_screen.dart';
 
@@ -36,7 +33,7 @@ class _GameScreenState extends State<GameScreen> {
   }
 
   void startTimer() {
-    const oneMilli = const Duration(milliseconds: 100);
+    const oneMilli = Duration(milliseconds: 100);
     _timer = Timer.periodic(
       oneMilli,
       (Timer timer) => setState(
@@ -66,13 +63,13 @@ class _GameScreenState extends State<GameScreen> {
     // Hide bottom bar and top bar
     SystemChrome.setEnabledSystemUIOverlays([]);
 
-    var _goalValue = Provider.of<GoalValue>(context).newValue;
+    final int _goalValue = Provider.of<GoalValue>(context).newValue;
 
-    var _screenSize = MediaQuery.of(context).size;
+    final Size _screenSize = MediaQuery.of(context).size;
     // double _buttonWidth = _screenSize.height / _widthRatio;
 
-    int _score = listOfScorePoints[vMagicLevel - 1];
-    int _scorePointsLevel = listOfScorePoints[vMagicLevel - 1];
+    final int _score = listOfScorePoints[vMagicLevel - 1];
+    final int _scorePointsLevel = listOfScorePoints[vMagicLevel - 1];
 
     if (vStartTimer && vIsTimerTicking) {
       startTimer();
@@ -97,9 +94,9 @@ class _GameScreenState extends State<GameScreen> {
                 children: [
                   Column(
                     children: [
-                      Container(
+                      SizedBox(
                         width: _screenSize.width / 5,
-                        child: CustomHeader(
+                        child: const CustomHeader(
                           text: ' Timer ',
                         ),
                       ),
@@ -109,7 +106,7 @@ class _GameScreenState extends State<GameScreen> {
                   // CountDown(),
                   Column(
                     children: [
-                      Container(
+                      SizedBox(
                         width: _screenSize.width / 3,
                         child: CustomHeader(
                           text: _scorePointsLevel.toString(),
@@ -127,9 +124,9 @@ class _GameScreenState extends State<GameScreen> {
                   ),
                   Column(
                     children: [
-                      Container(
+                      SizedBox(
                         width: _screenSize.width / 5,
-                        child: CustomHeader(
+                        child: const CustomHeader(
                           text: ' Goal ',
                         ),
                       ),
@@ -145,9 +142,9 @@ class _GameScreenState extends State<GameScreen> {
                   ),
                 ],
               ),
-              Spacer(),
+              const Spacer(),
               ButtonsLayout(),
-              Spacer(),
+              const Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [

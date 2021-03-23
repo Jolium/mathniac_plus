@@ -1,14 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
-import 'dart:math';
 import 'dart:io';
+import 'dart:math';
 
 import 'package:audioplayers/audio_cache.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
-import '../settings/vars.dart';
 import '../settings/constants.dart';
 import '../settings/lists.dart';
-
+import '../settings/vars.dart';
 import 'task_hive.dart';
 import 'tasks_provider.dart';
 
@@ -36,7 +35,7 @@ class ClearOnlyButtons {
 
     for (int index = 0; index < listIsSelected.length; index++) {
       if (listIsSelected[index] == true) {
-        int _value = 1 + _random.nextInt(9);
+        final int _value = 1 + _random.nextInt(9);
         randomsList[index] = _value;
         listIsSelected[index] = false;
       }
@@ -98,7 +97,7 @@ void clearSelectedButtons(List<int> randomsList) {
 }
 
 class AudioPlayer {
-  AudioCache _audioCache =
+  final AudioCache _audioCache =
       AudioCache(prefix: 'assets/sounds/', respectSilence: true);
 
   void checkPlatform() {

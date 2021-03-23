@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../settings/constants.dart';
-
-import '../tasks/tasks_functions.dart';
 import '../tasks/custom_route.dart';
+import '../tasks/tasks_functions.dart';
 
 class MyButton extends StatefulWidget {
-  MyButton({
+  const MyButton({
     this.icon,
     this.text,
     @required this.onTap, // () {}
@@ -25,7 +24,7 @@ class MyButton extends StatefulWidget {
     this.diagonal = true,
     this.decreaseSizeOnTap = true,
   }) : assert(
-          (icon != null || text != null),
+          icon != null || text != null,
           'One of the parameters must be provided ("icon" or "text")',
         );
 
@@ -62,18 +61,21 @@ class _MyButtonState extends State<MyButton> {
 
   @override
   Widget build(BuildContext context) {
-    var _screenSize = MediaQuery.of(context).size;
-    double _sizeRatio = _screenSize.height / _screenSize.width / 2;
-    double _buttonHeight = _screenSize.width / widget.heightRatio * _sizeRatio;
-    double _buttonWidth = _screenSize.width / widget.widthRatio * _sizeRatio;
-    double _buttonSize =
+    final Size _screenSize = MediaQuery.of(context).size;
+    final double _sizeRatio = _screenSize.height / _screenSize.width / 2;
+    final double _buttonHeight =
+        _screenSize.width / widget.heightRatio * _sizeRatio;
+    final double _buttonWidth =
+        _screenSize.width / widget.widthRatio * _sizeRatio;
+    final double _buttonSize =
         _buttonHeight <= _buttonWidth ? _buttonHeight : _buttonWidth;
 
-    double _borderRadius = _buttonSize / widget.borderRatio * _sizeRatio;
-    double _edgeInsets = _buttonSize / widget.marginRatio * _sizeRatio;
-    double _shadowRadius = _buttonSize / widget.marginRatio * _sizeRatio;
-    double _textSize = _buttonSize / widget.textRatio * _sizedBox;
-    double _iconSize = _buttonSize / widget.iconRatio * _sizedBox * _sizeRatio;
+    final double _borderRadius = _buttonSize / widget.borderRatio * _sizeRatio;
+    final double _edgeInsets = _buttonSize / widget.marginRatio * _sizeRatio;
+    final double _shadowRadius = _buttonSize / widget.marginRatio * _sizeRatio;
+    final double _textSize = _buttonSize / widget.textRatio * _sizedBox;
+    final double _iconSize =
+        _buttonSize / widget.iconRatio * _sizedBox * _sizeRatio;
 
     void _onTapDown(TapDownDetails details) {
       if (widget.active) {

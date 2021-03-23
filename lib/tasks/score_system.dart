@@ -17,8 +17,8 @@ class ScoreSystem {
   }
 
   void getScoreValue() {
-    int _sumSelected = vListOfSelectedValues.fold(0, (prev, cur) => prev + cur);
-    int _lengthSelected = vListOfSelectedValues.length;
+    final int _sumSelected = vListOfSelectedValues.fold(0, (prev, cur) => prev + cur);
+    final int _lengthSelected = vListOfSelectedValues.length;
 
     if (_sumSelected == vGoalValue) {
       if (_lengthSelected == 2) {

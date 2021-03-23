@@ -10,33 +10,33 @@ class LevelsLayout extends StatefulWidget {
 }
 
 class _LevelsLayoutState extends State<LevelsLayout> {
-  double _widthRatio = 5; // 1.1
-  double _heightRatio = 5; // 1.1
-  double _borderRatio = 3; // 10
-  double _marginRatio = 20;
-  double _textRatio = 3;
-  double _shadowRatio = 15;
+  final double _widthRatio = 5; // 1.1
+  final double _heightRatio = 5; // 1.1
+  final double _borderRatio = 3; // 10
+  final double _marginRatio = 20;
+  final double _textRatio = 3;
+  final double _shadowRatio = 15;
 
   List<Widget> rowElements = [];
 
   List<Widget> generateRowElements(double size) {
-    var _screenSize = MediaQuery.of(context).size;
-    double _sizeRatio = _screenSize.height / _screenSize.width / 2;
-    double _buttonHeight = _screenSize.width / _heightRatio * _sizeRatio;
-    double _buttonWidth = _screenSize.width / _widthRatio * _sizeRatio;
-    double _buttonSize =
+    final Size _screenSize = MediaQuery.of(context).size;
+    final double _sizeRatio = _screenSize.height / _screenSize.width / 2;
+    final double _buttonHeight = _screenSize.width / _heightRatio * _sizeRatio;
+    final double _buttonWidth = _screenSize.width / _widthRatio * _sizeRatio;
+    final double _buttonSize =
         _buttonHeight <= _buttonWidth ? _buttonHeight : _buttonWidth;
 
-    double _textSize = _buttonSize / _textRatio;
-    double _borderRadius = _buttonSize / _borderRatio * _sizeRatio;
-    double _edgeInsets = _buttonSize / _marginRatio * _sizeRatio;
-    double _shadowRadius = _buttonHeight / 5 / _shadowRatio;
+    final double _textSize = _buttonSize / _textRatio;
+    final double _borderRadius = _buttonSize / _borderRatio * _sizeRatio;
+    final double _edgeInsets = _buttonSize / _marginRatio * _sizeRatio;
+    final double _shadowRadius = _buttonHeight / 5 / _shadowRatio;
 
     rowElements.clear();
 
     for (int i = 0; i < listGotLevel.length; i++) {
       Color _starColor;
-      Color _lastLevelColor = kColorSilver;
+      final Color _lastLevelColor = kColorSilver;
 
       if (i <= 2) {
         _starColor = kColorGreen;
@@ -50,15 +50,15 @@ class _LevelsLayoutState extends State<LevelsLayout> {
         _starColor = _lastLevelColor;
       }
 
-      int _text = i + 1;
-      double _buttonRatio = size;
-      double _sizeShape = _screenSize.width;
-      Color _color = listGotLevel[i] ? kColor2 : Colors.black;
-      Color _shadow = listGotLevel[i]
+      final int _text = i + 1;
+      final double _buttonRatio = size;
+      final double _sizeShape = _screenSize.width;
+      final Color _color = listGotLevel[i] ? kColor2 : Colors.black;
+      final Color _shadow = listGotLevel[i]
           ? kShadow2.withOpacity(kShadowOpacity2)
           : kShadow1.withOpacity(kShadowOpacity1);
 
-      Widget elementTile = Container(
+      final Widget elementTile = Container(
         margin: EdgeInsets.all(_edgeInsets), // Between buttons
         width: _screenSize.width / _widthRatio * _sizeRatio * _buttonRatio,
         height: _screenSize.width / _heightRatio * _sizeRatio * _buttonRatio,
@@ -164,23 +164,24 @@ class _LevelsLayoutState extends State<LevelsLayout> {
 
   @override
   Widget build(BuildContext context) {
-    var _screenSize = MediaQuery.of(context).size;
-    double _sizeRatio = _screenSize.height / _screenSize.width / 2;
-    double _buttonHeight = _screenSize.width * _sizeRatio;
-    double _buttonWidth = _screenSize.width * _sizeRatio;
-    double _buttonSize =
+    final Size _screenSize = MediaQuery.of(context).size;
+    final double _sizeRatio = _screenSize.height / _screenSize.width / 2;
+    final double _buttonHeight = _screenSize.width * _sizeRatio;
+    final double _buttonWidth = _screenSize.width * _sizeRatio;
+    final double _buttonSize =
         _buttonHeight <= _buttonWidth ? _buttonHeight : _buttonWidth;
 
-    List<Widget> list = [];
+    final List<Widget> list = [];
 
-    for (int i = 0; i <= 14; i++)
+    for (int i = 0; i <= 14; i++) {
       if (i == 14) {
         list.add(generateRowElements(3)[i]);
       } else {
         list.add(generateRowElements(1)[i]);
       }
+    }
 
-    return Container(
+    return SizedBox(
       width: _buttonSize,
       height: _buttonSize,
       child: Stack(children: [

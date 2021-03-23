@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
 
-import '../settings/vars.dart';
 import '../settings/constants.dart';
 import '../settings/lists.dart';
-
-import 'tasks_provider.dart';
-import 'tasks_functions.dart';
+import '../settings/vars.dart';
 import 'score_system.dart';
+import 'tasks_functions.dart';
+import 'tasks_provider.dart';
 
 class ButtonsLayout extends StatefulWidget {
   final double size = 1;
@@ -18,11 +16,11 @@ class ButtonsLayout extends StatefulWidget {
 }
 
 class _ButtonsLayoutState extends State<ButtonsLayout> {
-  double _widthRatio = 5;
-  double _heightRatio = 5;
-  double _borderRatio = 3;
-  double _marginRatio = 20;
-  double _textRatio = 2;
+  final double _widthRatio = 5;
+  final double _heightRatio = 5;
+  final double _borderRatio = 3;
+  final double _marginRatio = 20;
+  final double _textRatio = 2;
 
   List<Widget> rowElements = [];
 
@@ -36,29 +34,29 @@ class _ButtonsLayoutState extends State<ButtonsLayout> {
     double _sizedBox = widget.size;
 
     rowElements.clear();
-    var _screenSize = MediaQuery.of(context).size;
-    double _sizeRatio = _screenSize.height / _screenSize.width / 2;
-    double _buttonHeight = _screenSize.width / _heightRatio * _sizeRatio;
-    double _buttonWidth = _screenSize.width / _widthRatio * _sizeRatio;
-    double _buttonSize =
+    final Size _screenSize = MediaQuery.of(context).size;
+    final double _sizeRatio = _screenSize.height / _screenSize.width / 2;
+    final double _buttonHeight = _screenSize.width / _heightRatio * _sizeRatio;
+    final double _buttonWidth = _screenSize.width / _widthRatio * _sizeRatio;
+    final double _buttonSize =
         _buttonHeight <= _buttonWidth ? _buttonHeight : _buttonWidth;
 
-    double _borderRadius = _buttonSize / _borderRatio * _sizeRatio;
-    double _edgeInsets = _buttonSize / _marginRatio * _sizeRatio;
-    double _shadowRadius = _buttonSize / _marginRatio * _sizeRatio;
-    double _textSize = _buttonSize / _textRatio * _sizedBox;
+    final double _borderRadius = _buttonSize / _borderRatio * _sizeRatio;
+    final double _edgeInsets = _buttonSize / _marginRatio * _sizeRatio;
+    final double _shadowRadius = _buttonSize / _marginRatio * _sizeRatio;
+    final double _textSize = _buttonSize / _textRatio * _sizedBox;
 
     for (int i = 0; i < listIsSelected.length; i++) {
-      int _textValue = Provider.of<Randoms>(context).randomsList[i];
-      bool _isSelected =
+      final int _textValue = Provider.of<Randoms>(context).randomsList[i];
+      final bool _isSelected =
           Provider.of<ClearAllButtons>(context).isSelectedList[i];
 
-      Color _color = listIsSelected[i] ? kColor2 : kColor1;
-      Color _shadow = listIsSelected[i]
+      final Color _color = listIsSelected[i] ? kColor2 : kColor1;
+      final Color _shadow = listIsSelected[i]
           ? kShadow2.withOpacity(kShadowOpacity2)
           : kShadow1.withOpacity(kShadowOpacity1);
 
-      List<Color> _colorsList = vMagicLevel <= 14
+      final List<Color> _colorsList = vMagicLevel <= 14
           ? listIsSelected[i]
               ? [
                   kColorBlue,
@@ -97,7 +95,7 @@ class _ButtonsLayoutState extends State<ButtonsLayout> {
             vListOfSelectedValues.remove(_textValue);
 
             // Updates the goal value (MagicValue - SelectedValues)
-            var _updateGoal = Provider.of<GoalValue>(context, listen: false);
+            final GoalValue _updateGoal = Provider.of<GoalValue>(context, listen: false);
             _updateGoal.setNewValue();
 
             // if button is not selected
@@ -109,7 +107,7 @@ class _ButtonsLayoutState extends State<ButtonsLayout> {
               clearSelectedButtons(listOfRandoms);
 
               // Set GoalValue text to start value
-              var _resetGoalValue =
+              final GoalValue _resetGoalValue =
                   Provider.of<GoalValue>(context, listen: false);
               _resetGoalValue.setStartingValue();
 
@@ -120,11 +118,11 @@ class _ButtonsLayoutState extends State<ButtonsLayout> {
               vListOfSelectedValues.add(_textValue);
 
               // Updates the goal value (MagicValue - SelectedValues)
-              var _updateGoal = Provider.of<GoalValue>(context, listen: false);
+              final GoalValue _updateGoal = Provider.of<GoalValue>(context, listen: false);
               _updateGoal.setNewValue();
 
               // check if sum of selected values is equal to the magic number
-              int sum =
+              final int sum =
                   vListOfSelectedValues.fold(0, (prev, cur) => prev + cur);
 
               if (sum > vGoalValue) {
@@ -134,7 +132,7 @@ class _ButtonsLayoutState extends State<ButtonsLayout> {
                 ClearOnlyButtons().resetSelectedButtons();
 
                 // Set GoalValue text to start value
-                var _resetGoalValue =
+                final GoalValue _resetGoalValue =
                     Provider.of<GoalValue>(context, listen: false);
                 _resetGoalValue.setStartingValue();
               } else if (sum == vGoalValue) {
@@ -147,7 +145,7 @@ class _ButtonsLayoutState extends State<ButtonsLayout> {
                 ClearOnlyButtons().setRandomsList(listOfRandoms);
 
                 // Set GoalValue text to start value
-                var _resetGoalValue =
+                final GoalValue _resetGoalValue =
                     Provider.of<GoalValue>(context, listen: false);
                 _resetGoalValue.setStartingValue();
               }
@@ -163,7 +161,7 @@ class _ButtonsLayoutState extends State<ButtonsLayout> {
         });
       }
 
-      Widget elementTile = GestureDetector(
+      final Widget elementTile = GestureDetector(
         onTapDown: _onTapDown,
         onTapUp: _onTapUp,
         child: Container(
@@ -225,7 +223,7 @@ class _ButtonsLayoutState extends State<ButtonsLayout> {
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> list = generateRowElements();
+    final List<Widget> list = generateRowElements();
 
     if (vMagicLevel <= 3) {
       return Row(

@@ -3,9 +3,13 @@ import 'package:flutter/material.dart';
 class PopUp extends StatefulWidget {
   final String title;
   final String content;
-  final Function onPressed;
+  final void Function() onPressed;
 
-  PopUp({this.title, this.content, @required this.onPressed});
+  const PopUp({
+    this.title,
+    this.content,
+    @required this.onPressed,
+  });
 
   @override
   _PopUpState createState() => _PopUpState();
@@ -16,9 +20,9 @@ class _PopUpState extends State<PopUp> {
   Widget build(BuildContext context) {
     return AlertDialog(
       elevation: 24.0,
-      buttonPadding: EdgeInsets.all(16),
+      buttonPadding: const EdgeInsets.all(16),
       backgroundColor: Colors.black,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(
           Radius.circular(32),
         ),
@@ -26,7 +30,7 @@ class _PopUpState extends State<PopUp> {
       ),
       title: Text(
         widget.title,
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.white,
           fontSize: 16,
           // fontFamily: kLetterType1,
@@ -34,20 +38,20 @@ class _PopUpState extends State<PopUp> {
       ),
       content: Text(
         widget.content,
-        style: TextStyle(
+        style: const TextStyle(
           color: Colors.white,
           fontSize: 14,
         ),
       ),
       actions: [
-        FlatButton(
+        TextButton(
           onPressed: widget.onPressed,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(32),
-            ),
-          ),
-          child: Text(
+          // shape: const RoundedRectangleBorder(
+          //   borderRadius: BorderRadius.all(
+          //     Radius.circular(32),
+          //   ),
+          // ),
+          child: const Text(
             'Dismiss',
             style: TextStyle(
               fontSize: 14,

@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 import 'upload_screen.dart';
 
@@ -22,7 +21,7 @@ class Authentication extends StatelessWidget {
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.active) {
-          User user = snapshot.data;
+          final User user = snapshot.data;
           if (user == null) {
             _signInAnonymously();
             print("== Anonymous User: $user ==");
@@ -31,7 +30,7 @@ class Authentication extends StatelessWidget {
           print("== == User: $user == ==");
           return UploadScreen();
         } else {
-          return Scaffold(
+          return const Scaffold(
             body: Center(
               child: CircularProgressIndicator(),
             ),

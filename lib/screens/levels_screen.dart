@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
 
 import '../settings/backgrounds.dart';
 import '../settings/lists.dart';
 import '../settings/vars.dart';
-
 import '../tasks/layout_level.dart';
 import '../tasks/tasks_functions.dart';
 import '../tasks/tasks_provider.dart';
-
-import '../widgets/my_button.dart';
 import '../widgets/custom_header.dart';
-
+import '../widgets/my_button.dart';
 import 'game_screen.dart';
 import 'home_screen.dart';
 
@@ -24,10 +20,10 @@ class LevelsScreen extends StatefulWidget {
 class _LevelsScreenState extends State<LevelsScreen> {
   @override
   Widget build(BuildContext context) {
-    var _screenSize = MediaQuery.of(context).size;
+    final Size _screenSize = MediaQuery.of(context).size;
 
-    String _stringValue = vStartCountdownValue.toString().substring(0, 2);
-    int _scoreLevel = listOfScorePoints[vMagicLevel - 1];
+    final String _stringValue = vStartCountdownValue.toString().substring(0, 2);
+    final int _scoreLevel = listOfScorePoints[vMagicLevel - 1];
 
     return Scaffold(
       body: Container(
@@ -43,19 +39,19 @@ class _LevelsScreenState extends State<LevelsScreen> {
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: _screenSize.width / 30),
-              child: CustomHeader(text: ' Unlocked Levels '),
+              child: const CustomHeader(text: ' Unlocked Levels '),
             ),
-            Spacer(),
+            const Spacer(),
             LevelsLayout(),
-            Spacer(),
+            const Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Column(
                   children: [
-                    Container(
+                    SizedBox(
                       width: _screenSize.width / 5,
-                      child: CustomHeader(
+                      child: const CustomHeader(
                         text: ' Timer ',
                       ),
                     ),
@@ -71,9 +67,9 @@ class _LevelsScreenState extends State<LevelsScreen> {
                 ),
                 Column(
                   children: [
-                    Container(
+                    SizedBox(
                       width: _screenSize.width / 3,
-                      child: CustomHeader(
+                      child: const CustomHeader(
                         text: ' Score ',
                       ),
                     ),
@@ -89,9 +85,9 @@ class _LevelsScreenState extends State<LevelsScreen> {
                 ),
                 Column(
                   children: [
-                    Container(
+                    SizedBox(
                       width: _screenSize.width / 5,
-                      child: CustomHeader(
+                      child: const CustomHeader(
                         text: ' Goal ',
                       ),
                     ),
@@ -107,7 +103,7 @@ class _LevelsScreenState extends State<LevelsScreen> {
                 ),
               ],
             ),
-            Spacer(),
+            const Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -119,16 +115,17 @@ class _LevelsScreenState extends State<LevelsScreen> {
                     vActualScoreValue = 0;
 
                     // Set listOfRandoms with zeros => '?'
-                    var _model = Provider.of<Randoms>(context, listen: false);
+                    final Randoms _model =
+                        Provider.of<Randoms>(context, listen: false);
                     _model.setZerosRandomsList();
 
                     // Set GoalValue text to start value
-                    var _resetGoalValue =
+                    final GoalValue _resetGoalValue =
                         Provider.of<GoalValue>(context, listen: false);
                     _resetGoalValue.setStartingValue();
 
                     // Update isSelected List
-                    var _isSelected =
+                    final ClearAllButtons _isSelected =
                         Provider.of<ClearAllButtons>(context, listen: false);
                     _isSelected.setIsSelectedList();
                   },

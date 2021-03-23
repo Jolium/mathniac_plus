@@ -12,24 +12,27 @@ Color _backGroundColor;
 String _animationEffect;
 double _logoSize;
 
-enum MySplashType { StaticDuration, BackgroundProcess }
+enum MySplashType { staticDuration, backgroundProcess }
 
 Map<dynamic, Widget> _outputAndHome = {};
 
 class MySplash extends StatefulWidget {
-  MySplash(
-      {@required String imagePath,
-      @required Widget home,
-      Function customFunction,
-      int duration,
-      MySplashType type,
-      Color backGroundColor = Colors.white,
-      String animationEffect = 'fade-in',
-      double logoSize = 250.0,
-      Map<dynamic, Widget> outputAndHome}) {
-    assert(duration != null);
-    assert(home != null);
-    assert(imagePath != null);
+  MySplash({
+    @required String imagePath,
+    @required Widget home,
+    Function customFunction,
+    @required int duration,
+    MySplashType type,
+    Color backGroundColor = Colors.white,
+    String animationEffect = 'fade-in',
+    double logoSize = 250.0,
+    Map<dynamic, Widget> outputAndHome,
+  })  : assert(duration != null),
+        assert(home != null),
+        assert(imagePath != null) {
+    // assert(duration != null);
+    // assert(home != null);
+    // assert(imagePath != null);
 
     _home = home;
     _duration = duration;
@@ -39,7 +42,7 @@ class MySplash extends StatefulWidget {
     _outputAndHome = outputAndHome;
     _backGroundColor = backGroundColor;
     _animationEffect = animationEffect;
-    _logoSize = 250.0;
+    _logoSize = logoSize;
   }
 
   @override
@@ -49,14 +52,14 @@ class MySplash extends StatefulWidget {
 class _MySplashState extends State<MySplash>
     with SingleTickerProviderStateMixin {
   AnimationController _animationController;
-  Animation _animation;
+  Animation<double> _animation;
 
   @override
   void initState() {
     super.initState();
     if (_duration < 1000) _duration = 2000;
-    _animationController = new AnimationController(
-        vsync: this, duration: Duration(milliseconds: 1200));
+    _animationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 1200));
     _animation = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
         parent: _animationController, curve: Curves.easeInCirc));
     _animationController.forward();
@@ -68,7 +71,7 @@ class _MySplashState extends State<MySplash>
     super.dispose();
   }
 
-  navigator(home) {
+  void navigator(Widget home) {
     Navigator.of(context)
         .pushReplacement(CustomRoute(builder: (context) => home));
   }
@@ -98,15 +101,20 @@ class _MySplashState extends State<MySplash>
       case 'zoom-out':
         {
           return ScaleTransition(
-            scale: Tween(begin: 1.0, end: 0.0).animate(CurvedAnimation(
-                parent: _animationController, curve: Curves.linear)),
+            scale: Tween(begin: 1.0, end: 0.0).animate(
+              CurvedAnimation(
+                parent: _animationController,
+                curve: Curves.linear,
+              ),
+            ),
             child: Center(
               child:
                   SizedBox(height: _logoSize, child: Image.asset(_imagePath)),
             ),
           );
         }
-      case 'top-down':
+      // case 'top-down':
+      default:
         {
           return SizeTransition(
             sizeFactor: _animation,
@@ -121,9 +129,9 @@ class _MySplashState extends State<MySplash>
 
   @override
   Widget build(BuildContext context) {
-    _runfor == MySplashType.BackgroundProcess
+    _runfor == MySplashType.backgroundProcess
         ? Future.delayed(Duration.zero).then((value) {
-            var res = _customFunction();
+            final res = _customFunction();
             //print("$res+${_outputAndHome[res]}");
             Future.delayed(Duration(milliseconds: _duration)).then((value) {
               Navigator.of(context).pushReplacement(

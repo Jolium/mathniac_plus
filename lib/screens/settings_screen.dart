@@ -5,13 +5,10 @@ import '../settings/backgrounds.dart';
 import '../settings/constants.dart';
 import '../settings/lists.dart';
 import '../settings/vars.dart';
-
 import '../tasks/task_hive.dart';
 import '../tasks/tasks_functions.dart';
-
-import '../widgets/my_button.dart';
 import '../widgets/custom_header.dart';
-
+import '../widgets/my_button.dart';
 import 'home_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -20,26 +17,26 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  double _widthRatio = 1.1;
-  double _heightRatio = 1.1;
-  double _borderRatio = 10;
-  double _marginRatio = 20;
-  double _textRatio = 10;
+  final double _widthRatio = 1.1;
+  final double _heightRatio = 1.1;
+  final double _borderRatio = 10;
+  final double _marginRatio = 20;
+  final double _textRatio = 10;
 
   @override
   Widget build(BuildContext context) {
-    var _screenSize = MediaQuery.of(context).size;
-    double _sizeRatio = _screenSize.height / _screenSize.width / 2;
-    double _buttonHeight = _screenSize.width / _heightRatio * _sizeRatio;
-    double _buttonWidth = _screenSize.width / _widthRatio * _sizeRatio;
-    double _buttonSize =
+    final Size _screenSize = MediaQuery.of(context).size;
+    final double _sizeRatio = _screenSize.height / _screenSize.width / 2;
+    final double _buttonHeight = _screenSize.width / _heightRatio * _sizeRatio;
+    final double _buttonWidth = _screenSize.width / _widthRatio * _sizeRatio;
+    final double _buttonSize =
         _buttonHeight <= _buttonWidth ? _buttonHeight : _buttonWidth;
 
-    double _textSize = _buttonSize / _textRatio;
-    double _borderRadius = _buttonSize / _borderRatio;
-    double _edgeInsets = _buttonSize / _marginRatio;
+    final double _textSize = _buttonSize / _textRatio;
+    final double _borderRadius = _buttonSize / _borderRatio;
+    final double _edgeInsets = _buttonSize / _marginRatio;
 
-    Widget _alertDialog = AlertDialog(
+    final Widget _alertDialog = AlertDialog(
       elevation: 24.0,
       buttonPadding: EdgeInsets.all(_borderRadius / 4),
       backgroundColor: Colors.black,
@@ -65,7 +62,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
       ),
       actions: [
-        FlatButton(
+        TextButton(
 
             /// TODO: on production delete from here ///
             onLongPress: () {
@@ -99,26 +96,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
               });
               Navigator.of(context).pop();
             },
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(_borderRadius),
-              ),
-            ),
+            // shape: RoundedRectangleBorder(
+            //   borderRadius: BorderRadius.all(
+            //     Radius.circular(_borderRadius),
+            //   ),
+            // ),
             child: Text(
               'Yes',
               style: TextStyle(
                 fontSize: _textSize / 1.5,
               ),
             )),
-        FlatButton(
+        TextButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(_borderRadius),
-            ),
-          ),
+          // shape: RoundedRectangleBorder(
+          //   borderRadius: BorderRadius.all(
+          //     Radius.circular(_borderRadius),
+          //   ),
+          // ),
           child: Text(
             'No',
             style: TextStyle(
@@ -146,7 +143,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 SizedBox(
                   height: _screenSize.height / 30,
                 ),
-                CustomHeader(
+                const CustomHeader(
                   text: ' Settings ',
                 ),
                 SizedBox(
@@ -155,9 +152,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Container(
+                    SizedBox(
                       width: _screenSize.width / 2,
-                      child: CustomHeader(
+                      child: const CustomHeader(
                         text: ' Sound ',
                         heightRatio: 8,
                       ),
@@ -180,7 +177,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           }
                         });
                         if (!kIsWeb) {
-                          TaskHive().updateSound(vPlaySound);
+                          TaskHive().updateSound(value: vPlaySound);
                         }
                       },
                     )
@@ -192,9 +189,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Container(
+                    SizedBox(
                       width: _screenSize.width / 2,
-                      child: CustomHeader(
+                      child: const CustomHeader(
                         text: ' Background ',
                         heightRatio: 8,
                       ),
@@ -217,7 +214,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           }
                         });
                         if (!kIsWeb) {
-                          TaskHive().updateBackground(vBackground);
+                          TaskHive().updateBackground(value: vBackground);
                         }
                       },
                     )
@@ -229,9 +226,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Container(
+                    SizedBox(
                       width: _screenSize.width / 2,
-                      child: CustomHeader(
+                      child: const CustomHeader(
                         text: ' Reset ',
                         heightRatio: 8,
                       ),
@@ -254,7 +251,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     )
                   ],
                 ),
-                Spacer(),
+                const Spacer(),
                 MyButton(
                   onTap: () {},
                   text: ' Home ',

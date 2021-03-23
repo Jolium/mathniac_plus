@@ -1,27 +1,25 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:hive/hive.dart';
-
-import './settings/vars.dart';
-import './settings/lists.dart';
-import './settings/constants.dart';
-
-import './tasks/tasks_provider.dart';
-import './tasks/tasks_functions.dart';
-import './tasks/my_splash.dart';
-import './tasks/task_hive.dart';
 
 import './screens/home_screen.dart';
+import './settings/constants.dart';
+import './settings/lists.dart';
+import './settings/vars.dart';
+import './tasks/my_splash.dart';
+import './tasks/task_hive.dart';
+import './tasks/tasks_functions.dart';
+import './tasks/tasks_provider.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  FirebaseApp app = await Firebase.initializeApp();
+  final FirebaseApp app = await Firebase.initializeApp();
   assert(app != null);
 
   // Admob.initialize(testDeviceIds: listOfTestDevices);
@@ -40,7 +38,7 @@ void main() async {
   }
 
   if (!kIsWeb) {
-    Directory document = await getApplicationDocumentsDirectory();
+    final Directory document = await getApplicationDocumentsDirectory();
     Hive.init(document.path);
     await Hive.openBox<String>(kHiveBoxName);
     vMagicLevel = TaskHive().level;
@@ -84,13 +82,13 @@ class MyApp extends StatelessWidget {
               title: kAppName,
               debugShowCheckedModeBanner: false,
               home: MySplash(
-                logoSize: 300.0,
+                // logoSize: 300.0,
                 imagePath: 'images/launch_image.png',
                 backGroundColor: Colors.black,
                 animationEffect: 'zoom-out',
                 home: HomeScreen(),
                 duration: 1600,
-                type: MySplashType.StaticDuration,
+                type: MySplashType.staticDuration,
               ),
             )
           : MaterialApp(

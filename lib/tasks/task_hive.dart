@@ -13,7 +13,7 @@ class TaskHive {
   }
 
   int get level {
-    var _level = tasksBox.get('level');
+    final String _level = tasksBox.get('level');
     if (_level == null) {
       tasksBox.put('level', '1');
       return 1;
@@ -22,13 +22,13 @@ class TaskHive {
     }
   }
 
-  void updateSound(bool value) {
+  void updateSound({bool value}) {
     tasksBox.put('sound', '$value');
     vPlaySound = value;
   }
 
   bool get sound {
-    var _sound = tasksBox.get('sound');
+    final String  _sound = tasksBox.get('sound');
     if (_sound == null) {
       tasksBox.put('sound', 'true');
       return true;
@@ -41,13 +41,13 @@ class TaskHive {
     }
   }
 
-  void updateBackground(bool value) {
+  void updateBackground({bool value}) {
     tasksBox.put('background', '$value');
     vBackground = value;
   }
 
   bool get background {
-    var _background = tasksBox.get('background');
+    final String  _background = tasksBox.get('background');
     if (_background == null) {
       tasksBox.put('background', 'true');
       return true;
@@ -66,7 +66,7 @@ class TaskHive {
   }
 
   int get highScore {
-    var _highScore = tasksBox.get('highScore');
+    final String  _highScore = tasksBox.get('highScore');
     if (_highScore == null) {
       tasksBox.put('highScore', '0');
       return 0;
@@ -76,12 +76,12 @@ class TaskHive {
   }
 
   void saveNickname(String nickname) {
-    tasksBox.put('nickname', '$nickname');
+    tasksBox.put('nickname', nickname);
     vNickname = nickname;
   }
 
   String get nickname {
-    var _nickname = tasksBox.get('nickname');
+    final String  _nickname = tasksBox.get('nickname');
     if (_nickname == null) {
       tasksBox.put('nickname', '');
       return '';
@@ -90,13 +90,13 @@ class TaskHive {
     }
   }
 
-  void uploadScore(bool value) {
+  void uploadScore({bool value}) {
     tasksBox.put('uploadScore', '$value');
     vUploadScore = value;
   }
 
   bool get getUploadScore {
-    var _uploadScore = tasksBox.get('uploadScore');
+    final String  _uploadScore = tasksBox.get('uploadScore');
     if (_uploadScore == null) {
       tasksBox.put('uploadScore', 'false');
       return false;

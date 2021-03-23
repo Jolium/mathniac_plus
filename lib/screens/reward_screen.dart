@@ -1,22 +1,19 @@
+// import 'package:device_info/device_info.dart';
+import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-// import 'package:device_info/device_info.dart';
-import 'package:firebase_admob/firebase_admob.dart';
+import '../settings/backgrounds.dart';
+import '../settings/constants.dart';
 // import 'package:admob_flutter/admob_flutter.dart';
 
 import '../settings/lists.dart';
 import '../settings/vars.dart';
-import '../settings/constants.dart';
-import '../settings/backgrounds.dart';
-
-import '../tasks/tasks_functions.dart';
 import '../tasks/admob_service.dart';
-
-import '../widgets/my_button.dart';
+import '../tasks/tasks_functions.dart';
 import '../widgets/custom_header.dart';
+import '../widgets/my_button.dart';
 import '../widgets/pop_up.dart';
-
 import 'home_screen.dart';
 
 class RewardScreen extends StatefulWidget {
@@ -25,11 +22,11 @@ class RewardScreen extends StatefulWidget {
 }
 
 class _RewardScreenState extends State<RewardScreen> {
-  double _widthRatio = 1.1;
-  double _heightRatio = 1.1;
-  double _borderRatio = 10;
-  double _marginRatio = 20;
-  double _textRatio = 20;
+  final double _widthRatio = 1.1;
+  final double _heightRatio = 1.1;
+  final double _borderRatio = 10;
+  final double _marginRatio = 20;
+  final double _textRatio = 20;
 
   MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
     keywords: listOfKeyWords,
@@ -46,10 +43,10 @@ class _RewardScreenState extends State<RewardScreen> {
   bool _adButtonActive = false;
 
   //An instance to be called in the init state
-  RewardedVideoAd _videoAd = RewardedVideoAd.instance;
+  final RewardedVideoAd _videoAd = RewardedVideoAd.instance;
 
   // Rewarded Unit Id
-  String _rewardedUnitId = AdMobService().getRewardedAdId();
+  final String _rewardedUnitId = AdMobService().getRewardedAdId();
 
   @override
   void initState() {
@@ -61,7 +58,7 @@ class _RewardScreenState extends State<RewardScreen> {
       // load ad in the beginning
       _videoAd
           .load(adUnitId: _rewardedUnitId, targetingInfo: targetingInfo)
-          .catchError((e) => print("error in loading 1st time"))
+          .catchError((e) => print("error in loading 1st time: ${e.toString()}"))
           .then((v) => setState(() => _loaded = v));
     } else {
       // Activate button to show pop-up showing warning 'You have to play at least 1 time...'
@@ -74,7 +71,7 @@ class _RewardScreenState extends State<RewardScreen> {
       if (event == RewardedVideoAdEvent.completed) {
         RewardedVideoAd.instance
             .load(adUnitId: _rewardedUnitId, targetingInfo: targetingInfo)
-            .catchError((e) => print("error in loading again"))
+            .catchError((e) => print("error in loading again: ${e.toString()}"))
             .then((v) => setState(() => _loaded = v));
       }
 
@@ -152,16 +149,16 @@ class _RewardScreenState extends State<RewardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var _screenSize = MediaQuery.of(context).size;
-    double _sizeRatio = _screenSize.height / _screenSize.width / 2;
-    double _buttonHeight = _screenSize.width / _heightRatio * _sizeRatio;
-    double _buttonWidth = _screenSize.width / _widthRatio * _sizeRatio;
-    double _buttonSize =
+    final Size _screenSize = MediaQuery.of(context).size;
+    final double _sizeRatio = _screenSize.height / _screenSize.width / 2;
+    final double _buttonHeight = _screenSize.width / _heightRatio * _sizeRatio;
+    final double _buttonWidth = _screenSize.width / _widthRatio * _sizeRatio;
+    final double _buttonSize =
         _buttonHeight <= _buttonWidth ? _buttonHeight : _buttonWidth;
 
-    double _textSize = _buttonSize / _textRatio;
-    double _borderRadius = _buttonSize / _borderRatio;
-    double _edgeInsets = _buttonSize / _marginRatio;
+    final double _textSize = _buttonSize / _textRatio;
+    final double _borderRadius = _buttonSize / _borderRatio;
+    final double _edgeInsets = _buttonSize / _marginRatio;
 
     return Scaffold(
       body: Container(
@@ -179,7 +176,7 @@ class _RewardScreenState extends State<RewardScreen> {
                 SizedBox(
                   height: _screenSize.height / 30,
                 ),
-                CustomHeader(text: ' Level Up '),
+                const CustomHeader(text: ' Level Up '),
                 Visibility(
                   visible: !vInternetConnection,
                   child: Column(
@@ -219,7 +216,7 @@ class _RewardScreenState extends State<RewardScreen> {
                     ],
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Container(
                   alignment: Alignment.center,
                   padding: EdgeInsets.all(_edgeInsets),
@@ -249,7 +246,7 @@ class _RewardScreenState extends State<RewardScreen> {
                     ),
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 MyButton(
                   contentColor:
                       _adButtonActive ? Colors.yellowAccent : Colors.grey,
@@ -295,7 +292,7 @@ class _RewardScreenState extends State<RewardScreen> {
                     }
                   },
                 ),
-                Spacer(),
+                const Spacer(),
                 MyButton(
                   onTap: () {},
                   text: ' Home ',

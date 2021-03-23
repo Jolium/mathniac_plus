@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
-
-import '../tasks/task_hive.dart';
-import '../tasks/tasks_provider.dart';
-import '../tasks/tasks_functions.dart';
 
 import '../settings/constants.dart';
 import '../settings/lists.dart';
 import '../settings/vars.dart';
+import '../tasks/task_hive.dart';
+import '../tasks/tasks_functions.dart';
+import '../tasks/tasks_provider.dart';
 
 class CountDown extends StatefulWidget {
   @override
@@ -16,31 +14,31 @@ class CountDown extends StatefulWidget {
 }
 
 class _CountDownState extends State<CountDown> {
-  int _scoreLevelPoints = listOfScorePoints[vMagicLevel - 1];
-  double _widthRatio = 5;
-  double _heightRatio = 5;
-  double _textRatio = 2;
-  double _borderRatio = 3;
-  double _marginRatio = 20;
+  final int _scoreLevelPoints = listOfScorePoints[vMagicLevel - 1];
+  final double _widthRatio = 5;
+  final double _heightRatio = 5;
+  final double _textRatio = 2;
+  final double _borderRatio = 3;
+  final double _marginRatio = 20;
 
   @override
   Widget build(BuildContext context) {
     Provider.of<RebuildWidgets>(context).rebuildWidget;
 
-    var _screenSize = MediaQuery.of(context).size;
-    double _sizeRatio = _screenSize.height / _screenSize.width / 2;
-    double _buttonHeight = _screenSize.width / _heightRatio * _sizeRatio;
-    double _buttonWidth = _screenSize.width / _widthRatio * _sizeRatio;
-    double _buttonSize =
+    final Size _screenSize = MediaQuery.of(context).size;
+    final double _sizeRatio = _screenSize.height / _screenSize.width / 2;
+    final double _buttonHeight = _screenSize.width / _heightRatio * _sizeRatio;
+    final double _buttonWidth = _screenSize.width / _widthRatio * _sizeRatio;
+    final double _buttonSize =
         _buttonHeight <= _buttonWidth ? _buttonHeight : _buttonWidth;
 
-    double _borderRadius = _buttonSize / _borderRatio * _sizeRatio;
-    double _edgeInsets = _buttonSize / _marginRatio * _sizeRatio;
-    double _shadowRadius = _buttonSize / _marginRatio * _sizeRatio;
-    double _textSize = _buttonSize / _textRatio;
+    final double _borderRadius = _buttonSize / _borderRatio * _sizeRatio;
+    final double _edgeInsets = _buttonSize / _marginRatio * _sizeRatio;
+    final double _shadowRadius = _buttonSize / _marginRatio * _sizeRatio;
+    final double _textSize = _buttonSize / _textRatio;
     // double _iconSize = _buttonSize / _iconRatio * _sizeRatio;
 
-    int _scorePointsLevel = listOfScorePoints[vMagicLevel - 1];
+    final int _scorePointsLevel = listOfScorePoints[vMagicLevel - 1];
 
     // Beep the last 5 seconds
     if (vCountdownValue == 50 ||
@@ -61,7 +59,7 @@ class _CountDownState extends State<CountDown> {
         // If score is own high score
         if (vMagicLevel == 15 && vActualScoreValue > _scoreLevelPoints) {
           TaskHive().updateHighScore(vActualScoreValue);
-          TaskHive().uploadScore(true);
+          TaskHive().uploadScore(value: true);
           listOfScorePoints[14] = vActualScoreValue;
           vButtonText = ' Next ';
           vButtonGradient = true;
@@ -87,10 +85,10 @@ class _CountDownState extends State<CountDown> {
       vPlayLevelUp = false;
     }
 
-    int _intValue =
+    final int _intValue =
         int.parse(vCountdownValue.toString().padLeft(3, '0').substring(0, 2));
 
-    int _stringValue10 =
+    final int _stringValue10 =
         int.parse(vCountdownValue.toString().padLeft(3, '0').substring(2, 3));
 
     return Container(
@@ -128,10 +126,8 @@ class _CountDownState extends State<CountDown> {
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            _intValue >= 10
-                ? Text(
+            if (_intValue >= 10) Text(
                     _intValue.toString(),
                     style: TextStyle(
                       fontSize: _textSize,
@@ -140,8 +136,7 @@ class _CountDownState extends State<CountDown> {
                           ? kColorRed
                           : Colors.white,
                     ),
-                  )
-                : Row(
+                  ) else Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
