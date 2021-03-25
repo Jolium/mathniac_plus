@@ -8,11 +8,3 @@ class GameTimerNotifier extends StateNotifier<bool> {
 
   bool stopTimer() => state = false;
 }
-
-class GameTickingNotifier extends StateNotifier<bool> {
-  GameTickingNotifier() : super(false);
-
-  bool startTicking() => state = true;
-
-  bool stopTicking() => state = false;
-}

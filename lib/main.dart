@@ -4,10 +4,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:provider/provider.dart';
+import 'package:provider/provider.dart' as prov;
 
 import './screens/home_screen.dart';
 import './settings/constants.dart';
@@ -54,8 +55,8 @@ Future<void> main() async {
   }
   UpdateValues().getStartTimerValue();
   UpdateGoalValues().getGoalValue();
-  runApp(MyApp());
-  // runApp(ProviderScope(child: MyApp()));
+  // runApp(MyApp());
+  runApp(ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -69,15 +70,17 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
 
-    return MultiProvider(
+    return prov.MultiProvider(
       providers: [
-        ChangeNotifierProvider<Randoms>(create: (context) => Randoms()),
-        ChangeNotifierProvider<GoalValue>(create: (context) => GoalValue()),
-        ChangeNotifierProvider<RebuildWidgets>(
+        prov.ChangeNotifierProvider<Randoms>(create: (context) => Randoms()),
+        prov.ChangeNotifierProvider<GoalValue>(
+            create: (context) => GoalValue()),
+        prov.ChangeNotifierProvider<RebuildWidgets>(
             create: (context) => RebuildWidgets()),
-        ChangeNotifierProvider<ClearAllButtons>(
+        prov.ChangeNotifierProvider<ClearAllButtons>(
             create: (context) => ClearAllButtons()),
-        ChangeNotifierProvider<GameTimer>(create: (context) => GameTimer()),
+        prov.ChangeNotifierProvider<GameTimer>(
+            create: (context) => GameTimer()),
       ],
       child: kSplashScreen
           ? MaterialApp(
