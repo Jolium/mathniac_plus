@@ -68,7 +68,7 @@ class _UploadScreenState extends State<UploadScreen> {
         listOfAllNames.add(a.id);
       }
     }
-    print('listOfAllNames: $listOfAllNames');
+    // print('listOfAllNames: $listOfAllNames');
   }
 
   final _firebase = FirebaseFirestore.instance.collection("scores");
@@ -364,8 +364,8 @@ class _UploadScreenState extends State<UploadScreen> {
                                   text: ' Upload ',
                                   active: vNickname == '' ? false : true,
                                   onTap: () {
-                                    print('nickname1: $vNickname');
-                                    print('Internet: $vInternetConnection');
+                                    // print('nickname1: $vNickname');
+                                    // print('Internet: $vInternetConnection');
 
                                     if (vInternetConnection) {
                                       if (listOfAllNames.contains(vNickname) &&

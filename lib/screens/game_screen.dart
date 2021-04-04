@@ -32,8 +32,7 @@ class GameScreen extends StatelessWidget {
 
     final Size _screenSize = MediaQuery.of(context).size;
 
-    final int _score = listOfScorePoints[vMagicLevel - 1];
-    final int _scorePointsLevel = listOfScorePoints[vMagicLevel - 1];
+    final int _goalLevel = listOfScorePoints[vMagicLevel - 1];
 
     return Scaffold(
       body: Container(
@@ -68,7 +67,7 @@ class GameScreen extends StatelessWidget {
                       SizedBox(
                         width: _screenSize.width / 3,
                         child: CustomHeader(
-                          text: _scorePointsLevel.toString(),
+                          text: _goalLevel.toString(),
                         ),
                       ),
                       Consumer(builder: (context, watch, child) {
@@ -115,19 +114,23 @@ class GameScreen extends StatelessWidget {
                 children: [
                   Consumer(builder: (context, watch, child) {
                     final bool isTicking = watch(gameTickingProvider.state);
+                    final int actualScore = context.read(scoreProvider.state);
                     return MyButton(
                       onTap: () {},
                       text: ' Home ',
                       widthRatio: isTicking ||
-                              vActualScoreValue >= _score && vMagicLevel != 15
+                              actualScore >= _goalLevel && vMagicLevel != 15 ||
+                              actualScore > _goalLevel && vMagicLevel == 15
                           ? 7
                           : 3.5,
                       heightRatio: isTicking ||
-                              vActualScoreValue >= _score && vMagicLevel != 15
+                              actualScore >= _goalLevel && vMagicLevel != 15 ||
+                              actualScore > _goalLevel && vMagicLevel == 15
                           ? 10
                           : 5,
                       active: isTicking ||
-                              vActualScoreValue >= _score && vMagicLevel != 15
+                              actualScore >= _goalLevel && vMagicLevel != 15 ||
+                              actualScore > _goalLevel && vMagicLevel == 15
                           ? false
                           : true,
                       navigator: HomeScreen(),
@@ -136,20 +139,24 @@ class GameScreen extends StatelessWidget {
                   StartButton(),
                   Consumer(builder: (context, watch, child) {
                     final bool isTicking = watch(gameTickingProvider.state);
+                    final int actualScore = context.read(scoreProvider.state);
                     return MyButton(
                       onTap: () {},
                       text: ' Levels ',
                       navigator: LevelsScreen(),
                       widthRatio: isTicking ||
-                              vActualScoreValue >= _score && vMagicLevel != 15
+                              actualScore >= _goalLevel && vMagicLevel != 15 ||
+                              actualScore > _goalLevel && vMagicLevel == 15
                           ? 7
                           : 3.5,
                       heightRatio: isTicking ||
-                              vActualScoreValue >= _score && vMagicLevel != 15
+                              actualScore >= _goalLevel && vMagicLevel != 15 ||
+                              actualScore > _goalLevel && vMagicLevel == 15
                           ? 10
                           : 5,
                       active: isTicking ||
-                              vActualScoreValue >= _score && vMagicLevel != 15
+                              actualScore >= _goalLevel && vMagicLevel != 15 ||
+                              actualScore > _goalLevel && vMagicLevel == 15
                           ? false
                           : true,
                     );

@@ -106,8 +106,9 @@ class LevelsScreen extends StatelessWidget {
                   onTap: () {
                     // vButtonText = ' Start ';
                     // vButtonGradient = true;
-                    vCountdownValue = vStartCountdownValue;
-                    vActualScoreValue = 0;
+                    // vCountdownValue = vStartCountdownValue;
+                    ///TODO
+                    // vActualScoreValue = 0;
 
                     /// Set listOfRandoms with zeros => '?'
                     context.read(randomsProvider).setZerosRandomsList();

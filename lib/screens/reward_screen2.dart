@@ -82,11 +82,11 @@ class _RewardScreenState extends State<RewardScreen> {
   @override
   void initState() {
     super.initState();
-    print('vWatchAds: $vWatchAds');
+    // print('vWatchAds: $vWatchAds');
     if (vWatchAds) {
       // load ad in the beginning
       MobileAds.instance.initialize().then((InitializationStatus status) {
-        print('Initialization done: ${status.adapterStatuses}');
+        // print('Initialization done: ${status.adapterStatuses}');
         MobileAds.instance
             .updateRequestConfiguration(RequestConfiguration(
                 tagForChildDirectedTreatment:
@@ -219,11 +219,24 @@ class _RewardScreenState extends State<RewardScreen> {
                   active: _adButtonActive,
                   decreaseSizeOnTap: false,
                   onTap: () async {
-                    print('\n=== Is Ad loaded onTap: $_rewardedReady ===');
+                    // print('\n=== Is Ad loaded onTap: $_rewardedReady ===');
                     if (vWatchAds) {
                       if (_rewardedReady) {
                         _rewardedAd.show().catchError((e) =>
-                            print("error in showing ad: ${e.toString()}"));
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return PopUp(
+                                    title: 'Something went wrong!',
+                                    content:
+                                    "error in showing ad: ${e.toString()}",
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  );
+                                })
+                            // print("error in showing ad: ${e.toString()}")
+                    );
                         setState(() => _rewardedReady = false);
                         _rewardedAd = null;
                       } else {

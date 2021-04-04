@@ -14,7 +14,7 @@ class CountDown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('== CountDown ==');
+    // print('== CountDown ==');
 
     final Size _screenSize = MediaQuery.of(context).size;
     final double _sizeRatio = _screenSize.height / _screenSize.width / 2;

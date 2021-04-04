@@ -1,9 +1,9 @@
-// import 'package:admob_flutter/admob_flutter.dart';
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:flutter/material.dart';
+import 'package:mathniac_plus/widgets/pop_up.dart';
 
 import '../settings/backgrounds.dart';
 import '../settings/constants.dart';
@@ -143,7 +143,19 @@ class _ScoresScreenState extends State<ScoresScreen> {
                   _nickname = document['name'];
                 } catch (e) {
                   _nickname = document.id;
-                  print('\n== ${document.id} has no field [name] ==\n');
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return PopUp(
+                          title: 'Something went wrong!',
+                          content:
+                          e.toString(),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        );
+                      });
+                  // print('\n== ${document.id} has no field [name] ==\n');
                 }
 
                 final String _score = document['score'].toString();

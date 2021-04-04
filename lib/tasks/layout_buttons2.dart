@@ -17,7 +17,7 @@ class ButtonsLayout extends StatelessWidget {
   final List<Widget> rowElements = [];
 
   List<Widget> generateRowElements(BuildContext context) {
-    print('== generateRowElements ==');
+    // print('== generateRowElements ==');
     final List<bool> listIsSelected = context.read(selectedListProvider.state);
 
     rowElements.clear();
@@ -34,30 +34,6 @@ class ButtonsLayout extends StatelessWidget {
     final double _textSize = _buttonSize / _textRatio;
 
     for (int i = 0; i < listIsSelected.length; i++) {
-      final List<Color> _colorsList = vMagicLevel <= 14
-          ? listIsSelected[i]
-              ? [
-                  kColorBlue,
-                  kColorRed,
-                  kColorBlue,
-                ]
-              : [
-                  kColorRed,
-                  kColorBlue,
-                  kColorRed,
-                ]
-          : listIsSelected[i]
-              ? [
-                  Colors.black,
-                  kColorSilver,
-                  Colors.black,
-                ]
-              : [
-                  Colors.black,
-                  kColorBronze,
-                  Colors.black,
-                ];
-
       void _onTapDown(_) {
         final bool _isSelected = context.read(clearAllButtonsProvider.state)[i];
         final int _textValue = context.read(randomsProvider.state)[i];
@@ -191,6 +167,29 @@ class ButtonsLayout extends StatelessWidget {
           final Color _shadow = listIsSelected[i]
               ? kShadow2.withOpacity(kShadowOpacity2)
               : kShadow1.withOpacity(kShadowOpacity1);
+          final List<Color> _colorsList = vMagicLevel <= 14
+              ? listIsSelected[i]
+                  ? [
+                      kColorBlue,
+                      kColorRed,
+                      kColorBlue,
+                    ]
+                  : [
+                      kColorRed,
+                      kColorBlue,
+                      kColorRed,
+                    ]
+              : listIsSelected[i]
+                  ? [
+                      Colors.black,
+                      kColorSilver,
+                      Colors.black,
+                    ]
+                  : [
+                      Colors.black,
+                      kColorBronze,
+                      Colors.black,
+                    ];
           return Container(
             alignment: Alignment.center,
             margin: EdgeInsets.all(_edgeInsets),
@@ -251,7 +250,7 @@ class ButtonsLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('== Build LayoutButtons ==');
+    // print('== Build LayoutButtons ==');
     AudioPlayer().checkPlatform();
     final List<Widget> list = generateRowElements(context);
 

@@ -5,6 +5,8 @@ import 'package:mathniac_plus/settings/vars.dart';
 class CountdownNotifier extends StateNotifier<int> {
   CountdownNotifier() : super(vStartCountdownValue);
 
+  int decrease() => state--;
+
   int add(int value) => state = state + value;
 
   int set(int value) => state = value;
