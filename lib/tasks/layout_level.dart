@@ -32,7 +32,6 @@ class LevelsLayout extends StatelessWidget {
 
     for (int i = 0; i < listGotLevel.length; i++) {
       Color _starColor;
-      final Color _lastLevelColor = kColorSilver;
 
       if (i <= 2) {
         _starColor = kColorGreen;
@@ -43,7 +42,7 @@ class LevelsLayout extends StatelessWidget {
       } else if (i <= 13) {
         _starColor = kColorRed;
       } else {
-        _starColor = _lastLevelColor;
+        _starColor = kColorSilver;
       }
 
       final int _text = i + 1;

@@ -51,6 +51,31 @@ List<int> listOfRandoms = [
   0,
 ];
 
+/// List of sizedBox doubles to each button (max = 18 buttons)
+List<double> listOfSizedBoxes = [
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+  1.0,
+];
+
 /// List of selected buttons (true if selected (max = 18 buttons))
 List<bool> listIsSelected = [
   false,
@@ -97,7 +122,7 @@ List<bool> listGotLevel = [
 
 /// List of points for each level
 List<int> listOfScorePoints = [
-  130,
+  130, // 130
   150,
   170,
   200,
@@ -116,7 +141,7 @@ List<int> listOfScorePoints = [
 
 /// List of seconds for each level (milliseconds)
 List<int> listOfSeconds = [
-  300,
+  300, // 300
   350,
   400,
   400,

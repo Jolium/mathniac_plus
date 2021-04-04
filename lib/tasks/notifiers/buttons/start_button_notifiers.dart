@@ -13,7 +13,7 @@ class TextNotifier extends StateNotifier<String> {
 }
 
 class GradientNotifier extends StateNotifier<bool> {
-  GradientNotifier() : super(false);
+  GradientNotifier() : super(true);
 
   bool set({bool value}) => state = value;
 }

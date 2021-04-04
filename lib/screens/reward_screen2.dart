@@ -24,7 +24,7 @@ class _RewardScreenState extends State<RewardScreen> {
   final double _marginRatio = 20;
   final double _textRatio = 20;
 
-  // Ad button active
+  /// Ad button active
   bool _adButtonActive = false;
 
   RewardedAd _rewardedAd;
@@ -76,7 +76,7 @@ class _RewardScreenState extends State<RewardScreen> {
     )..load();
   }
 
-  // Rewarded Unit Id
+  /// Rewarded Unit Id
   final String _rewardedUnitId = AdMobService().getRewardedAdId();
 
   @override
@@ -85,8 +85,8 @@ class _RewardScreenState extends State<RewardScreen> {
     print('vWatchAds: $vWatchAds');
     if (vWatchAds) {
       // load ad in the beginning
-      // MobileAds.instance.initialize().then((InitializationStatus status) {
-      //   print('Initialization done: ${status.adapterStatuses}');
+      MobileAds.instance.initialize().then((InitializationStatus status) {
+        print('Initialization done: ${status.adapterStatuses}');
         MobileAds.instance
             .updateRequestConfiguration(RequestConfiguration(
                 tagForChildDirectedTreatment:
@@ -94,9 +94,9 @@ class _RewardScreenState extends State<RewardScreen> {
             .then((value) {
           createRewardedAd();
         });
-      // });
+      });
     } else {
-      // Activate button to show pop-up showing warning 'You have to play at least 1 time...'
+      /// Activate button to show pop-up showing warning 'You have to play at least 1 time...'
       _adButtonActive = true;
     }
   }

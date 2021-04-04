@@ -41,11 +41,6 @@ class PopUp extends StatelessWidget {
       actions: [
         TextButton(
           onPressed: onPressed,
-          // shape: const RoundedRectangleBorder(
-          //   borderRadius: BorderRadius.all(
-          //     Radius.circular(32),
-          //   ),
-          // ),
           child: const Text(
             'Dismiss',
             style: TextStyle(

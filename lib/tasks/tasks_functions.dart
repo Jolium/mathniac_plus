@@ -9,7 +9,6 @@ import '../settings/constants.dart';
 import '../settings/lists.dart';
 import '../settings/vars.dart';
 import 'task_hive.dart';
-import 'tasks_provider.dart';
 
 class ClearOnlyButtons {
   /// Deselect ONLY selected buttons and only UPDATE the list of selected buttons
@@ -120,15 +119,15 @@ class AudioPlayer {
   }
 }
 
-void clearAllGameScreen() {
-  /// Set Game screen to starting point
-  vActualScoreValue = 0;
-  vCountdownValue = vStartCountdownValue;
-  GameTimer().stopTimerTicking();
-  ClearAllButtons().setIsSelectedList();
-  GoalValue().setStartingValue();
-  Randoms().setZerosRandomsList();
-}
+// void clearAllGameScreen() {
+//   /// Set Game screen to starting point
+//   vActualScoreValue = 0;
+//   vCountdownValue = vStartCountdownValue;
+//   GameTimer().stopTimerTicking();
+//   ClearAllButtons().setIsSelectedList();
+//   GoalValue().setStartingValue();
+//   Randoms().setZerosRandomsList();
+// }
 
 Color levelColor() {
   if (vMagicLevel <= 3) {

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mathniac_plus/tasks/providers.dart';
 
 import '../settings/backgrounds.dart';
 import '../settings/lists.dart';
 import '../settings/vars.dart';
 import '../tasks/layout_level.dart';
 import '../tasks/tasks_functions.dart';
-import '../tasks/tasks_provider.dart';
 import '../widgets/custom_header.dart';
 import '../widgets/my_button.dart';
 import 'game_screen.dart';
@@ -104,25 +104,19 @@ class LevelsScreen extends StatelessWidget {
               children: [
                 MyButton(
                   onTap: () {
-                    vButtonText = ' Start ';
-                    vButtonGradient = true;
+                    // vButtonText = ' Start ';
+                    // vButtonGradient = true;
                     vCountdownValue = vStartCountdownValue;
                     vActualScoreValue = 0;
 
-                    // Set listOfRandoms with zeros => '?'
-                    final Randoms _model =
-                        Provider.of<Randoms>(context, listen: false);
-                    _model.setZerosRandomsList();
+                    /// Set listOfRandoms with zeros => '?'
+                    context.read(randomsProvider).setZerosRandomsList();
 
-                    // Set GoalValue text to start value
-                    final GoalValue _resetGoalValue =
-                        Provider.of<GoalValue>(context, listen: false);
-                    _resetGoalValue.setStartingValue();
+                    /// Set GoalValue text to start value
+                    context.read(goalProvider).setStartingValue();
 
-                    // Update isSelected List
-                    final ClearAllButtons _isSelected =
-                        Provider.of<ClearAllButtons>(context, listen: false);
-                    _isSelected.setIsSelectedList();
+                    /// Update isSelected List
+                    context.read(clearAllButtonsProvider).setIsSelectedList();
                   },
                   text: ' Play ',
                   navigator: GameScreen(),

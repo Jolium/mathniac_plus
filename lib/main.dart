@@ -5,10 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:provider/provider.dart' as prov;
 
 import './screens/home_screen.dart';
 import './settings/constants.dart';
@@ -17,7 +15,6 @@ import './settings/vars.dart';
 import './tasks/my_splash.dart';
 import './tasks/task_hive.dart';
 import './tasks/tasks_functions.dart';
-import './tasks/tasks_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,9 +23,9 @@ Future<void> main() async {
 
   // Admob.initialize(testDeviceIds: listOfTestDevices);
   // Admob.initialize();
-  MobileAds.instance.initialize();
+  // MobileAds.instance.initialize();
 
-  // Check internet connection
+  /// Check internet connection
   try {
     final result = await InternetAddress.lookup('google.com');
     if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
@@ -55,14 +52,13 @@ Future<void> main() async {
   }
   UpdateValues().getStartTimerValue();
   UpdateGoalValues().getGoalValue();
-  // runApp(MyApp());
   runApp(ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // Hide bottom bar and top bar
+    /// Hide bottom bar and top bar
     SystemChrome.setEnabledSystemUIOverlays([]);
 
     SystemChrome.setPreferredOrientations([
@@ -70,41 +66,28 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitDown,
     ]);
 
-    return prov.MultiProvider(
-      providers: [
-        prov.ChangeNotifierProvider<Randoms>(create: (context) => Randoms()),
-        prov.ChangeNotifierProvider<GoalValue>(
-            create: (context) => GoalValue()),
-        prov.ChangeNotifierProvider<RebuildWidgets>(
-            create: (context) => RebuildWidgets()),
-        prov.ChangeNotifierProvider<ClearAllButtons>(
-            create: (context) => ClearAllButtons()),
-        prov.ChangeNotifierProvider<GameTimer>(
-            create: (context) => GameTimer()),
-      ],
-      child: kSplashScreen
-          ? MaterialApp(
-              color: Colors.black,
-              title: kAppName,
-              debugShowCheckedModeBanner: false,
-              home: MySplash(
-                // logoSize: 300.0,
-                imagePath: 'images/launch_image.png',
-                backGroundColor: Colors.black,
-                animationEffect: 'zoom-out',
-                home: HomeScreen(),
-                duration: 1600,
-                type: MySplashType.staticDuration,
-              ),
-            )
-          : MaterialApp(
-              color: Colors.black,
-              title: kAppName,
-              debugShowCheckedModeBanner: false,
-              // initialRoute: kHomeScreen,
-              // onGenerateRoute: ScreensRouter.onGenerateRoute,
+    return kSplashScreen
+        ? MaterialApp(
+            color: Colors.black,
+            title: kAppName,
+            debugShowCheckedModeBanner: false,
+            home: MySplash(
+              // logoSize: 300.0,
+              imagePath: 'images/launch_image.png',
+              backGroundColor: Colors.black,
+              animationEffect: 'zoom-out',
               home: HomeScreen(),
+              duration: 1600,
+              type: MySplashType.staticDuration,
             ),
-    );
+          )
+        : MaterialApp(
+            color: Colors.black,
+            title: kAppName,
+            debugShowCheckedModeBanner: false,
+            // initialRoute: kHomeScreen,
+            // onGenerateRoute: ScreensRouter.onGenerateRoute,
+            home: HomeScreen(),
+          );
   }
 }

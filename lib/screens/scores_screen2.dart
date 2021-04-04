@@ -29,7 +29,7 @@ class _ScoresScreenState extends State<ScoresScreen> {
 
   List<Widget> rowElements = [];
 
-  // Banner Unit Id
+  /// Banner Unit Id
   final String _bannerUnitId = AdMobService().getBannerAdId();
 
   BannerAd _bannerAd;
@@ -42,7 +42,7 @@ class _ScoresScreenState extends State<ScoresScreen> {
     super.initState();
     // Admob.initialize(testDeviceIds: listOfTestDevices);
 
-    // MobileAds.instance.initialize();
+    MobileAds.instance.initialize();
 
     _bannerAd = BannerAd(
       // adUnitId: BannerAd.testAdUnitId,

@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mathniac_plus/settings/vars.dart';
 
@@ -7,21 +5,15 @@ import 'package:mathniac_plus/settings/vars.dart';
 class CountdownNotifier extends StateNotifier<int> {
   CountdownNotifier() : super(vStartCountdownValue);
 
-  int start() {
-    const oneMilli = Duration(milliseconds: 100);
-    // int _timer = state;
-    Timer.periodic(oneMilli, (Timer timer) {
-      if (state <= 0) {
-        timer.cancel();
-        state = 0;
-      } else {
-        state--;
-      }
-    });
-    return state;
-  }
+  int add(int value) => state = state + value;
 
-  // int start() => state--;
+  int set(int value) => state = value;
 
   int reset() => state = vStartCountdownValue;
+}
+
+class CountdownCancelNotifier extends StateNotifier<bool> {
+  CountdownCancelNotifier() : super(false);
+
+  bool set({bool cancelTimer}) => state = cancelTimer;
 }

@@ -36,18 +36,18 @@ class _UploadScreenState extends State<UploadScreen> {
   }
 
   Future<void> _checkInternetConnectivity() async {
-    // Check internet connection
+    /// Check internet connection
     try {
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        print('connected');
+        // print('connected');
         vInternetConnection = true;
         if (!_nicknameExist) {
           getListOfAllNames();
         }
       }
     } on SocketException catch (_) {
-      print('not connected');
+      // print('not connected');
       vInternetConnection = false;
     }
   }
@@ -87,7 +87,7 @@ class _UploadScreenState extends State<UploadScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Hide bottom bar and top bar
+    /// Hide bottom bar and top bar
     SystemChrome.setEnabledSystemUIOverlays([]);
 
     // _checkInternetConnectivity();
@@ -130,11 +130,6 @@ class _UploadScreenState extends State<UploadScreen> {
             Navigator.of(context).pushReplacement(
                 CustomRoute(builder: (context) => GameScreen()));
           },
-          // shape: RoundedRectangleBorder(
-          //   borderRadius: BorderRadius.all(
-          //     Radius.circular(_borderRadius),
-          //   ),
-          // ),
           child: Text(
             'Ok',
             style: TextStyle(

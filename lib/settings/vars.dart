@@ -17,10 +17,13 @@ int vCountdownValue = vStartCountdownValue;
 double vExtraTime = 0.0;
 int vPointsToWinSecond = 25;
 
-bool vPlayLevelUp = true;
+// bool vPlayLevelUp = true;
 
-String vButtonText = ' Start ';
-bool vButtonGradient = true;
+// String vButtonText = ' Start ';
+// bool vButtonGradient = true;
+
+/// Cancel Countdown (if actual score >= level score)
+bool vCancelTimer = false;
 
 /// Sound
 bool vPlaySound = true;
