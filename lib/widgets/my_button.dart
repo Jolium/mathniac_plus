@@ -53,11 +53,11 @@ class MyButton extends StatefulWidget {
 class _MyButtonState extends State<MyButton> {
   double _sizedBox = 1;
 
-  @override
-  void initState() {
-    AudioPlayer().checkPlatform();
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   AudioPlayer().checkPlatform();
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,8 @@
 import 'dart:io';
 import 'dart:math';
 
-import 'package:audioplayers/audio_cache.dart';
+import 'package:assets_audio_player/assets_audio_player.dart';
+// import 'package:audioplayers/audio_cache.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -61,7 +62,6 @@ class UpdateValues {
       }
       vGoalValue = vGoalValue + 1;
 
-
       /// Check if player already have nickname (ex: reset game)
       if (vMagicLevel == 15) {
         try {
@@ -111,28 +111,55 @@ void clearSelectedButtons(List<int> randomsList) {
 }
 
 class AudioPlayer {
-  final AudioCache _audioCache =
-      AudioCache(prefix: 'assets/sounds/', respectSilence: true);
+  final AssetsAudioPlayer _audioPlayer = AssetsAudioPlayer();
 
-  void checkPlatform() {
-    if (kIsWeb) {
-      // Calls to Platform.isIOS fails on web
-      return;
-    }
-    if (Platform.isIOS) {
-      if (_audioCache.fixedPlayer != null) {
-        _audioCache.fixedPlayer.startHeadlessService();
-      }
-    }
-  }
+  // void checkPlatform() {
+  //   if (kIsWeb) {
+  //     // Calls to Platform.isIOS fails on web
+  //     return;
+  //   }
+  //   // if (Platform.isIOS) {
+  //   //   if (_audioCache.fixedPlayer != null) {
+  //   //     _audioCache.fixedPlayer.startHeadlessService();
+  //   //   }
+  //   // }
+  // }
 
   void soundPlayer(String sound) {
-    /// Sound Player ///
+    /// Sound Player
+
+    final String path = 'assets/sounds/$sound';
+
     if (vPlaySound) {
-      _audioCache.play(sound);
+      _audioPlayer.open(Audio(path));
     }
   }
 }
+
+// class AudioPlayer {
+//   final AudioCache _audioCache =
+//       // AudioCache(prefix: 'assets/sounds/', respectSilence: true);
+//   AudioCache(prefix: 'assets/sounds/', respectSilence: true);
+//
+//   void checkPlatform() {
+//     if (kIsWeb) {
+//       // Calls to Platform.isIOS fails on web
+//       return;
+//     }
+//     if (Platform.isIOS) {
+//       if (_audioCache.fixedPlayer != null) {
+//         _audioCache.fixedPlayer.startHeadlessService();
+//       }
+//     }
+//   }
+//
+//   void soundPlayer(String sound) {
+//     /// Sound Player ///
+//     if (vPlaySound) {
+//       _audioCache.play(sound);
+//     }
+//   }
+// }
 
 Color levelColor() {
   if (vMagicLevel <= 3) {

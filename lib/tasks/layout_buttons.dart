@@ -230,8 +230,8 @@ class ButtonsLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /// Play audio
-    AudioPlayer().checkPlatform();
+    // /// Play audio
+    // AudioPlayer().checkPlatform();
 
     /// Create list/grid of buttons
     final List<Widget> list = generateRowElements(context);

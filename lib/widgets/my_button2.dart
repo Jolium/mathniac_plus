@@ -57,7 +57,7 @@ class MyButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AudioPlayer().checkPlatform();
+    // AudioPlayer().checkPlatform();
 
     final Size _screenSize = MediaQuery.of(context).size;
     final double _sizeRatio = _screenSize.height / _screenSize.width / 2;
