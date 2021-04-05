@@ -21,19 +21,15 @@ Future<void> main() async {
   final FirebaseApp app = await Firebase.initializeApp();
   assert(app != null);
 
-  // Admob.initialize(testDeviceIds: listOfTestDevices);
-  // Admob.initialize();
-  // MobileAds.instance.initialize();
-
   /// Check internet connection
   try {
     final result = await InternetAddress.lookup('google.com');
     if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-      // print('connected');
+      if (kShowPrints) print('connected');
       vInternetConnection = true;
     }
   } on SocketException catch (_) {
-    // print('not connected');
+    if (kShowPrints) print('not connected');
     vInternetConnection = false;
   }
 
@@ -44,6 +40,7 @@ Future<void> main() async {
     vMagicLevel = TaskHive().level;
     vPlaySound = TaskHive().sound;
     vBackground = TaskHive().background;
+
     if (vMagicLevel == 15) {
       listOfScorePoints[14] = TaskHive().highScore;
       vNickname = TaskHive().nickname;

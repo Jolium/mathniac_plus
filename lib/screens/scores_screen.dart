@@ -1,9 +1,8 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:flutter/material.dart';
-import 'package:mathniac_plus/widgets/pop_up.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import '../settings/backgrounds.dart';
 import '../settings/constants.dart';
@@ -12,6 +11,7 @@ import '../settings/vars.dart';
 import '../tasks/admob_service.dart';
 import '../widgets/custom_header.dart';
 import '../widgets/my_button.dart';
+import '../widgets/pop_up.dart';
 import 'home_screen.dart';
 
 class ScoresScreen extends StatefulWidget {
@@ -40,7 +40,6 @@ class _ScoresScreenState extends State<ScoresScreen> {
   @override
   void initState() {
     super.initState();
-    // Admob.initialize(testDeviceIds: listOfTestDevices);
 
     MobileAds.instance.initialize();
 
@@ -56,17 +55,23 @@ class _ScoresScreenState extends State<ScoresScreen> {
       size: AdSize.banner,
       listener: AdListener(
         onAdLoaded: (Ad ad) {
-          print('$BannerAd loaded.');
+          if (kShowPrints) print('$BannerAd loaded.');
           bannerCompleter.complete(ad as BannerAd);
         },
         onAdFailedToLoad: (Ad ad, LoadAdError error) {
           ad.dispose();
-          print('$BannerAd failedToLoad: $error');
+          if (kShowPrints) print('$BannerAd failedToLoad: $error');
           bannerCompleter.completeError(null);
         },
-        onAdOpened: (Ad ad) => print('$BannerAd onAdOpened.'),
-        onAdClosed: (Ad ad) => print('$BannerAd onAdClosed.'),
-        onApplicationExit: (Ad ad) => print('$BannerAd onApplicationExit.'),
+        onAdOpened: (Ad ad) {
+          if (kShowPrints) print('$BannerAd onAdOpened.');
+        },
+        onAdClosed: (Ad ad) {
+          if (kShowPrints) print('$BannerAd onAdClosed.');
+        },
+        onApplicationExit: (Ad ad) {
+          if (kShowPrints) print('$BannerAd onApplicationExit.');
+        },
       ),
     );
 
@@ -98,7 +103,6 @@ class _ScoresScreenState extends State<ScoresScreen> {
     final double _buttonSize =
         _buttonHeight <= _buttonWidth ? _buttonHeight : _buttonWidth;
 
-    // double _textSize = _screenSize.height / _textRatio / 5;
     final double _borderRadius = _buttonSize / _borderRatio;
     final double _edgeInsets = _buttonSize / _marginRatio;
 
@@ -148,14 +152,14 @@ class _ScoresScreenState extends State<ScoresScreen> {
                       builder: (BuildContext context) {
                         return PopUp(
                           title: 'Something went wrong!',
-                          content:
-                          e.toString(),
+                          content: e.toString(),
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
                         );
                       });
-                  // print('\n== ${document.id} has no field [name] ==\n');
+                  if (kShowPrints)
+                    print('\n== ${document.id} has no field [name] ==\n');
                 }
 
                 final String _score = document['score'].toString();
@@ -211,7 +215,6 @@ class _ScoresScreenState extends State<ScoresScreen> {
                               ),
                               child: Container(
                                 height: 80.0,
-                                // width: _buttonWidth / 1.5,
                                 alignment: Alignment.center,
                                 padding: EdgeInsets.all(_edgeInsets),
                                 decoration: isLoaded
@@ -241,11 +244,6 @@ class _ScoresScreenState extends State<ScoresScreen> {
                                         ),
                                       ),
                                 child: banner(context),
-                                // child: AdmobBanner(
-                                //   adUnitId: _bannerUnitId,
-                                //   adSize: AdmobBannerSize.BANNER,
-                                //   nonPersonalizedAds: true,
-                                // ),
                               ),
                             ),
                           ],
@@ -370,20 +368,14 @@ class _ScoresScreenState extends State<ScoresScreen> {
                     ],
                   ),
                 ),
-                Expanded(
-                  child: _scoresListStreamer(),
-                ),
-                SizedBox(
-                  height: _screenSize.height / 20,
-                ),
+                Expanded(child: _scoresListStreamer()),
+                SizedBox(height: _screenSize.height / 20),
                 MyButton(
                   onTap: () {},
                   text: ' Home ',
                   navigator: HomeScreen(),
                 ),
-                SizedBox(
-                  height: _screenSize.height / 30,
-                ),
+                SizedBox(height: _screenSize.height / 30),
               ],
             ),
           ),

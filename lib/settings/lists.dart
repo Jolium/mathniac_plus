@@ -52,6 +52,7 @@ List<int> listOfRandoms = [
 ];
 
 /// List of sizedBox doubles to each button (max = 18 buttons)
+/// Used by game_button_notifier.dart
 List<double> listOfSizedBoxes = [
   1.0,
   1.0,

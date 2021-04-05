@@ -24,8 +24,6 @@ class LevelUp extends StatelessWidget {
     final double _edgeInsets = _buttonSize / _marginRatio * _sizeRatio;
     final double _shadowRadius = _buttonHeight / 5 / _shadowRatio;
     final double _sizeShape = _screenSize.width;
-    final Color _color = kColor2;
-    final Color _shadow = kShadow2.withOpacity(kShadowOpacity2);
 
     final int level = vMagicLevel;
     Color _starColor;
@@ -65,7 +63,7 @@ class LevelUp extends StatelessWidget {
               fontFamily: kLetterType1,
               shadows: [
                 BoxShadow(
-                  color: _shadow.withOpacity(0.8),
+                  color: kShadow2.withOpacity(kShadowOpacity2),
                   spreadRadius: _shadowRadius / 2,
                   blurRadius: _shadowRadius,
                 ),
@@ -85,7 +83,7 @@ class LevelUp extends StatelessWidget {
                 fontFamily: kLetterType1,
                 shadows: [
                   BoxShadow(
-                    color: _shadow.withOpacity(0.8),
+                    color: kShadow2.withOpacity(kShadowOpacity2),
                     spreadRadius: _shadowRadius / 2,
                     blurRadius: _shadowRadius,
                   ),
@@ -123,12 +121,12 @@ class LevelUp extends StatelessWidget {
                       ],
                     ),
                     border: Border.all(
-                      color: _color,
+                      color: kColor2,
                       width: _edgeInsets,
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: _shadow.withOpacity(0.8),
+                        color: kShadow2.withOpacity(kShadowOpacity2),
                         spreadRadius: _shadowRadius / 2,
                         blurRadius: _shadowRadius,
                       ),
@@ -142,7 +140,7 @@ class LevelUp extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       shadows: [
                         BoxShadow(
-                          color: _shadow,
+                          color: kShadow2.withOpacity(kShadowOpacity2),
                           spreadRadius: _shadowRadius / 2,
                           blurRadius: _shadowRadius,
                         ),
@@ -154,10 +152,10 @@ class LevelUp extends StatelessWidget {
                   width: _screenSize.width / _widthRatio * _sizeRatio / 2.5,
                   height: _screenSize.width / _heightRatio * _sizeRatio / 2.5,
                   decoration: BoxDecoration(
-                    color: _color,
+                    color: kColor2,
                     boxShadow: [
                       BoxShadow(
-                        color: _shadow,
+                        color: kShadow2.withOpacity(kShadowOpacity2),
                         spreadRadius: _shadowRadius / 2,
                         blurRadius: _shadowRadius,
                       ),
@@ -176,17 +174,6 @@ class LevelUp extends StatelessWidget {
             ),
           ],
         ),
-        // actions: [
-        //   TextButton(
-        //     onPressed: (){},
-        //     child: const Text(
-        //       'Dismiss',
-        //       style: TextStyle(
-        //         fontSize: 14,
-        //       ),
-        //     ),
-        //   ),
-        // ],
       ),
     );
   }

@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import '../settings/backgrounds.dart';
+import '../settings/constants.dart';
 import '../settings/lists.dart';
 import '../settings/vars.dart';
 import '../tasks/admob_service.dart';
@@ -31,8 +32,7 @@ class _RewardScreenState extends State<RewardScreen> {
   bool _rewardedReady = false;
 
   static final AdRequest request = AdRequest(
-    testDevices:
-        listOfTestDevices, // Android emulators are considered test devices
+    testDevices: listOfTestDevices, // Android emulators are test devices
     // testDevices: testDevice != null ? <String>[testDevice] : null,
     keywords: listOfKeyWords,
     contentUrl: 'https://play.google.com/store/apps/category/GAME_CASUAL',
@@ -44,35 +44,34 @@ class _RewardScreenState extends State<RewardScreen> {
       // adUnitId: RewardedAd.testAdUnitId,
       adUnitId: _rewardedUnitId,
       request: request,
-      listener: AdListener(
-          onAdLoaded: (Ad ad) {
-            print('${ad.runtimeType} loaded.');
-            _rewardedReady = true;
-            setState(() {
-              _adButtonActive = true;
-            });
-          },
-          onAdFailedToLoad: (Ad ad, LoadAdError error) {
-            print('${ad.runtimeType} failed to load: $error');
-            ad.dispose();
-            _rewardedAd = null;
-            createRewardedAd();
-          },
-          onAdOpened: (Ad ad) => print('${ad.runtimeType} onAdOpened.'),
-          onAdClosed: (Ad ad) {
-            print('${ad.runtimeType} closed.');
-            ad.dispose();
-            createRewardedAd();
-          },
-          onApplicationExit: (Ad ad) =>
-              print('${ad.runtimeType} onApplicationExit.'),
-          onRewardedAdUserEarnedReward: (RewardedAd ad, RewardItem reward) {
-            UpdateValues().getNewLevelValue();
-            vWatchAds = false;
-            print(
-              '$RewardedAd with reward $RewardItem(${reward.amount}, ${reward.type})',
-            );
-          }),
+      listener: AdListener(onAdLoaded: (Ad ad) {
+        if (kShowPrints) print('${ad.runtimeType} loaded.');
+        _rewardedReady = true;
+        setState(() {
+          _adButtonActive = true;
+        });
+      }, onAdFailedToLoad: (Ad ad, LoadAdError error) {
+        if (kShowPrints) print('${ad.runtimeType} failed to load: $error');
+        ad.dispose();
+        _rewardedAd = null;
+        createRewardedAd();
+      }, onAdOpened: (Ad ad) {
+        if (kShowPrints) print('${ad.runtimeType} onAdOpened.');
+      }, onAdClosed: (Ad ad) {
+        if (kShowPrints) print('${ad.runtimeType} closed.');
+        ad.dispose();
+        createRewardedAd();
+      }, onApplicationExit: (Ad ad) {
+        if (kShowPrints) print('${ad.runtimeType} onApplicationExit.');
+      }, onRewardedAdUserEarnedReward: (RewardedAd ad, RewardItem reward) {
+        UpdateValues().getNewLevelValue();
+        vWatchAds = false;
+        if (kShowPrints) {
+          print(
+            '$RewardedAd with reward $RewardItem(${reward.amount}, ${reward.type})',
+          );
+        }
+      }),
     )..load();
   }
 
@@ -84,7 +83,7 @@ class _RewardScreenState extends State<RewardScreen> {
     super.initState();
     // print('vWatchAds: $vWatchAds');
     if (vWatchAds) {
-      // load ad in the beginning
+      /// load ad in the beginning
       MobileAds.instance.initialize().then((InitializationStatus status) {
         // print('Initialization done: ${status.adapterStatuses}');
         MobileAds.instance
@@ -222,63 +221,57 @@ class _RewardScreenState extends State<RewardScreen> {
                     // print('\n=== Is Ad loaded onTap: $_rewardedReady ===');
                     if (vWatchAds) {
                       if (_rewardedReady) {
-                        _rewardedAd.show().catchError((e) =>
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return PopUp(
-                                    title: 'Something went wrong!',
-                                    content:
-                                    "error in showing ad: ${e.toString()}",
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                  );
-                                })
-                            // print("error in showing ad: ${e.toString()}")
-                    );
+                        _rewardedAd.show().catchError((e) => showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return PopUp(
+                                  title: 'Something went wrong!',
+                                  content:
+                                      "error in showing ad: ${e.toString()}",
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                );
+                              },
+                            ));
                         setState(() => _rewardedReady = false);
                         _rewardedAd = null;
                       } else {
                         showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return PopUp(
-                                title: 'Something went wrong!',
-                                content:
-                                    '\nAt this moment is not possible to show Ads.\n'
-                                    'Please, try it again later.',
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                              );
-                            });
-                      }
-                    } else {
-                      showDialog(
                           context: context,
                           builder: (BuildContext context) {
                             return PopUp(
-                              title: 'Not authorized!',
+                              title: 'Something went wrong!',
                               content:
-                                  '\nYou have to play at least 1 time the new unlocked level before watch a new ad.',
+                                  '\nAt this moment is not possible to show Ads.\n'
+                                  'Please, try it again later.',
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
                             );
-                          });
+                          },
+                        );
+                      }
+                    } else {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return PopUp(
+                            title: 'Not authorized!',
+                            content:
+                                '\nYou have to play at least 1 time the new unlocked level before watch a new ad.',
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          );
+                        },
+                      );
                     }
                   },
                 ),
                 const Spacer(),
-                MyButton(
-                  onTap: () {},
-                  text: ' Home ',
-                  navigator: HomeScreen(),
-                ),
-                SizedBox(
-                  height: _screenSize.height / 30,
-                ),
+                MyButton(onTap: () {}, text: ' Home ', navigator: HomeScreen()),
+                SizedBox(height: _screenSize.height / 30),
               ],
             ),
           ),

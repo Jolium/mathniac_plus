@@ -9,7 +9,7 @@ class CountdownNotifier extends StateNotifier<int> {
 
   int add(int value) => state = state + value;
 
-  int set(int value) => state = value;
+  // int set(int value) => state = value;
 
   int reset() => state = vStartCountdownValue;
 }

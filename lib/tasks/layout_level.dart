@@ -12,8 +12,6 @@ class LevelsLayout extends StatelessWidget {
   final double _textRatio = 3;
   final double _shadowRatio = 15;
 
-  // List<Widget> rowElements = [];
-
   List<Widget> generateRowElements(BuildContext context, double size) {
     final Size _screenSize = MediaQuery.of(context).size;
     final double _sizeRatio = _screenSize.height / _screenSize.width / 2;
@@ -28,7 +26,6 @@ class LevelsLayout extends StatelessWidget {
     final double _shadowRadius = _buttonHeight / 5 / _shadowRatio;
 
     final List<Widget> rowElements = [];
-    // rowElements.clear();
 
     for (int i = 0; i < listGotLevel.length; i++) {
       Color _starColor;
@@ -168,6 +165,7 @@ class LevelsLayout extends StatelessWidget {
 
     final List<Widget> list = [];
 
+    /// Create list/grid of level elements
     for (int i = 0; i <= 14; i++) {
       if (i == 14) {
         list.add(generateRowElements(context, 3)[i]);

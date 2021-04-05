@@ -84,7 +84,7 @@ class _MyButtonState extends State<MyButton> {
 
         setState(() {
           if (widget.decreaseSizeOnTap) {
-            // decreases the button size
+            /// decreases the button size
             _sizedBox = 0.95;
           }
 
@@ -99,7 +99,7 @@ class _MyButtonState extends State<MyButton> {
     void _onTapUp(TapUpDetails details) {
       setState(() {
         if (widget.active) {
-          // increases the button size
+          /// increases the button size
           _sizedBox = 1;
         }
       });

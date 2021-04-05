@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mathniac_plus/tasks/providers.dart';
 
 import '../settings/backgrounds.dart';
 import '../settings/lists.dart';
 import '../settings/vars.dart';
-import '../tasks/layout_buttons2.dart';
+import '../tasks/layout_buttons.dart';
+import '../tasks/providers.dart';
 import '../tasks/tasks_functions.dart';
 import '../widgets/countdown.dart';
 import '../widgets/custom_header.dart';
 import '../widgets/my_button.dart';
-import '../widgets/start_button2.dart';
+import '../widgets/start_button.dart';
 import 'home_screen.dart';
 import 'levels_screen.dart';
 

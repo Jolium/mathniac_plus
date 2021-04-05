@@ -1,34 +1,23 @@
 /// Level vars
 int vMagicLevel = 1; // 1..4...8...12..15
 
+/// Goal level value
 int vGoalValue = 10; // 10...14...18...22...25
 
+/// Chosen nickname
 String vNickname = '';
 
-// int vActualScoreValue = 0; // 0
-
+/// Selected values/numbers during game
 List<int> vListOfSelectedValues = [];
 
 /// Timer vars
-// bool vIsTimerTicking = false;
-// bool vStartTimer = false;
 int vStartCountdownValue = 300; // 450 is equal to 45 seconds
-// int vCountdownValue = vStartCountdownValue;
-// double vExtraTime = 0.0;
 int vPointsToWinSecond = 25;
 
-// bool vPlayLevelUp = true;
-
-// String vButtonText = ' Start ';
-// bool vButtonGradient = true;
-
-// / Cancel Countdown (if actual score >= level score)
-// bool vCancelTimer = false;
-
-/// Sound
+/// Settings: Sound
 bool vPlaySound = true;
 
-/// Background
+/// Settings: Background
 bool vBackground = true;
 
 /// Internet connectivity
@@ -38,5 +27,5 @@ bool vInternetConnection = false;
 bool vUploadScore = false;
 int vLeaderboardScore = 0;
 
-/// Ads - only watch new ad after pay once
+/// Ads - only watch new ad after play once
 bool vWatchAds = true;

@@ -55,14 +55,6 @@ class MyButton extends StatelessWidget {
   final bool diagonal;
   final bool decreaseSizeOnTap;
 
-  // double _sizedBox = 1;
-
-  // @override
-  // void initState() {
-  //   AudioPlayer().checkPlatform();
-  //   super.initState();
-  // }
-
   @override
   Widget build(BuildContext context) {
     AudioPlayer().checkPlatform();

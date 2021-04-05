@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mathniac_plus/tasks/providers.dart';
 
 import '../settings/backgrounds.dart';
 import '../settings/lists.dart';
 import '../settings/vars.dart';
 import '../tasks/layout_level.dart';
+import '../tasks/providers.dart';
 import '../tasks/tasks_functions.dart';
 import '../widgets/custom_header.dart';
 import '../widgets/my_button.dart';
@@ -104,12 +104,6 @@ class LevelsScreen extends StatelessWidget {
               children: [
                 MyButton(
                   onTap: () {
-                    // vButtonText = ' Start ';
-                    // vButtonGradient = true;
-                    // vCountdownValue = vStartCountdownValue;
-                    ///TODO
-                    // vActualScoreValue = 0;
-
                     /// Set listOfRandoms with zeros => '?'
                     context.read(randomsProvider).setZerosRandomsList();
 

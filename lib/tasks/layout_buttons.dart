@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:mathniac_plus/tasks/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mathniac_plus/tasks/score.dart';
 
 import '../settings/constants.dart';
 import '../settings/vars.dart';
+import '../tasks/providers.dart';
+import '../tasks/score.dart';
 import 'tasks_functions.dart';
 
 class ButtonsLayout extends StatelessWidget {
@@ -17,7 +17,6 @@ class ButtonsLayout extends StatelessWidget {
   final List<Widget> rowElements = [];
 
   List<Widget> generateRowElements(BuildContext context) {
-    // print('== generateRowElements ==');
     final List<bool> listIsSelected = context.read(selectedListProvider.state);
 
     rowElements.clear();
@@ -41,14 +40,11 @@ class ButtonsLayout extends StatelessWidget {
 
         /// Check if timer is already started to prevent restart
         if (isTicking) {
-          // print('=== isTicking ===');
+          /// Decrease button size
           context.read(gameSizedBoxProvider).set(index: i, size: 0.95);
 
           /// check if button is already selected
           if (_isSelected) {
-            // print('=== button is already selected ===');
-            // print('1 vListOfSelectedValues: $vListOfSelectedValues');
-
             /// Play audio
             AudioPlayer().soundPlayer('pressed_button.mp3');
 
@@ -58,20 +54,13 @@ class ButtonsLayout extends StatelessWidget {
             /// Remove value from selected values
             vListOfSelectedValues.remove(_textValue);
 
-            // print('2 vListOfSelectedValues: $vListOfSelectedValues');
-
             /// Updates the goal value (MagicValue - SelectedValues)
             context.read(goalProvider).setNewValue();
 
             /// If button is not selected
           } else {
-            // print('=== button is NOT selected ===');
-            // print('3 vListOfSelectedValues: $vListOfSelectedValues');
-
             /// check if value is already selected
             if (vListOfSelectedValues.contains(_textValue)) {
-              // print('=== value is already selected ===');
-
               /// Play audio
               AudioPlayer().soundPlayer('repeated_number_value.mp3');
 
@@ -86,9 +75,6 @@ class ButtonsLayout extends StatelessWidget {
 
               /// if value is not selected
             } else {
-              // print('=== value is NOT selected ===');
-              // print('4 vListOfSelectedValues: $vListOfSelectedValues');
-
               /// Play audio
               AudioPlayer().soundPlayer('pressed_button.mp3');
 
@@ -106,13 +92,9 @@ class ButtonsLayout extends StatelessWidget {
               /// check if sum of selected values is equal to the magic number
               final int sum =
                   vListOfSelectedValues.fold(0, (prev, cur) => prev + cur);
-              // print('5 vListOfSelectedValues: $vListOfSelectedValues');
-              // print('sum: $sum');
 
               /// Check if sum of selected numbers is equal to Goal Value
               if (sum > vGoalValue) {
-                // print('=== sum greater than goalValue ===');
-
                 /// Play audio
                 AudioPlayer().soundPlayer('repeated_number_value.mp3');
 
@@ -127,8 +109,6 @@ class ButtonsLayout extends StatelessWidget {
 
                 /// If sum of selected values is greater tha Goal Value
               } else if (sum == vGoalValue) {
-                // print('=== sum is equal to goalValue ===');
-
                 /// PLay audio
                 AudioPlayer().soundPlayer('correct_sum.mp3');
 
@@ -250,8 +230,10 @@ class ButtonsLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // print('== Build LayoutButtons ==');
+    /// Play audio
     AudioPlayer().checkPlatform();
+
+    /// Create list/grid of buttons
     final List<Widget> list = generateRowElements(context);
 
     if (vMagicLevel <= 3) {
@@ -260,18 +242,10 @@ class ButtonsLayout extends StatelessWidget {
         children: [
           Column(
             children: [
-              Row(
-                children: [for (int i = 0; i <= 1; i++) list[i]],
-              ),
-              Row(
-                children: [for (int i = 2; i <= 5; i++) list[i]],
-              ),
-              Row(
-                children: [for (int i = 6; i <= 9; i++) list[i]],
-              ),
-              Row(
-                children: [for (int i = 10; i <= 11; i++) list[i]],
-              ),
+              Row(children: [for (int i = 0; i <= 1; i++) list[i]]),
+              Row(children: [for (int i = 2; i <= 5; i++) list[i]]),
+              Row(children: [for (int i = 6; i <= 9; i++) list[i]]),
+              Row(children: [for (int i = 10; i <= 11; i++) list[i]]),
             ],
           ),
         ],
@@ -282,18 +256,10 @@ class ButtonsLayout extends StatelessWidget {
         children: [
           Column(
             children: [
-              Row(
-                children: [for (int i = 0; i <= 2; i++) list[i]],
-              ),
-              Row(
-                children: [for (int i = 3; i <= 6; i++) list[i]],
-              ),
-              Row(
-                children: [for (int i = 7; i <= 10; i++) list[i]],
-              ),
-              Row(
-                children: [for (int i = 11; i <= 13; i++) list[i]],
-              ),
+              Row(children: [for (int i = 0; i <= 2; i++) list[i]]),
+              Row(children: [for (int i = 3; i <= 6; i++) list[i]]),
+              Row(children: [for (int i = 7; i <= 10; i++) list[i]]),
+              Row(children: [for (int i = 11; i <= 13; i++) list[i]]),
             ],
           ),
         ],
@@ -304,21 +270,11 @@ class ButtonsLayout extends StatelessWidget {
         children: [
           Column(
             children: [
-              Row(
-                children: [for (int i = 0; i <= 1; i++) list[i]],
-              ),
-              Row(
-                children: [for (int i = 2; i <= 5; i++) list[i]],
-              ),
-              Row(
-                children: [for (int i = 6; i <= 9; i++) list[i]],
-              ),
-              Row(
-                children: [for (int i = 10; i <= 13; i++) list[i]],
-              ),
-              Row(
-                children: [for (int i = 14; i <= 15; i++) list[i]],
-              ),
+              Row(children: [for (int i = 0; i <= 1; i++) list[i]]),
+              Row(children: [for (int i = 2; i <= 5; i++) list[i]]),
+              Row(children: [for (int i = 6; i <= 9; i++) list[i]]),
+              Row(children: [for (int i = 10; i <= 13; i++) list[i]]),
+              Row(children: [for (int i = 14; i <= 15; i++) list[i]]),
             ],
           ),
         ],
@@ -329,21 +285,11 @@ class ButtonsLayout extends StatelessWidget {
         children: [
           Column(
             children: [
-              Row(
-                children: [for (int i = 0; i <= 2; i++) list[i]],
-              ),
-              Row(
-                children: [for (int i = 3; i <= 6; i++) list[i]],
-              ),
-              Row(
-                children: [for (int i = 7; i <= 10; i++) list[i]],
-              ),
-              Row(
-                children: [for (int i = 11; i <= 14; i++) list[i]],
-              ),
-              Row(
-                children: [for (int i = 15; i <= 17; i++) list[i]],
-              ),
+              Row(children: [for (int i = 0; i <= 2; i++) list[i]]),
+              Row(children: [for (int i = 3; i <= 6; i++) list[i]]),
+              Row(children: [for (int i = 7; i <= 10; i++) list[i]]),
+              Row(children: [for (int i = 11; i <= 14; i++) list[i]]),
+              Row(children: [for (int i = 15; i <= 17; i++) list[i]]),
             ],
           ),
         ],
@@ -354,21 +300,11 @@ class ButtonsLayout extends StatelessWidget {
         children: [
           Column(
             children: [
-              Row(
-                children: [for (int i = 0; i <= 3; i++) list[i]],
-              ),
-              Row(
-                children: [for (int i = 4; i <= 7; i++) list[i]],
-              ),
-              Row(
-                children: [for (int i = 8; i <= 11; i++) list[i]],
-              ),
-              Row(
-                children: [for (int i = 12; i <= 15; i++) list[i]],
-              ),
-              Row(
-                children: [for (int i = 16; i <= 19; i++) list[i]],
-              ),
+              Row(children: [for (int i = 0; i <= 3; i++) list[i]]),
+              Row(children: [for (int i = 4; i <= 7; i++) list[i]]),
+              Row(children: [for (int i = 8; i <= 11; i++) list[i]]),
+              Row(children: [for (int i = 12; i <= 15; i++) list[i]]),
+              Row(children: [for (int i = 16; i <= 19; i++) list[i]]),
             ],
           ),
         ],

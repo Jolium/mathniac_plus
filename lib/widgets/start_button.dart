@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mathniac_plus/tasks/counter.dart';
-import 'package:mathniac_plus/tasks/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../screens/authentication.dart';
@@ -8,8 +6,9 @@ import '../screens/levels_screen.dart';
 import '../settings/constants.dart';
 import '../settings/lists.dart';
 import '../settings/vars.dart';
+import '../tasks/counter.dart';
 import '../tasks/custom_route.dart';
-import '../tasks/task_hive.dart';
+import '../tasks/providers.dart';
 import '../tasks/tasks_functions.dart';
 
 class StartButton extends StatelessWidget {
@@ -26,8 +25,6 @@ class StartButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // print('== Build StartButton ==');
-
     final Size _screenSize = MediaQuery.of(context).size;
     final double _sizeRatio = _screenSize.height / _screenSize.width / 2;
 
@@ -41,9 +38,7 @@ class StartButton extends StatelessWidget {
     final double _shadowRadius = _buttonSize / _marginRatio * _sizeRatio;
     final double _textSize = _buttonSize / _textRatio;
 
-    final Color _colorPrimary = kColorSilver;
     final Color _colorSecondary = levelColor();
-    final Color _shadow = kShadow1;
 
     void _onTapDown(_) {
       /// Player have to play at least one time to watch ads again
@@ -55,33 +50,22 @@ class StartButton extends StatelessWidget {
       /// If countdown is not started or not reached '0'
       final int countdown = context.read(countdownProvider.state);
       if (countdown != 0) {
-        // print('== 1 ==');
-
         /// cancelTimer is true (player reached level score and countdown is stopped)
         final bool cancelTimer = context.read(countdownCancelProvider.state);
-        // print('cancelTimer: $cancelTimer');
         if (cancelTimer) {
-          // print('== 2 ==');
-
           /// Play audio
           AudioPlayer().soundPlayer('pressed_button.mp3');
 
-          // print('=== Sett cancelTimer to FALSE');
           /// Set cancelTimer back to false
           context.read(countdownCancelProvider).set(cancelTimer: false);
 
           /// If Magic Level is NOT 15 and actual score is greater or equal score level points
           final int actualScore = context.read(scoreProvider.state);
           if (vMagicLevel != 15 && actualScore >= _scoreLevelPoints) {
-            // print('== 3 ==');
-
             /// Change screen to Levels screen
             /// Show screen with archived levels
             Navigator.of(context).pushReplacement(
                 CustomRoute(builder: (context) => LevelsScreen()));
-
-            // /// Update level
-            // UpdateValues().getNewLevelValue();
 
             /// Resets actual score to '0'
             context.read(scoreProvider).set(0);
@@ -89,8 +73,6 @@ class StartButton extends StatelessWidget {
 
           /// cancelTimer is false (player still NOT reached level score and countdown is NOT stopped)
         } else {
-          // print('== 4 ==');
-
           /// Play audio
           AudioPlayer().soundPlayer('start_all_buttons.mp3');
 
@@ -115,8 +97,6 @@ class StartButton extends StatelessWidget {
           /// Starts countdown only if it is false to prevent restart during count down
           final bool isTicking = context.read(gameTickingProvider.state);
           if (!isTicking) {
-            // print('== 5 ==');
-
             /// Start countdown
             counter(context);
 
@@ -127,23 +107,16 @@ class StartButton extends StatelessWidget {
 
         /// If countdown is equal to 0
       } else {
-        // print('== 6 ==');
-
         /// Play audio
         AudioPlayer().soundPlayer('pressed_button.mp3');
 
         /// If Magic Level is NOT 15 and actual score is greater or equal score level points
         final int actualScore = context.read(scoreProvider.state);
         if (vMagicLevel != 15 && actualScore >= _scoreLevelPoints) {
-          // print('== 7 ==');
-
           /// Change screen to Levels screen
           /// Show screen with archived levels
           Navigator.of(context).pushReplacement(
               CustomRoute(builder: (context) => LevelsScreen()));
-
-          /// Update level
-          UpdateValues().getNewLevelValue();
 
           /// Resets actual score to '0'
           context.read(scoreProvider).set(0);
@@ -151,25 +124,15 @@ class StartButton extends StatelessWidget {
 
         /// If Magic Level is 15 and score is own best score
         if (vMagicLevel == 15 && actualScore > _scoreLevelPoints) {
-          // print('== 8 ==');
-
-          /// Save new best score on storage
-          TaskHive().uploadScore(value: true);
 
           /// New best score on level 15
           /// Change screen to Authentication screen
           Navigator.of(context).pushReplacement(
               CustomRoute(builder: (context) => Authentication()));
-
-          // /// Stop Timer Ticking (just stop here to keep the Start button bigger
-          // /// than the other buttons until move to the next screen
-          // context.read(gameTickingProvider).stopTicking();
         }
 
         /// If Magic Level is 15 or actual score less than score level points
         if (vMagicLevel == 15 || actualScore < _scoreLevelPoints) {
-          // print('== 9 ==');
-
           /// Set button text to 'Start'
           context.read(textProvider).set(' Start ');
 
@@ -213,7 +176,7 @@ class StartButton extends StatelessWidget {
           final double _widthRatio = isTicking
               ? 2.5
               : actualScore >= _goalLevel && vMagicLevel != 15 ||
-              actualScore > _goalLevel && vMagicLevel == 15
+                      actualScore > _goalLevel && vMagicLevel == 15
                   ? 2.5
                   : 3.5;
 
@@ -239,7 +202,7 @@ class StartButton extends StatelessWidget {
                     colors: _gradient
                         ? [
                             Colors.black,
-                            _colorPrimary,
+                            kColorSilver,
                             Colors.black,
                           ]
                         : [
@@ -254,7 +217,7 @@ class StartButton extends StatelessWidget {
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: _shadow.withOpacity(0.8),
+                      color: kShadow1.withOpacity(0.8),
                       spreadRadius: _shadowRadius / 2,
                       blurRadius: _shadowRadius,
                     ),

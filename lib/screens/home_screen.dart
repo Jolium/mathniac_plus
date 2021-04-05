@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mathniac_plus/tasks/providers.dart';
 
 import '../settings/backgrounds.dart';
 import '../settings/vars.dart';
+import '../tasks/providers.dart';
 import '../tasks/tasks_functions.dart';
 import '../widgets/custom_header.dart';
 import '../widgets/my_button.dart';
@@ -14,8 +14,8 @@ import 'authentication.dart';
 import 'game_screen.dart';
 import 'intro_screen.dart';
 import 'levels_screen.dart';
-import 'reward_screen2.dart';
-import 'scores_screen2.dart';
+import 'reward_screen.dart';
+import 'scores_screen.dart';
 import 'settings_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -123,15 +123,10 @@ class HomeScreen extends StatelessWidget {
                   height: _screenSize.width / 30,
                 ),
                 MyButton(
+                  text: ' Play ',
                   onTap: checkLeaderboard()
                       ? () {}
                       : () {
-                          // vButtonText = ' Start ';
-                          // vButtonGradient = true;
-                          // vCountdownValue = vStartCountdownValue;
-                    ///TODO
-                          // vActualScoreValue = 0;
-
                           /// Set listOfRandoms with zeros => '?'
                           context.read(randomsProvider).setZerosRandomsList();
 
@@ -143,7 +138,6 @@ class HomeScreen extends StatelessWidget {
                               .read(clearAllButtonsProvider)
                               .setIsSelectedList();
                         },
-                  text: ' Play ',
                   navigator:
                       checkLeaderboard() ? Authentication() : GameScreen(),
                 ),

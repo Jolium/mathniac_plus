@@ -28,7 +28,7 @@ class TaskHive {
   }
 
   bool get sound {
-    final String  _sound = tasksBox.get('sound');
+    final String _sound = tasksBox.get('sound');
     if (_sound == null) {
       tasksBox.put('sound', 'true');
       return true;
@@ -47,7 +47,7 @@ class TaskHive {
   }
 
   bool get background {
-    final String  _background = tasksBox.get('background');
+    final String _background = tasksBox.get('background');
     if (_background == null) {
       tasksBox.put('background', 'true');
       return true;
@@ -66,7 +66,7 @@ class TaskHive {
   }
 
   int get highScore {
-    final String  _highScore = tasksBox.get('highScore');
+    final String _highScore = tasksBox.get('highScore');
     if (_highScore == null) {
       tasksBox.put('highScore', '0');
       return 0;
@@ -81,7 +81,7 @@ class TaskHive {
   }
 
   String get nickname {
-    final String  _nickname = tasksBox.get('nickname');
+    final String _nickname = tasksBox.get('nickname');
     if (_nickname == null) {
       tasksBox.put('nickname', '');
       return '';
@@ -91,12 +91,14 @@ class TaskHive {
   }
 
   void uploadScore({bool value}) {
+    /// If no internet connection it should be TRUE to upload later
+    /// If internet connection it should be FALSE and it was already uploaded
     tasksBox.put('uploadScore', '$value');
     vUploadScore = value;
   }
 
   bool get getUploadScore {
-    final String  _uploadScore = tasksBox.get('uploadScore');
+    final String _uploadScore = tasksBox.get('uploadScore');
     if (_uploadScore == null) {
       tasksBox.put('uploadScore', 'false');
       return false;

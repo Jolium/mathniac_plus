@@ -18,7 +18,6 @@ void counter(BuildContext context) {
   final int _scorePointsLevel = listOfScorePoints[vMagicLevel - 1];
 
   Timer.periodic(oneMilli, (Timer timer) {
-
     /// If counter is less or equal to '0'
     final int counter = context.read(countdownProvider.state);
     if (counter <= 0) {
@@ -28,17 +27,49 @@ void counter(BuildContext context) {
       /// Plays sound during game just 1 time when player pass level
       final int actualScore = context.read(scoreProvider.state);
 
-      /// If Magic level is '15' and actual score is > than Goal level
+      /// If Magic level is '15' and actual score is > than highest score
       if (vMagicLevel == 15 &&
           actualScore > _scorePointsLevel &&
           actualScore != 0) {
 
+        /// New highest score is ready to upload but not yet upload
+        TaskHive().uploadScore(value: true);
+
         /// Set Start button text to ' Next '
         context.read(textProvider).set(' Next ');
 
+        /// If Magic level is NOT '15' and actual score is >= than Goal level
+      } else if (vMagicLevel != 15 &&
+          actualScore >= _scorePointsLevel &&
+          actualScore != 0) {
+
+        /// Play audio
+        AudioPlayer().soundPlayer('level_up.mp3');
+
+        /// Set countdownCancel to TRUE (play reached level score)
+        context.read(countdownCancelProvider).set(cancelTimer: true);
+
+        /// Set Start button text to ' Next '
+        context.read(textProvider).set(' Next ');
+
+        /// Stop Timer Ticking
+        context.read(gameTickingProvider).stopTicking();
+
+        /// Change gradient of Start button
+        context.read(gradientProvider).set(value: true);
+
+        /// Show PopUp with Level Up warning
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return LevelUp();
+            });
+
+        /// Update level
+        UpdateValues().getNewLevelValue();
+
         /// If Magic level is NOT '15'
       } else {
-
         /// Set Start button text to ' Again '
         context.read(textProvider).set(' Again ');
       }
@@ -51,7 +82,6 @@ void counter(BuildContext context) {
 
       /// If counter is NOT '0'
     } else {
-
       /// Decrease counter by '1'
       context.read(countdownProvider).decrease();
 
@@ -74,6 +104,7 @@ void counter(BuildContext context) {
       if (vMagicLevel != 15 &&
           actualScore >= _scorePointsLevel &&
           actualScore != 0) {
+
         /// Play audio
         AudioPlayer().soundPlayer('level_up.mp3');
 
@@ -115,14 +146,9 @@ void counter(BuildContext context) {
         /// Set _playAudio to false to prevent it to play more than once
         _playAudio = false;
 
-        // /// Save new best score on storage
-        // TaskHive().uploadScore(value: true);
-
         /// Save new best score on storage
         TaskHive().updateHighScore(actualScore);
       }
     }
-    // }
   });
-  // return context.read(countdownProvider.state);
 }

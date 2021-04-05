@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mathniac_plus/tasks/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../settings/constants.dart';
+import '../tasks/providers.dart';
 import '../tasks/tasks_functions.dart';
 
 class CountDown extends StatelessWidget {
@@ -14,8 +14,6 @@ class CountDown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // print('== CountDown ==');
-
     final Size _screenSize = MediaQuery.of(context).size;
     final double _sizeRatio = _screenSize.height / _screenSize.width / 2;
     final double _buttonHeight = _screenSize.width / _heightRatio * _sizeRatio;
@@ -29,7 +27,6 @@ class CountDown extends StatelessWidget {
     final double _textSize = _buttonSize / _textRatio;
 
     return Consumer(builder: (context, watch, child) {
-
       final int countdown = watch(countdownProvider.state);
 
       final int _intValue =
@@ -104,9 +101,7 @@ class CountDown extends StatelessWidget {
                     ),
                     Column(
                       children: [
-                        SizedBox(
-                          height: _screenSize.height / 60,
-                        ),
+                        SizedBox(height: _screenSize.height / 60),
                         Text(
                           '.$_stringValue10',
                           style: TextStyle(

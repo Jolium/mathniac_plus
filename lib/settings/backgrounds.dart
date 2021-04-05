@@ -9,8 +9,6 @@ DecorationImage _imageTheme() {
   final String _month = dateTime.month.toString().padLeft(2, '0');
   final String _day = dateTime.day.toString().padLeft(2, '0');
 
-  // print('$_month - $_day');
-
   if (_month == '12' && _day == '25') {
     return const DecorationImage(
       image: AssetImage(
