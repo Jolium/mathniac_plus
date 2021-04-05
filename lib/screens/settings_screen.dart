@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../settings/backgrounds.dart';
 import '../settings/constants.dart';
-import '../settings/lists.dart';
+// import '../settings/lists.dart';
 import '../settings/vars.dart';
 import '../tasks/task_hive.dart';
 import '../tasks/tasks_functions.dart';
@@ -55,7 +55,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
       ),
       content: Text(
-        'Do you really want to return to level 1?',
+        vMagicLevel == 15
+            ? 'Do you really want to return to level 1\n'
+                'Nickname and highest score will be saved.'
+            : 'Do you really want to return to level 1?',
+        textAlign: TextAlign.justify,
         style: TextStyle(
           color: Colors.white,
           fontSize: _textSize / 2,
@@ -63,59 +67,50 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ),
       actions: [
         TextButton(
+          /// TODO: on production delete from here ///
+          onLongPress: () {
+            setState(() {
+              vMagicLevel = 15;
+              // listOfScorePoints[14] = 0;
+              if (!kIsWeb) {
+                TaskHive().updateLevel(15);
+                // TaskHive().updateHighScore(0);
+              }
+              vBackground = true;
+              UpdateValues().getStartTimerValue();
+              UpdateGoalValues().getGoalValue();
+            });
+            Navigator.of(context).pop();
+          },
 
-            /// TODO: on production delete from here ///
-            onLongPress: () {
-              setState(() {
-                vMagicLevel = 15;
-                listOfScorePoints[14] = 0;
-                if (!kIsWeb) {
-                  TaskHive().updateLevel(15);
-                  TaskHive().updateHighScore(0);
-                }
-                vBackground = true;
-                UpdateValues().getStartTimerValue();
-                UpdateGoalValues().getGoalValue();
-              });
-              Navigator.of(context).pop();
-            },
-
-            /// TODO: on production delete till here ///
-            onPressed: () {
-              setState(() {
-                vMagicLevel = 1;
-                listOfScorePoints[14] = 0;
-                if (!kIsWeb) {
-                  TaskHive().updateLevel(1);
-                  TaskHive().updateHighScore(0);
-                  TaskHive().saveNickname('');
-                }
-                vBackground = true;
-                UpdateValues().getStartTimerValue();
-                UpdateGoalValues().getGoalValue();
-              });
-              Navigator.of(context).pop();
-            },
-            // shape: RoundedRectangleBorder(
-            //   borderRadius: BorderRadius.all(
-            //     Radius.circular(_borderRadius),
-            //   ),
-            // ),
-            child: Text(
-              'Yes',
-              style: TextStyle(
-                fontSize: _textSize / 1.5,
-              ),
-            )),
+          /// TODO: on production delete till here ///
+          onPressed: () {
+            setState(() {
+              /// High score and nickname will be saved
+              vMagicLevel = 1;
+              // listOfScorePoints[14] = 0;
+              if (!kIsWeb) {
+                TaskHive().updateLevel(1);
+                // TaskHive().updateHighScore(0);
+                // TaskHive().saveNickname('');
+              }
+              vBackground = true;
+              UpdateValues().getStartTimerValue();
+              UpdateGoalValues().getGoalValue();
+            });
+            Navigator.of(context).pop();
+          },
+          child: Text(
+            'Yes',
+            style: TextStyle(
+              fontSize: _textSize / 1.5,
+            ),
+          ),
+        ),
         TextButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
-          // shape: RoundedRectangleBorder(
-          //   borderRadius: BorderRadius.all(
-          //     Radius.circular(_borderRadius),
-          //   ),
-          // ),
           child: Text(
             'No',
             style: TextStyle(
@@ -140,15 +135,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
-                  height: _screenSize.height / 30,
-                ),
-                const CustomHeader(
-                  text: ' Settings ',
-                ),
-                SizedBox(
-                  height: _screenSize.height / 10,
-                ),
+                SizedBox(height: _screenSize.height / 30),
+                const CustomHeader(text: ' Settings '),
+                SizedBox(height: _screenSize.height / 10),
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -159,9 +148,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         heightRatio: 8,
                       ),
                     ),
-                    SizedBox(
-                      width: _screenSize.width / 30,
-                    ),
+                    SizedBox(width: _screenSize.width / 30),
                     MyButton(
                       widthRatio: 5,
                       icon: vPlaySound ? Icons.volume_up : Icons.volume_off,
@@ -183,9 +170,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     )
                   ],
                 ),
-                SizedBox(
-                  height: _screenSize.height / 20,
-                ),
+                SizedBox(height: _screenSize.height / 20),
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -196,9 +181,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         heightRatio: 8,
                       ),
                     ),
-                    SizedBox(
-                      width: _screenSize.width / 30,
-                    ),
+                    SizedBox(width: _screenSize.width / 30),
                     MyButton(
                       widthRatio: 5,
                       icon: vBackground ? Icons.check : Icons.close,
@@ -220,9 +203,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     )
                   ],
                 ),
-                SizedBox(
-                  height: _screenSize.height / 20,
-                ),
+                SizedBox(height: _screenSize.height / 20),
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -233,9 +214,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         heightRatio: 8,
                       ),
                     ),
-                    SizedBox(
-                      width: _screenSize.width / 30,
-                    ),
+                    SizedBox(width: _screenSize.width / 30),
                     MyButton(
                       widthRatio: 5,
                       icon: Icons.restore,
@@ -257,9 +236,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   text: ' Home ',
                   navigator: HomeScreen(),
                 ),
-                SizedBox(
-                  height: _screenSize.height / 30,
-                ),
+                SizedBox(height: _screenSize.height / 30),
               ],
             ),
           ),

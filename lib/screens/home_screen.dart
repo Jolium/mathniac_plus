@@ -2,23 +2,24 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../settings/backgrounds.dart';
 import '../settings/vars.dart';
+import '../tasks/providers.dart';
 import '../tasks/tasks_functions.dart';
-import '../tasks/tasks_provider.dart';
 import '../widgets/custom_header.dart';
 import '../widgets/my_button.dart';
 import 'authentication.dart';
 import 'game_screen.dart';
 import 'intro_screen.dart';
 import 'levels_screen.dart';
-import 'reward_screen2.dart';
-import 'scores_screen2.dart';
+import 'reward_screen.dart';
+import 'scores_screen.dart';
 import 'settings_screen.dart';
 
 class HomeScreen extends StatelessWidget {
+  /// Check if have to upload previous high score not upload before
   bool checkLeaderboard() {
     if (vMagicLevel == 15 && vUploadScore) {
       return true;
@@ -29,7 +30,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Hide bottom bar and top bar
+    /// Hide bottom bar and top bar
     SystemChrome.setEnabledSystemUIOverlays([]);
 
     final Size _screenSize = MediaQuery.of(context).size;
@@ -71,16 +72,16 @@ class HomeScreen extends StatelessWidget {
                 ),
                 MyButton(
                   onTap: () async {
-                    // Check internet connection
+                    /// Check internet connection
                     try {
                       final result = await InternetAddress.lookup('google.com');
                       if (result.isNotEmpty &&
                           result[0].rawAddress.isNotEmpty) {
-                        print('connected');
+                        // print('connected');
                         vInternetConnection = true;
                       }
                     } on SocketException catch (_) {
-                      print('not connected');
+                      // print('not connected');
                       vInternetConnection = false;
                     }
                   },
@@ -91,16 +92,16 @@ class HomeScreen extends StatelessWidget {
                 MyButton(
                   contentColor: Colors.yellowAccent,
                   onTap: () async {
-                    // Check internet connection
+                    /// Check internet connection
                     try {
                       final result = await InternetAddress.lookup('google.com');
                       if (result.isNotEmpty &&
                           result[0].rawAddress.isNotEmpty) {
-                        print('connected');
+                        // print('connected');
                         vInternetConnection = true;
                       }
                     } on SocketException catch (_) {
-                      print('not connected');
+                      // print('not connected');
                       vInternetConnection = false;
                     }
                   },
@@ -122,31 +123,21 @@ class HomeScreen extends StatelessWidget {
                   height: _screenSize.width / 30,
                 ),
                 MyButton(
+                  text: ' Play ',
                   onTap: checkLeaderboard()
                       ? () {}
                       : () {
-                          vButtonText = ' Start ';
-                          vButtonGradient = true;
-                          vCountdownValue = vStartCountdownValue;
-                          vActualScoreValue = 0;
+                          /// Set listOfRandoms with zeros => '?'
+                          context.read(randomsProvider).setZerosRandomsList();
 
-                          // Set listOfRandoms with zeros => '?'
-                          final Randoms _model =
-                              Provider.of<Randoms>(context, listen: false);
-                          _model.setZerosRandomsList();
+                          /// Set GoalValue text to start value
+                          context.read(goalProvider).setStartingValue();
 
-                          // Set GoalValue text to start value
-                          final GoalValue _resetGoalValue =
-                              Provider.of<GoalValue>(context, listen: false);
-                          _resetGoalValue.setStartingValue();
-
-                          // Update isSelected List
-                          final ClearAllButtons _isSelected =
-                              Provider.of<ClearAllButtons>(context,
-                                  listen: false);
-                          _isSelected.setIsSelectedList();
+                          /// Update isSelected List
+                          context
+                              .read(clearAllButtonsProvider)
+                              .setIsSelectedList();
                         },
-                  text: ' Play ',
                   navigator:
                       checkLeaderboard() ? Authentication() : GameScreen(),
                 ),

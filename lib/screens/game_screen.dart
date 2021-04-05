@@ -1,15 +1,13 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../settings/backgrounds.dart';
 import '../settings/lists.dart';
 import '../settings/vars.dart';
 import '../tasks/layout_buttons.dart';
+import '../tasks/providers.dart';
 import '../tasks/tasks_functions.dart';
-import '../tasks/tasks_provider.dart';
 import '../widgets/countdown.dart';
 import '../widgets/custom_header.dart';
 import '../widgets/my_button.dart';
@@ -17,64 +15,24 @@ import '../widgets/start_button.dart';
 import 'home_screen.dart';
 import 'levels_screen.dart';
 
-class GameScreen extends StatefulWidget {
-  @override
-  _GameScreenState createState() => _GameScreenState();
-}
-
-class _GameScreenState extends State<GameScreen> {
-  Timer _timer;
-
-  @override
-  void initState() {
-    // Check Unlocked Levels and update Timer value
-    UpdateValues().getStartTimerValue();
-    super.initState();
-  }
-
-  void startTimer() {
-    const oneMilli = Duration(milliseconds: 100);
-    _timer = Timer.periodic(
-      oneMilli,
-      (Timer timer) => setState(
-        () {
-          if (vCountdownValue <= 0) {
-            timer.cancel();
-          } else {
-            vCountdownValue = vCountdownValue - 1;
-          }
-        },
-      ),
-    );
-  }
-
-  @override
-  void dispose() {
-    if (_timer != null) {
-      _timer.cancel();
-    }
-    super.dispose();
-  }
-
+class GameScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Provider.of<GameTimer>(context).isTimerTicking;
+    /// Get all starting level values
+    UpdateValues().getStartTimerValue();
 
-    // Hide bottom bar and top bar
+    /// Check game ticking provider and stop it
+    final bool isTicking = context.read(gameTickingProvider.state);
+    if (isTicking) {
+      context.read(gameTickingProvider).stopTicking();
+    }
+
+    /// Hide bottom bar and top bar
     SystemChrome.setEnabledSystemUIOverlays([]);
 
-    final int _goalValue = Provider.of<GoalValue>(context).newValue;
-
     final Size _screenSize = MediaQuery.of(context).size;
-    // double _buttonWidth = _screenSize.height / _widthRatio;
 
-    final int _score = listOfScorePoints[vMagicLevel - 1];
-    final int _scorePointsLevel = listOfScorePoints[vMagicLevel - 1];
-
-    if (vStartTimer && vIsTimerTicking) {
-      startTimer();
-      GameTimer().stopTimer();
-    }
+    final int _goalLevel = listOfScorePoints[vMagicLevel - 1];
 
     return Scaffold(
       body: Container(
@@ -109,17 +67,20 @@ class _GameScreenState extends State<GameScreen> {
                       SizedBox(
                         width: _screenSize.width / 3,
                         child: CustomHeader(
-                          text: _scorePointsLevel.toString(),
+                          text: _goalLevel.toString(),
                         ),
                       ),
-                      MyButton(
-                        onTap: () {},
-                        active: false,
-                        widthRatio: 3,
-                        textRatio: 2,
-                        text: vActualScoreValue.toString(),
-                        colorPrimary: levelColor(),
-                      ),
+                      Consumer(builder: (context, watch, child) {
+                        final int _score = watch(scoreProvider.state);
+                        return MyButton(
+                          onTap: () {},
+                          active: false,
+                          widthRatio: 3,
+                          textRatio: 2,
+                          text: _score.toString(),
+                          colorPrimary: levelColor(),
+                        );
+                      }),
                     ],
                   ),
                   Column(
@@ -130,14 +91,17 @@ class _GameScreenState extends State<GameScreen> {
                           text: ' Goal ',
                         ),
                       ),
-                      MyButton(
-                        onTap: () {},
-                        active: false,
-                        widthRatio: 5,
-                        textRatio: 2,
-                        text: _goalValue.toString(),
-                        colorPrimary: levelColor(),
-                      ),
+                      Consumer(builder: (context, watch, child) {
+                        final int _goalValue = watch(goalProvider.state);
+                        return MyButton(
+                          onTap: () {},
+                          active: false,
+                          widthRatio: 5,
+                          textRatio: 2,
+                          text: _goalValue.toString(),
+                          colorPrimary: levelColor(),
+                        );
+                      }),
                     ],
                   ),
                 ],
@@ -148,41 +112,55 @@ class _GameScreenState extends State<GameScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  MyButton(
-                    onTap: () {},
-                    text: ' Home ',
-                    widthRatio: vIsTimerTicking ||
-                            vActualScoreValue >= _score && vMagicLevel != 15
-                        ? 7
-                        : 3.5,
-                    heightRatio: vIsTimerTicking ||
-                            vActualScoreValue >= _score && vMagicLevel != 15
-                        ? 10
-                        : 5,
-                    active: vIsTimerTicking ||
-                            vActualScoreValue >= _score && vMagicLevel != 15
-                        ? false
-                        : true,
-                    navigator: HomeScreen(),
-                  ),
+                  Consumer(builder: (context, watch, child) {
+                    final bool isTicking = watch(gameTickingProvider.state);
+                    final int actualScore = context.read(scoreProvider.state);
+                    return MyButton(
+                      onTap: () {},
+                      text: ' Home ',
+                      widthRatio: isTicking ||
+                              actualScore >= _goalLevel && vMagicLevel != 15 ||
+                              actualScore > _goalLevel && vMagicLevel == 15
+                          ? 7
+                          : 3.5,
+                      heightRatio: isTicking ||
+                              actualScore >= _goalLevel && vMagicLevel != 15 ||
+                              actualScore > _goalLevel && vMagicLevel == 15
+                          ? 10
+                          : 5,
+                      active: isTicking ||
+                              actualScore >= _goalLevel && vMagicLevel != 15 ||
+                              actualScore > _goalLevel && vMagicLevel == 15
+                          ? false
+                          : true,
+                      navigator: HomeScreen(),
+                    );
+                  }),
                   StartButton(),
-                  MyButton(
-                    onTap: () {},
-                    text: ' Levels ',
-                    navigator: LevelsScreen(),
-                    widthRatio: vIsTimerTicking ||
-                            vActualScoreValue >= _score && vMagicLevel != 15
-                        ? 7
-                        : 3.5,
-                    heightRatio: vIsTimerTicking ||
-                            vActualScoreValue >= _score && vMagicLevel != 15
-                        ? 10
-                        : 5,
-                    active: vIsTimerTicking ||
-                            vActualScoreValue >= _score && vMagicLevel != 15
-                        ? false
-                        : true,
-                  ),
+                  Consumer(builder: (context, watch, child) {
+                    final bool isTicking = watch(gameTickingProvider.state);
+                    final int actualScore = context.read(scoreProvider.state);
+                    return MyButton(
+                      onTap: () {},
+                      text: ' Levels ',
+                      navigator: LevelsScreen(),
+                      widthRatio: isTicking ||
+                              actualScore >= _goalLevel && vMagicLevel != 15 ||
+                              actualScore > _goalLevel && vMagicLevel == 15
+                          ? 7
+                          : 3.5,
+                      heightRatio: isTicking ||
+                              actualScore >= _goalLevel && vMagicLevel != 15 ||
+                              actualScore > _goalLevel && vMagicLevel == 15
+                          ? 10
+                          : 5,
+                      active: isTicking ||
+                              actualScore >= _goalLevel && vMagicLevel != 15 ||
+                              actualScore > _goalLevel && vMagicLevel == 15
+                          ? false
+                          : true,
+                    );
+                  }),
                 ],
               ),
               SizedBox(

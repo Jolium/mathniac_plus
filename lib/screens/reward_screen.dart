@@ -1,14 +1,9 @@
-// import 'package:device_info/device_info.dart';
-
-// import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:firebase_admob/firebase_admob.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import '../settings/backgrounds.dart';
 import '../settings/constants.dart';
-// import 'package:admob_flutter/admob_flutter.dart';
-
 import '../settings/lists.dart';
 import '../settings/vars.dart';
 import '../tasks/admob_service.dart';
@@ -30,123 +25,89 @@ class _RewardScreenState extends State<RewardScreen> {
   final double _marginRatio = 20;
   final double _textRatio = 20;
 
-  MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
-    keywords: listOfKeyWords,
-    contentUrl: 'https://play.google.com/store/apps',
-    childDirected: false,
-    nonPersonalizedAds: true,
-    testDevices:
-        listOfTestDevices, // Android emulators are considered test devices
-  );
-
-  bool _loaded = false;
-
-  // Ad button active
+  /// Ad button active
   bool _adButtonActive = false;
 
-  //An instance to be called in the init state
-  final RewardedVideoAd _videoAd = RewardedVideoAd.instance;
+  RewardedAd _rewardedAd;
+  bool _rewardedReady = false;
 
-  // Rewarded Unit Id
+  static final AdRequest request = AdRequest(
+    testDevices: listOfTestDevices, // Android emulators are test devices
+    // testDevices: testDevice != null ? <String>[testDevice] : null,
+    keywords: listOfKeyWords,
+    contentUrl: 'https://play.google.com/store/apps/category/GAME_CASUAL',
+    nonPersonalizedAds: true,
+  );
+
+  void createRewardedAd() {
+    _rewardedAd ??= RewardedAd(
+      // adUnitId: RewardedAd.testAdUnitId,
+      adUnitId: _rewardedUnitId,
+      request: request,
+      listener: AdListener(onAdLoaded: (Ad ad) {
+        if (kShowPrints) print('${ad.runtimeType} loaded.');
+        _rewardedReady = true;
+        setState(() {
+          _adButtonActive = true;
+        });
+      }, onAdFailedToLoad: (Ad ad, LoadAdError error) {
+        if (kShowPrints) print('${ad.runtimeType} failed to load: $error');
+        ad.dispose();
+        _rewardedAd = null;
+        createRewardedAd();
+      }, onAdOpened: (Ad ad) {
+        if (kShowPrints) print('${ad.runtimeType} onAdOpened.');
+      }, onAdClosed: (Ad ad) {
+        if (kShowPrints) print('${ad.runtimeType} closed.');
+        ad.dispose();
+        createRewardedAd();
+      }, onApplicationExit: (Ad ad) {
+        if (kShowPrints) print('${ad.runtimeType} onApplicationExit.');
+      }, onRewardedAdUserEarnedReward: (RewardedAd ad, RewardItem reward) {
+        UpdateValues().getNewLevelValue();
+        vWatchAds = false;
+        if (kShowPrints) {
+          print(
+            '$RewardedAd with reward $RewardItem(${reward.amount}, ${reward.type})',
+          );
+        }
+      }),
+    )..load();
+  }
+
+  /// Rewarded Unit Id
   final String _rewardedUnitId = AdMobService().getRewardedAdId();
 
   @override
   void initState() {
     super.initState();
-
-    // print(' Unit ID: $_rewardedUnitId');
-
+    // print('vWatchAds: $vWatchAds');
     if (vWatchAds) {
-      // load ad in the beginning
-      _videoAd
-          .load(adUnitId: _rewardedUnitId, targetingInfo: targetingInfo)
-          .catchError((e) => print("error in loading 1st time: ${e.toString()}"))
-          .then((v) => setState(() => _loaded = v));
+      /// load ad in the beginning
+      MobileAds.instance.initialize().then((InitializationStatus status) {
+        // print('Initialization done: ${status.adapterStatuses}');
+        MobileAds.instance
+            .updateRequestConfiguration(RequestConfiguration(
+                tagForChildDirectedTreatment:
+                    TagForChildDirectedTreatment.unspecified))
+            .then((value) {
+          createRewardedAd();
+        });
+      });
     } else {
-      // Activate button to show pop-up showing warning 'You have to play at least 1 time...'
+      /// Activate button to show pop-up showing warning 'You have to play at least 1 time...'
       _adButtonActive = true;
     }
-
-    // ad listener
-    _videoAd.listener =
-        (RewardedVideoAdEvent event, {String rewardType, int rewardAmount}) {
-      if (event == RewardedVideoAdEvent.completed) {
-        RewardedVideoAd.instance
-            .load(adUnitId: _rewardedUnitId, targetingInfo: targetingInfo)
-            .catchError((e) => print("error in loading again: ${e.toString()}"))
-            .then((v) => setState(() => _loaded = v));
-      }
-
-      // Check rewarded event
-      _handleEvent(event);
-
-      if (kTestAds) {
-        // On every other event change pass the values to the _handleEvent Method.
-        _infoEvent(event, rewardType, 'Reward', rewardAmount);
-      }
-    };
   }
 
   @override
   void dispose() {
-    /// TODO: Remove Rewarded Ad event listener
-    RewardedVideoAd.instance.listener = null;
+    _rewardedAd?.dispose();
+
+    /// Added myself
+    _rewardedAd = null;
 
     super.dispose();
-  }
-
-  // Handle rewarded event
-  void _handleEvent(RewardedVideoAdEvent event) {
-    if (event == RewardedVideoAdEvent.rewarded) {
-      // Update level
-      UpdateValues().getNewLevelValue();
-      vWatchAds = false;
-    }
-    if (event == RewardedVideoAdEvent.loaded) {
-      setState(() {
-        _adButtonActive = true;
-      });
-    }
-  }
-
-  //---- Useful function to know exactly what is being done ----//
-  void _infoEvent(RewardedVideoAdEvent event, String rewardType, String adType,
-      int rewardAmount) {
-    print('\n=== 0 === $event === 0 ===');
-    switch (event) {
-      case RewardedVideoAdEvent.loaded:
-        print('\n=== 1 === $event === 1 ===');
-        break;
-
-      case RewardedVideoAdEvent.opened:
-        print('\n=== 2 === $event === 2 ===');
-        break;
-
-      case RewardedVideoAdEvent.started:
-        print('\n=== 3 === $event === 3 ===');
-        break;
-
-      case RewardedVideoAdEvent.completed:
-        print('\n=== 4 === $event === 4 ===');
-        break;
-
-      case RewardedVideoAdEvent.failedToLoad:
-        print('\n=== 5 === $event === 5 ===');
-        break;
-
-      case RewardedVideoAdEvent.rewarded:
-        print('\n=== 6 === $event === 6 ===');
-        print('\n\n=== REWARDED ==');
-        print('===== New level is $vMagicLevel =====');
-        break;
-
-      case RewardedVideoAdEvent.closed:
-        print('\n=== 7 === $event === 7 ===');
-        break;
-
-      default:
-        print('\n===== $event =======');
-    }
   }
 
   @override
@@ -257,52 +218,60 @@ class _RewardScreenState extends State<RewardScreen> {
                   active: _adButtonActive,
                   decreaseSizeOnTap: false,
                   onTap: () async {
-                    print('\n=== Is Ad loaded onTap: $_loaded ===');
+                    // print('\n=== Is Ad loaded onTap: $_rewardedReady ===');
                     if (vWatchAds) {
-                      if (_loaded) {
-                        await RewardedVideoAd.instance.show().catchError((e) =>
-                            print("error in showing ad: ${e.toString()}"));
-                        setState(() => _loaded = false);
+                      if (_rewardedReady) {
+                        _rewardedAd.show().catchError((e) => showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return PopUp(
+                                  title: 'Something went wrong!',
+                                  content:
+                                      "error in showing ad: ${e.toString()}",
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                );
+                              },
+                            ));
+                        setState(() => _rewardedReady = false);
+                        _rewardedAd = null;
                       } else {
                         showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return PopUp(
-                                title: 'Something went wrong!',
-                                content:
-                                    '\nAt this moment is not possible to show Ads.\n'
-                                    'Please, try it again later.',
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                              );
-                            });
-                      }
-                    } else {
-                      showDialog(
                           context: context,
                           builder: (BuildContext context) {
                             return PopUp(
-                              title: 'Not authorized!',
+                              title: 'Something went wrong!',
                               content:
-                                  '\nYou have to play at least 1 time the new unlocked level before watch a new ad.',
+                                  '\nAt this moment is not possible to show Ads.\n'
+                                  'Please, try it again later.',
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
                             );
-                          });
+                          },
+                        );
+                      }
+                    } else {
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return PopUp(
+                            title: 'Not authorized!',
+                            content:
+                                '\nYou have to play at least 1 time the new unlocked level before watch a new ad.',
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          );
+                        },
+                      );
                     }
                   },
                 ),
                 const Spacer(),
-                MyButton(
-                  onTap: () {},
-                  text: ' Home ',
-                  navigator: HomeScreen(),
-                ),
-                SizedBox(
-                  height: _screenSize.height / 30,
-                ),
+                MyButton(onTap: () {}, text: ' Home ', navigator: HomeScreen()),
+                SizedBox(height: _screenSize.height / 30),
               ],
             ),
           ),

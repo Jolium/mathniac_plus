@@ -1,17 +1,27 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../settings/constants.dart';
+import '../widgets/pop_up.dart';
 import 'upload_screen.dart';
 
 class Authentication extends StatelessWidget {
-  Future<void> _signInAnonymously() async {
+  Future<void> _signInAnonymously(BuildContext context) async {
     try {
       await FirebaseAuth.instance.signInAnonymously();
-      print("== Sign In Anonymously ==");
+      if (kShowPrints) print("== Sign In Anonymously ==");
     } catch (e) {
-      print('======= ERROR =======');
-      print(e); // TODO: show dialog with error
-      print('======= ERROR =======');
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return PopUp(
+              title: 'Something went wrong!',
+              content: e.toString(),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            );
+          });
     }
   }
 
@@ -23,11 +33,11 @@ class Authentication extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.active) {
           final User user = snapshot.data;
           if (user == null) {
-            _signInAnonymously();
-            print("== Anonymous User: $user ==");
+            _signInAnonymously(context);
+            if (kShowPrints) print("== Anonymous User: $user ==");
             return UploadScreen();
           }
-          print("== == User: $user == ==");
+          if (kShowPrints) print("== == User: $user == ==");
           return UploadScreen();
         } else {
           return const Scaffold(

@@ -36,18 +36,18 @@ class _UploadScreenState extends State<UploadScreen> {
   }
 
   Future<void> _checkInternetConnectivity() async {
-    // Check internet connection
+    /// Check internet connection
     try {
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        print('connected');
+        // print('connected');
         vInternetConnection = true;
         if (!_nicknameExist) {
           getListOfAllNames();
         }
       }
     } on SocketException catch (_) {
-      print('not connected');
+      // print('not connected');
       vInternetConnection = false;
     }
   }
@@ -68,7 +68,7 @@ class _UploadScreenState extends State<UploadScreen> {
         listOfAllNames.add(a.id);
       }
     }
-    print('listOfAllNames: $listOfAllNames');
+    if (kShowPrints) print('listOfAllNames: $listOfAllNames');
   }
 
   final _firebase = FirebaseFirestore.instance.collection("scores");
@@ -87,10 +87,8 @@ class _UploadScreenState extends State<UploadScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Hide bottom bar and top bar
+    /// Hide bottom bar and top bar
     SystemChrome.setEnabledSystemUIOverlays([]);
-
-    // _checkInternetConnectivity();
 
     final Size _screenSize = MediaQuery.of(context).size;
     final double _sizeRatio = _screenSize.height / _screenSize.width / 2;
@@ -102,7 +100,6 @@ class _UploadScreenState extends State<UploadScreen> {
     final double _textSize = _screenSize.height / _textRatio / 5;
     final double _borderRadius = _buttonSize / _borderRatio;
     final double _edgeInsets = _buttonSize / _marginRatio;
-    // double _shadowRadius = _buttonHeight / _marginRatio;
 
     final int _highScore = listOfScorePoints[14];
     vUploadScore = false;
@@ -130,11 +127,6 @@ class _UploadScreenState extends State<UploadScreen> {
             Navigator.of(context).pushReplacement(
                 CustomRoute(builder: (context) => GameScreen()));
           },
-          // shape: RoundedRectangleBorder(
-          //   borderRadius: BorderRadius.all(
-          //     Radius.circular(_borderRadius),
-          //   ),
-          // ),
           child: Text(
             'Ok',
             style: TextStyle(
@@ -326,9 +318,7 @@ class _UploadScreenState extends State<UploadScreen> {
                                             ),
                                           ),
                                         ]),
-                                    const SizedBox(
-                                      height: 10.0,
-                                    ),
+                                    const SizedBox(height: 10.0),
                                     MyButton(
                                       onTap: () {},
                                       active: false,
@@ -369,13 +359,15 @@ class _UploadScreenState extends State<UploadScreen> {
                                   text: ' Upload ',
                                   active: vNickname == '' ? false : true,
                                   onTap: () {
-                                    print('nickname1: $vNickname');
-                                    print('Internet: $vInternetConnection');
+                                    if (kShowPrints)
+                                      print('nickname1: $vNickname');
+                                    if (kShowPrints)
+                                      print('Internet: $vInternetConnection');
 
                                     if (vInternetConnection) {
                                       if (listOfAllNames.contains(vNickname) &&
                                           _nicknameExist) {
-                                        // Update existing score
+                                        /// Update existing score
                                         try {
                                           _firebase.doc(vNickname).update({
                                             'name': vNickname,
@@ -388,7 +380,7 @@ class _UploadScreenState extends State<UploadScreen> {
                                           });
                                         }
                                       } else {
-                                        // Add new score
+                                        /// Add new score
                                         _firebase.doc(vNickname).set({
                                           'score': _highScore,
                                           'name': vNickname,
@@ -397,7 +389,7 @@ class _UploadScreenState extends State<UploadScreen> {
                                       TaskHive().saveNickname(vNickname);
                                       TaskHive().uploadScore(value: false);
                                     } else {
-                                      // true to update on restart
+                                      /// With no internet connection set it true to update on restart
                                       TaskHive().uploadScore(value: true);
                                       showDialog(
                                           context: context,

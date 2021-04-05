@@ -28,7 +28,6 @@ class IntroScreen extends StatelessWidget {
     final double _textSize = _buttonSize / _textRatio;
     final double _borderRadius = _buttonSize / _borderRatio;
     final double _edgeInsets = _buttonSize / _marginRatio;
-    // double _shadowRadius = _buttonHeight / _marginRatio;
 
     return Scaffold(
       body: Container(

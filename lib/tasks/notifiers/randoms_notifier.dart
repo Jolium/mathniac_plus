@@ -19,11 +19,25 @@ class RandomsNotifier extends StateNotifier<List<int>> {
   }
 
   List<int> setZerosRandomsList() {
-    // randomsList.clear();
-
     for (int index = 0; index < listIsSelected.length; index++) {
       _randomsList[index] = 0;
     }
     return state = _randomsList;
+  }
+
+  List<int> setOnlySelected() {
+    for (int index = 0; index < listIsSelected.length; index++) {
+      if (listIsSelected[index] == true) {
+        final int _value = 1 + _random.nextInt(9);
+        _randomsList[index] = _value;
+      }
+    }
+    return state = _randomsList;
+  }
+
+  int set(int index) {
+    final int _value = 1 + _random.nextInt(9);
+    _randomsList[index] = _value;
+    return state[index] = _value;
   }
 }

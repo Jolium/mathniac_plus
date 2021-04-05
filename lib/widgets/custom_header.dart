@@ -13,7 +13,6 @@ class CustomHeader extends StatelessWidget {
     this.widthRatio = 1, // 1.2
     this.heightRatio = 10,
     this.textRatio = 2,
-    // this.borderRatio = 3,
     this.marginRatio = 10,
   });
 
@@ -26,7 +25,6 @@ class CustomHeader extends StatelessWidget {
   final double widthRatio;
   final double heightRatio;
   final double textRatio;
-  // final double borderRatio;
   final double marginRatio;
 
   @override
@@ -45,7 +43,6 @@ class CustomHeader extends StatelessWidget {
     final double _textSize = _screenSize.height / 20 / textRatio;
 
     return Container(
-      // width: _screenSize.width / widget.widthRatio * _sizeRatio,
       height: _screenSize.width / heightRatio * _sizeRatio,
       decoration: BoxDecoration(
         color: colorSecondary,
