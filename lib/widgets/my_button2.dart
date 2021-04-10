@@ -1,9 +1,17 @@
+// import 'package:audioplayers/audio_cache.dart';
+// import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../settings/constants.dart';
 import '../tasks/custom_route.dart';
-import '../tasks/tasks_functions.dart';
+import '../tasks/tasks_soundpool.dart';
+
+// final AudioCache _audioCache = AudioCache(
+//   prefix: 'assets/sounds/',
+//   // respectSilence: true,
+//   fixedPlayer: AudioPlayer(),
+// );
 
 class _SizedBoxNotifier extends StateNotifier<double> {
   _SizedBoxNotifier() : super(1.0);
@@ -17,7 +25,7 @@ class MyButton extends StatelessWidget {
   const MyButton({
     this.icon,
     this.text,
-    @required this.onTap, // () {}
+    required this.onTap, // () {}
     this.navigator,
     this.contentColor = Colors.white,
     this.colorPrimary = kColorBronze,
@@ -37,14 +45,14 @@ class MyButton extends StatelessWidget {
           'One of the parameters must be provided ("icon" or "text")',
         );
 
-  final IconData icon;
-  final String text;
+  final IconData? icon;
+  final String? text;
   final Color contentColor;
   final Function onTap;
   final Color colorPrimary;
   final Color colorSecondary;
   final Color shadow;
-  final Widget navigator;
+  final Widget? navigator;
   final double iconRatio;
   final double widthRatio;
   final double heightRatio;
@@ -57,7 +65,7 @@ class MyButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AudioPlayer().checkPlatform();
+    // AudioPlayer().checkPlatform();
 
     final Size _screenSize = MediaQuery.of(context).size;
     final double _sizeRatio = _screenSize.height / _screenSize.width / 2;
@@ -72,26 +80,34 @@ class MyButton extends StatelessWidget {
     final double _textSize = _buttonSize / textRatio;
     final double _iconSize = _buttonSize / iconRatio * _sizeRatio;
 
-    void _onTapDown(TapDownDetails details) {
+    void _onTapDown(_) {
       if (active) {
-        onTap();
-        AudioPlayer().soundPlayer('pressed_button.mp3');
+        /// Play audio
+        SoundManager.instance.playSound(SOUND_ACTIONS.pressedButton);
+        // _audioCache.play('pressed_button.mp3');
+        // AudioAssetsPlayer().soundPlayer('pressed_button.mp3');
 
+        /// Action on tap
+        onTap();
+
+        /// Check if button is supposed to decrease size
         if (decreaseSizeOnTap) {
           /// decreases the button size
           context.read(_sizedBoxProvider).set(0.95);
         }
 
+        /// Check if should navigate to other page
         if (navigator != null) {
           Navigator.of(context)
-              .pushReplacement(CustomRoute(builder: (context) => navigator));
+              .pushReplacement(CustomRoute(builder: (context) => navigator!));
         }
       }
     }
 
-    void _onTapUp(TapUpDetails details) {
-      if (active) {
-        /// increases the button size
+    void _onTapUp(_) {
+      /// Check if button is active and is supposed to decrease size
+      if (active && decreaseSizeOnTap) {
+        /// Restore/Increase the button size
         context.read(_sizedBoxProvider).set(1.0);
       }
     }
@@ -146,7 +162,7 @@ class MyButton extends StatelessWidget {
                         color: contentColor,
                       )
                     : Text(
-                        text,
+                        text!,
                         style: TextStyle(
                           fontSize: _textSize * _sizedBox,
                           fontWeight: FontWeight.bold,

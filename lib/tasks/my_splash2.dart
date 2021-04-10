@@ -2,45 +2,26 @@ import 'package:flutter/material.dart';
 
 import 'custom_route.dart';
 
-late Widget _home;
-Function? _customFunction;
-late String _imagePath;
-late int _duration;
-MySplashType? _runfor;
-Color? _backGroundColor;
-String? _animationEffect;
-double? _logoSize;
-
 enum MySplashType { staticDuration, backgroundProcess }
 
-Map<dynamic, Widget>? _outputAndHome = {};
-
 class MySplash extends StatefulWidget {
-  MySplash({
-    required String imagePath,
-    required Widget home,
-    Function? customFunction,
-    required int duration,
-    MySplashType? type,
-    Color backGroundColor = Colors.white,
-    String animationEffect = 'fade-in',
-    double logoSize = 250.0,
-    Map<dynamic, Widget>? outputAndHome,
-  }) {
-    // assert(duration != null);
-    // assert(home != null);
-    // assert(imagePath != null);
+  final int duration;
+  final String animationEffect;
+  final double logoSize;
+  final String imagePath;
+  final Color backGroundColor;
+  final Widget home;
+  final MySplashType? type;
 
-    _home = home;
-    _duration = duration;
-    _customFunction = customFunction;
-    _imagePath = imagePath;
-    _runfor = type;
-    _outputAndHome = outputAndHome;
-    _backGroundColor = backGroundColor;
-    _animationEffect = animationEffect;
-    _logoSize = logoSize;
-  }
+  const MySplash({
+    required this.imagePath,
+    required this.home,
+    this.type = MySplashType.backgroundProcess,
+    this.duration = 1600,
+    this.backGroundColor = Colors.black,
+    this.animationEffect = 'zoom-out',
+    this.logoSize = 250.0,
+  });
 
   @override
   _MySplashState createState() => _MySplashState();
@@ -50,15 +31,26 @@ class _MySplashState extends State<MySplash>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animation;
+  late int _duration;
 
   @override
   void initState() {
     super.initState();
-    if (_duration < 1000) _duration = 2000;
+    if (widget.duration < 1000) {
+      _duration = 2000;
+    } else {
+      _duration = widget.duration;
+    }
     _animationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 1200));
-    _animation = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-        parent: _animationController, curve: Curves.easeInCirc));
+      vsync: this,
+      duration: Duration(milliseconds: widget.duration),
+    );
+    _animation = Tween(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: Curves.easeInCirc,
+      ),
+    );
     _animationController.forward();
   }
 
@@ -74,14 +66,16 @@ class _MySplashState extends State<MySplash>
   }
 
   Widget _buildAnimation() {
-    switch (_animationEffect) {
+    switch (widget.animationEffect) {
       case 'fade-in':
         {
           return FadeTransition(
             opacity: _animation,
             child: Center(
-              child:
-                  SizedBox(height: _logoSize, child: Image.asset(_imagePath)),
+              child: SizedBox(
+                height: widget.logoSize,
+                child: Image.asset(widget.imagePath),
+              ),
             ),
           );
         }
@@ -90,8 +84,10 @@ class _MySplashState extends State<MySplash>
           return ScaleTransition(
             scale: _animation,
             child: Center(
-              child:
-                  SizedBox(height: _logoSize, child: Image.asset(_imagePath)),
+              child: SizedBox(
+                height: widget.logoSize,
+                child: Image.asset(widget.imagePath),
+              ),
             ),
           );
         }
@@ -105,8 +101,10 @@ class _MySplashState extends State<MySplash>
               ),
             ),
             child: Center(
-              child:
-                  SizedBox(height: _logoSize, child: Image.asset(_imagePath)),
+              child: SizedBox(
+                height: widget.logoSize,
+                child: Image.asset(widget.imagePath),
+              ),
             ),
           );
         }
@@ -116,8 +114,10 @@ class _MySplashState extends State<MySplash>
           return SizeTransition(
             sizeFactor: _animation,
             child: Center(
-              child:
-                  SizedBox(height: _logoSize, child: Image.asset(_imagePath)),
+              child: SizedBox(
+                height: widget.logoSize,
+                child: Image.asset(widget.imagePath),
+              ),
             ),
           );
         }
@@ -126,20 +126,21 @@ class _MySplashState extends State<MySplash>
 
   @override
   Widget build(BuildContext context) {
-    _runfor == MySplashType.backgroundProcess
+    widget.type == MySplashType.backgroundProcess
         ? Future.delayed(Duration.zero).then((value) {
-            final res = _customFunction!();
-            //print("$res+${_outputAndHome[res]}");
             Future.delayed(Duration(milliseconds: _duration)).then((value) {
               Navigator.of(context).pushReplacement(
-                  CustomRoute(builder: (context) => _outputAndHome![res]!));
+                  CustomRoute(builder: (context) => widget.home));
             });
           })
         : Future.delayed(Duration(milliseconds: _duration)).then((value) {
-            Navigator.of(context)
-                .pushReplacement(CustomRoute(builder: (context) => _home));
+            Navigator.of(context).pushReplacement(
+                CustomRoute(builder: (context) => widget.home));
           });
 
-    return Scaffold(backgroundColor: _backGroundColor, body: _buildAnimation());
+    return Scaffold(
+      backgroundColor: widget.backGroundColor,
+      body: _buildAnimation(),
+    );
   }
 }

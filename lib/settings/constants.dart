@@ -35,3 +35,11 @@ const double kShadowOpacity2 = 0.8;
 const kLetterType1 = 'Courgette';
 const kLetterType2 = 'Dancing';
 const kLetterType3 = 'Niconne';
+
+// final AudioCache kAudioCache = AudioCache(
+//   prefix: 'assets/sounds/',
+//   respectSilence: true,
+//   fixedPlayer: AudioPlayer(),
+// );
+//
+// final AssetsAudioPlayer kAssetsAudioCache = AssetsAudioPlayer();

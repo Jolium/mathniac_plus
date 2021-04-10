@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import './constants.dart';
 
 /// Image of the day
-DecorationImage _imageTheme() {
+DecorationImage? _imageTheme() {
   final String _date = DateTime.now().toString();
   final DateTime dateTime = DateTime.parse(_date);
   final String _month = dateTime.month.toString().padLeft(2, '0');

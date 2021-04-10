@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+// import '../audio/audio_cache.dart';
+// import '../audio/audio_players.dart';
 import '../settings/constants.dart';
 import '../settings/vars.dart';
 import '../tasks/providers.dart';
 import '../tasks/score.dart';
-import 'tasks_functions.dart';
+import '../tasks/tasks_soundpool.dart';
+
+// final AudioCache _audioCache = AudioCache(
+//   prefix: 'assets/sounds/',
+//   // respectSilence: true,
+//   fixedPlayer: AudioPlayer()..setReleaseMode(ReleaseMode.STOP),
+// );
 
 class ButtonsLayout extends StatelessWidget {
   final double _widthRatio = 5;
@@ -15,6 +23,8 @@ class ButtonsLayout extends StatelessWidget {
   final double _textRatio = 2;
 
   final List<Widget> rowElements = [];
+
+
 
   List<Widget> generateRowElements(BuildContext context) {
     final List<bool> listIsSelected = context.read(selectedListProvider.state);
@@ -46,7 +56,9 @@ class ButtonsLayout extends StatelessWidget {
           /// check if button is already selected
           if (_isSelected) {
             /// Play audio
-            AudioPlayer().soundPlayer('pressed_button.mp3');
+            SoundManager.instance.playSound(SOUND_ACTIONS.pressedButton);
+            // _audioCache.play('pressed_button.mp3');
+            // AudioAssetsPlayer().soundPlayer('pressed_button.mp3');
 
             /// Deselect button
             context.read(selectedListProvider).set(index: i, isSelected: false);
@@ -62,7 +74,9 @@ class ButtonsLayout extends StatelessWidget {
             /// check if value is already selected
             if (vListOfSelectedValues.contains(_textValue)) {
               /// Play audio
-              AudioPlayer().soundPlayer('repeated_number_value.mp3');
+              SoundManager.instance.playSound(SOUND_ACTIONS.repeatedNumber);
+              // _audioCache.play('repeated_number.mp3');
+              // AudioAssetsPlayer().soundPlayer('repeated_number.mp3');
 
               /// Clear all selected buttons (repeated button)
               context.read(selectedListProvider).clear();
@@ -76,7 +90,9 @@ class ButtonsLayout extends StatelessWidget {
               /// if value is not selected
             } else {
               /// Play audio
-              AudioPlayer().soundPlayer('pressed_button.mp3');
+              SoundManager.instance.playSound(SOUND_ACTIONS.pressedButton);
+              // _audioCache.play('pressed_button.mp3');
+              // AudioAssetsPlayer().soundPlayer('pressed_button.mp3');
 
               /// Turn true the selected button
               context
@@ -96,7 +112,9 @@ class ButtonsLayout extends StatelessWidget {
               /// Check if sum of selected numbers is equal to Goal Value
               if (sum > vGoalValue) {
                 /// Play audio
-                AudioPlayer().soundPlayer('repeated_number_value.mp3');
+                SoundManager.instance.playSound(SOUND_ACTIONS.repeatedNumber);
+                // _audioCache.play('repeated_number.mp3');
+                // AudioAssetsPlayer().soundPlayer('repeated_number.mp3');
 
                 /// Clear list of selected values
                 vListOfSelectedValues.clear();
@@ -110,7 +128,9 @@ class ButtonsLayout extends StatelessWidget {
                 /// If sum of selected values is greater tha Goal Value
               } else if (sum == vGoalValue) {
                 /// PLay audio
-                AudioPlayer().soundPlayer('correct_sum.mp3');
+                SoundManager.instance.playSound(SOUND_ACTIONS.correctSum);
+                // _audioCache.play('correct_sum.mp3');
+                // AudioAssetsPlayer().soundPlayer('correct_sum.mp3');
 
                 /// Update Score Value
                 getScoreValue(context);
@@ -230,8 +250,8 @@ class ButtonsLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /// Play audio
-    AudioPlayer().checkPlatform();
+    // /// Play audio
+    // AudioPlayer().checkPlatform();
 
     /// Create list/grid of buttons
     final List<Widget> list = generateRowElements(context);

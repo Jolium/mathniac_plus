@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'dart:math';
 
-import 'package:audioplayers/audio_cache.dart';
+// import 'package:assets_audio_player/assets_audio_player.dart';
+// import 'package:audioplayers/audio_cache.dart';
+// import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -61,7 +63,6 @@ class UpdateValues {
       }
       vGoalValue = vGoalValue + 1;
 
-
       /// Check if player already have nickname (ex: reset game)
       if (vMagicLevel == 15) {
         try {
@@ -110,29 +111,63 @@ void clearSelectedButtons(List<int> randomsList) {
   }
 }
 
-class AudioPlayer {
-  final AudioCache _audioCache =
-      AudioCache(prefix: 'assets/sounds/', respectSilence: true);
+// class AudioPlayer {
+//   final AssetsAudioPlayer _audioPlayer = AssetsAudioPlayer();
+//
+//   // void checkPlatform() {
+//   //   if (kIsWeb) {
+//   //     // Calls to Platform.isIOS fails on web
+//   //     return;
+//   //   }
+//   //   // if (Platform.isIOS) {
+//   //   //   if (_audioCache.fixedPlayer != null) {
+//   //   //     _audioCache.fixedPlayer.startHeadlessService();
+//   //   //   }
+//   //   // }
+//   // }
+//
+//   void soundPlayer(String sound) {
+//     /// Sound Player
+//
+//     final String path = 'assets/sounds/$sound';
+//
+//     if (vPlaySound!) {
+//       _audioPlayer.open(Audio(path));
+//     }
+//   }
+// }
 
-  void checkPlatform() {
-    if (kIsWeb) {
-      // Calls to Platform.isIOS fails on web
-      return;
-    }
-    if (Platform.isIOS) {
-      if (_audioCache.fixedPlayer != null) {
-        _audioCache.fixedPlayer.startHeadlessService();
-      }
-    }
-  }
 
-  void soundPlayer(String sound) {
-    /// Sound Player ///
-    if (vPlaySound) {
-      _audioCache.play(sound);
-    }
-  }
-}
+// class AudioAssetsPlayer {
+//   static final AudioCache _audioCache =
+//       // AudioCache(prefix: 'assets/sounds/', respectSilence: true);
+//       // fixedPlayer: AudioPlayer()
+//       AudioCache(
+//     prefix: 'assets/sounds/',
+//     respectSilence: true,
+//     fixedPlayer: AudioPlayer(),
+//   );
+//
+//   void checkPlatform() {
+//     if (kIsWeb) {
+//       // Calls to Platform.isIOS fails on web
+//       return;
+//     }
+//     if (Platform.isIOS) {
+//       if (_audioCache.fixedPlayer != null) {
+//         _audioCache.fixedPlayer!.startHeadlessService();
+//       }
+//     }
+//   }
+//
+//   void soundPlayer(String sound) {
+//     /// Sound Player ///
+//     if (vPlaySound) {
+//       _audioCache.play(sound);
+//       _audioCache.clear(sound);
+//     }
+//   }
+// }
 
 Color levelColor() {
   if (vMagicLevel <= 3) {
@@ -147,3 +182,4 @@ Color levelColor() {
     return kColorSilver;
   }
 }
+

@@ -16,6 +16,9 @@ import 'home_screen.dart';
 import 'levels_screen.dart';
 
 class GameScreen extends StatelessWidget {
+  final Color _colorLevel = levelColor();
+  final int _goalLevel = listOfScorePoints[vMagicLevel - 1];
+
   @override
   Widget build(BuildContext context) {
     /// Get all starting level values
@@ -31,8 +34,6 @@ class GameScreen extends StatelessWidget {
     SystemChrome.setEnabledSystemUIOverlays([]);
 
     final Size _screenSize = MediaQuery.of(context).size;
-
-    final int _goalLevel = listOfScorePoints[vMagicLevel - 1];
 
     return Scaffold(
       body: Container(
@@ -70,7 +71,8 @@ class GameScreen extends StatelessWidget {
                           text: _goalLevel.toString(),
                         ),
                       ),
-                      Consumer(builder: (context, watch, child) {
+                      Consumer(
+                          builder: (context, watch, child) {
                         final int _score = watch(scoreProvider.state);
                         return MyButton(
                           onTap: () {},
@@ -78,7 +80,7 @@ class GameScreen extends StatelessWidget {
                           widthRatio: 3,
                           textRatio: 2,
                           text: _score.toString(),
-                          colorPrimary: levelColor(),
+                          colorPrimary: _colorLevel,
                         );
                       }),
                     ],
@@ -91,7 +93,8 @@ class GameScreen extends StatelessWidget {
                           text: ' Goal ',
                         ),
                       ),
-                      Consumer(builder: (context, watch, child) {
+                      Consumer(
+                          builder: (context, watch, child) {
                         final int _goalValue = watch(goalProvider.state);
                         return MyButton(
                           onTap: () {},
@@ -99,7 +102,7 @@ class GameScreen extends StatelessWidget {
                           widthRatio: 5,
                           textRatio: 2,
                           text: _goalValue.toString(),
-                          colorPrimary: levelColor(),
+                          colorPrimary: _colorLevel,
                         );
                       }),
                     ],
@@ -112,7 +115,8 @@ class GameScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Consumer(builder: (context, watch, child) {
+                  Consumer(
+                      builder: (context, watch, child) {
                     final bool isTicking = watch(gameTickingProvider.state);
                     final int actualScore = context.read(scoreProvider.state);
                     return MyButton(
@@ -137,7 +141,8 @@ class GameScreen extends StatelessWidget {
                     );
                   }),
                   StartButton(),
-                  Consumer(builder: (context, watch, child) {
+                  Consumer(
+                      builder: (context, watch, child) {
                     final bool isTicking = watch(gameTickingProvider.state);
                     final int actualScore = context.read(scoreProvider.state);
                     return MyButton(

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class PopUp extends StatelessWidget {
-  final String title;
-  final String content;
+  final String? title;
+  final String? content;
   final void Function() onPressed;
 
   const PopUp({
     this.title,
     this.content,
-    @required this.onPressed,
+    required this.onPressed,
   });
 
   @override
@@ -24,7 +24,7 @@ class PopUp extends StatelessWidget {
         side: BorderSide(color: Colors.white60, width: 4),
       ),
       title: Text(
-        title,
+        title!,
         style: const TextStyle(
           color: Colors.white,
           fontSize: 16,
@@ -32,7 +32,7 @@ class PopUp extends StatelessWidget {
         ),
       ),
       content: Text(
-        content,
+        content!,
         style: const TextStyle(
           color: Colors.white,
           fontSize: 14,

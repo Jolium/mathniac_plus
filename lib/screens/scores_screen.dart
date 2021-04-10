@@ -30,9 +30,9 @@ class _ScoresScreenState extends State<ScoresScreen> {
   List<Widget> rowElements = [];
 
   /// Banner Unit Id
-  final String _bannerUnitId = AdMobService().getBannerAdId();
+  late final String? _bannerUnitId = AdMobService().getBannerAdId();
 
-  BannerAd _bannerAd;
+  BannerAd? _bannerAd;
   final Completer<BannerAd> bannerCompleter = Completer<BannerAd>();
 
   bool isLoaded = false;
@@ -45,7 +45,7 @@ class _ScoresScreenState extends State<ScoresScreen> {
 
     _bannerAd = BannerAd(
       // adUnitId: BannerAd.testAdUnitId,
-      adUnitId: _bannerUnitId,
+      adUnitId: _bannerUnitId!,
       request: AdRequest(
         testDevices: listOfTestDevices,
         keywords: listOfKeyWords,
@@ -56,12 +56,15 @@ class _ScoresScreenState extends State<ScoresScreen> {
       listener: AdListener(
         onAdLoaded: (Ad ad) {
           if (kShowPrints) print('$BannerAd loaded.');
+          setState(() {
+            isLoaded = true;
+          });
           bannerCompleter.complete(ad as BannerAd);
         },
         onAdFailedToLoad: (Ad ad, LoadAdError error) {
           ad.dispose();
           if (kShowPrints) print('$BannerAd failedToLoad: $error');
-          bannerCompleter.completeError(null);
+          bannerCompleter.completeError(error);
         },
         onAdOpened: (Ad ad) {
           if (kShowPrints) print('$BannerAd onAdOpened.');
@@ -75,13 +78,8 @@ class _ScoresScreenState extends State<ScoresScreen> {
       ),
     );
 
-    // _bannerAd?.load();
-    Future<void>.delayed(const Duration(seconds: 1), () {
-      _bannerAd?.load();
-      setState(() {
-        isLoaded = true;
-      });
-    });
+    /// Loads Ads
+    _bannerAd?.load();
   }
 
   @override
@@ -110,7 +108,7 @@ class _ScoresScreenState extends State<ScoresScreen> {
       return FutureBuilder<BannerAd>(
         future: bannerCompleter.future,
         builder: (BuildContext context, AsyncSnapshot<BannerAd> snapshot) {
-          Widget child;
+          late Widget child;
 
           switch (snapshot.connectionState) {
             case ConnectionState.none:
@@ -120,7 +118,7 @@ class _ScoresScreenState extends State<ScoresScreen> {
               break;
             case ConnectionState.done:
               if (snapshot.hasData) {
-                child = AdWidget(ad: _bannerAd);
+                child = AdWidget(ad: _bannerAd!);
               } else {
                 child = Text('Error loading $BannerAd');
               }
@@ -139,7 +137,7 @@ class _ScoresScreenState extends State<ScoresScreen> {
           );
         } else {
           return ListView(
-            children: snapshot.data.docs.map((document) {
+            children: snapshot.data!.docs.map((document) {
               if (_place < kTopScores) {
                 _place++;
                 dynamic _nickname;
@@ -158,8 +156,9 @@ class _ScoresScreenState extends State<ScoresScreen> {
                           },
                         );
                       });
-                  if (kShowPrints)
+                  if (kShowPrints) {
                     print('\n== ${document.id} has no field [name] ==\n');
+                  }
                 }
 
                 final String _score = document['score'].toString();

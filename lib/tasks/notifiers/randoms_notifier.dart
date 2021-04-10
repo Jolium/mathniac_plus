@@ -7,7 +7,7 @@ import 'package:mathniac_plus/settings/lists.dart';
 class RandomsNotifier extends StateNotifier<List<int>> {
   RandomsNotifier() : super(listOfRandoms);
 
-  final _random = Random();
+  final Random _random = Random();
   final List<int> _randomsList = listOfRandoms;
 
   List<int> setRandomsList() {

@@ -21,7 +21,7 @@ class UploadScreen extends StatefulWidget {
 }
 
 class _UploadScreenState extends State<UploadScreen> {
-  bool _nicknameExist;
+  late bool _nicknameExist;
   List<String> listOfAllNames = [];
 
   @override
@@ -359,10 +359,12 @@ class _UploadScreenState extends State<UploadScreen> {
                                   text: ' Upload ',
                                   active: vNickname == '' ? false : true,
                                   onTap: () {
-                                    if (kShowPrints)
+                                    if (kShowPrints) {
                                       print('nickname1: $vNickname');
-                                    if (kShowPrints)
+                                    }
+                                    if (kShowPrints) {
                                       print('Internet: $vInternetConnection');
+                                    }
 
                                     if (vInternetConnection) {
                                       if (listOfAllNames.contains(vNickname) &&

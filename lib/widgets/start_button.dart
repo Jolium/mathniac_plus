@@ -10,6 +10,16 @@ import '../tasks/counter.dart';
 import '../tasks/custom_route.dart';
 import '../tasks/providers.dart';
 import '../tasks/tasks_functions.dart';
+import '../tasks/tasks_soundpool.dart';
+
+// Soundpool pool = Soundpool(streamType: StreamType.notification);
+
+
+// final AudioCache _audioCache = AudioCache(
+//   prefix: 'assets/sounds/',
+//   // respectSilence: true,
+//   fixedPlayer: AudioPlayer(),
+// );
 
 class StartButton extends StatelessWidget {
   final int _goalLevel = listOfScorePoints[vMagicLevel - 1];
@@ -54,7 +64,11 @@ class StartButton extends StatelessWidget {
         final bool cancelTimer = context.read(countdownCancelProvider.state);
         if (cancelTimer) {
           /// Play audio
-          AudioPlayer().soundPlayer('pressed_button.mp3');
+          SoundManager.instance.playSound(SOUND_ACTIONS.pressedButton);
+          // _audioCache.play('pressed_button.mp3');
+          // AudioAssetsPlayer().soundPlayer('pressed_button.mp3');
+
+
 
           /// Set cancelTimer back to false
           context.read(countdownCancelProvider).set(cancelTimer: false);
@@ -74,7 +88,10 @@ class StartButton extends StatelessWidget {
           /// cancelTimer is false (player still NOT reached level score and countdown is NOT stopped)
         } else {
           /// Play audio
-          AudioPlayer().soundPlayer('start_all_buttons.mp3');
+          SoundManager.instance.playSound(SOUND_ACTIONS.startAllButtons);
+          // _audioCache.play('start_all_buttons.mp3');
+          // kAssetsAudioCache.open(Audio('assets/sounds/start_all_buttons.mp3'));
+          // AudioAssetsPlayer().soundPlayer('start_all_buttons.mp3');
 
           /// Decreases the button size
           context.read(sizedBoxProvider).set(0.95);
@@ -108,7 +125,10 @@ class StartButton extends StatelessWidget {
         /// If countdown is equal to 0
       } else {
         /// Play audio
-        AudioPlayer().soundPlayer('pressed_button.mp3');
+        SoundManager.instance.playSound(SOUND_ACTIONS.pressedButton);
+        // _audioCache.play('pressed_button.mp3');
+        // AudioAssetsPlayer().soundPlayer('pressed_button.mp3');
+        // kAssetsAudioCache.open(Audio('assets/sounds/pressed_button.mp3'));
 
         /// If Magic Level is NOT 15 and actual score is greater or equal score level points
         final int actualScore = context.read(scoreProvider.state);

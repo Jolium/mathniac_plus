@@ -11,6 +11,7 @@ class CountDown extends StatelessWidget {
   final double _textRatio = 2;
   final double _borderRatio = 3;
   final double _marginRatio = 20;
+  final Color _color = levelColor();
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +49,7 @@ class CountDown extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [Colors.black, levelColor(), Colors.black],
+            colors: [Colors.black, _color, Colors.black],
           ),
           border: Border.all(
             color: _intValue <= 10 && _intValue >= 3 && _intValue.isEven
