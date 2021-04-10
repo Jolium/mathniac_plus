@@ -4,7 +4,7 @@ import '../settings/constants.dart';
 
 class CustomHeader extends StatelessWidget {
   const CustomHeader({
-    @required this.text,
+    required this.text,
     this.colorPrimary = Colors.black,
     this.colorSecondary = Colors.white,
     this.shadow = Colors.black,

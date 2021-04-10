@@ -3,7 +3,7 @@ import 'dart:io';
 import '../settings/constants.dart';
 
 class AdMobService {
-  String getAdMobAppId() {
+  String? getAdMobAppId() {
     if (Platform.isIOS) {
       return 'ca-app-pub-4259634083772880~8976810502'; // mine
     } else if (Platform.isAndroid) {
@@ -12,7 +12,7 @@ class AdMobService {
     return null;
   }
 
-  String getBannerAdId() {
+  String? getBannerAdId() {
     if (Platform.isIOS) {
       if (kTestAds) {
         return 'ca-app-pub-3940256099942544/2934735716';
@@ -29,7 +29,7 @@ class AdMobService {
     return null;
   }
 
-  String getInterstitialAdId() {
+  String? getInterstitialAdId() {
     if (Platform.isIOS) {
       if (kTestAds) {
         // Interstitial Video
@@ -52,7 +52,7 @@ class AdMobService {
     return null;
   }
 
-  String getRewardedAdId() {
+  String? getRewardedAdId() {
     if (Platform.isIOS) {
       if (kTestAds) {
         return 'ca-app-pub-3940256099942544/1712485313';

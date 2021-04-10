@@ -17,5 +17,5 @@ class CountdownNotifier extends StateNotifier<int> {
 class CountdownCancelNotifier extends StateNotifier<bool> {
   CountdownCancelNotifier() : super(false);
 
-  bool set({bool cancelTimer}) => state = cancelTimer;
+  bool set({required bool cancelTimer}) => state = cancelTimer;
 }

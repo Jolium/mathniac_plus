@@ -4,7 +4,7 @@ import 'package:mathniac_plus/settings/lists.dart';
 class GameSizedBoxNotifier extends StateNotifier<List<double>> {
   GameSizedBoxNotifier() : super(listOfSizedBoxes);
 
-  List<double> set({int index, double size}) {
+  List<double> set({required int index, required double size}) {
     listOfSizedBoxes[index] = size;
     return state = listOfSizedBoxes;
   }
@@ -19,7 +19,7 @@ class GameTextNotifier extends StateNotifier<String> {
 class SelectedListNotifier extends StateNotifier<List<bool>> {
   SelectedListNotifier() : super(listIsSelected);
 
-  bool set({int index, bool isSelected}) => state[index] = isSelected;
+  bool set({required int index, required bool isSelected}) => state[index] = isSelected;
 
   List<bool> clear() {
     for (int index = 0; index < listIsSelected.length; index++) {

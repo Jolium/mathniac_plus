@@ -6,20 +6,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
+import 'package:mathniac_plus/tasks/tasks_soundpool.dart';
 import 'package:path_provider/path_provider.dart';
 
 import './screens/home_screen.dart';
 import './settings/constants.dart';
 import './settings/lists.dart';
 import './settings/vars.dart';
-import './tasks/my_splash.dart';
+import './tasks/my_splash2.dart';
 import './tasks/task_hive.dart';
 import './tasks/tasks_functions.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final FirebaseApp app = await Firebase.initializeApp();
-  assert(app != null);
+  await Firebase.initializeApp();
+  // final FirebaseApp app = await Firebase.initializeApp();
+  // assert(app != null);
 
   /// Check internet connection
   try {
@@ -49,6 +51,7 @@ Future<void> main() async {
   }
   UpdateValues().getStartTimerValue();
   UpdateGoalValues().getGoalValue();
+  await SoundManager.instance.initSounds();
   runApp(ProviderScope(child: MyApp()));
 }
 
@@ -69,22 +72,22 @@ class MyApp extends StatelessWidget {
             title: kAppName,
             debugShowCheckedModeBanner: false,
             home: MySplash(
-              // logoSize: 300.0,
               imagePath: 'images/launch_image.png',
-              backGroundColor: Colors.black,
-              animationEffect: 'zoom-out',
               home: HomeScreen(),
-              duration: 1600,
-              type: MySplashType.staticDuration,
+              // backGroundColor: Colors.black,
+              // animationEffect: 'zoom-out',
+              // logoSize: 300.0,
+              // duration: 1600,
+              // type: MySplashType.backgroundProcess,
             ),
           )
         : MaterialApp(
             color: Colors.black,
             title: kAppName,
             debugShowCheckedModeBanner: false,
+            home: HomeScreen(),
             // initialRoute: kHomeScreen,
             // onGenerateRoute: ScreensRouter.onGenerateRoute,
-            home: HomeScreen(),
           );
   }
 }

@@ -1,14 +1,24 @@
 import 'dart:async';
 
+// import 'package:audioplayers/audio_cache.dart';
+// import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:mathniac_plus/settings/lists.dart';
-import 'package:mathniac_plus/settings/vars.dart';
-import 'package:mathniac_plus/tasks/task_hive.dart';
-import 'package:mathniac_plus/widgets/level_up.dart';
 
+import '../settings/lists.dart';
+import '../settings/vars.dart';
+import '../tasks/task_hive.dart';
+import '../tasks/tasks_soundpool.dart';
+import '../widgets/level_up.dart';
 import 'providers.dart';
 import 'tasks_functions.dart';
+
+
+// final AudioCache _audioCache = AudioCache(
+//   prefix: 'assets/sounds/',
+//   // respectSilence: true,
+//   fixedPlayer: AudioPlayer(),
+// );
 
 void counter(BuildContext context) {
   bool _playAudio = true;
@@ -22,7 +32,9 @@ void counter(BuildContext context) {
     final int counter = context.read(countdownProvider.state);
     if (counter <= 0) {
       /// PLay audio
-      AudioPlayer().soundPlayer('beep_end.mp3');
+      SoundManager.instance.playSound(SOUND_ACTIONS.beepEnd);
+      // _audioCache.play('beep_end.mp3');
+      // AudioAssetsPlayer().soundPlayer('beep_end.mp3');
 
       /// Plays sound during game just 1 time when player pass level
       final int actualScore = context.read(scoreProvider.state);
@@ -31,7 +43,6 @@ void counter(BuildContext context) {
       if (vMagicLevel == 15 &&
           actualScore > _scorePointsLevel &&
           actualScore != 0) {
-
         /// New highest score is ready to upload but not yet upload
         TaskHive().uploadScore(value: true);
 
@@ -42,9 +53,10 @@ void counter(BuildContext context) {
       } else if (vMagicLevel != 15 &&
           actualScore >= _scorePointsLevel &&
           actualScore != 0) {
-
         /// Play audio
-        AudioPlayer().soundPlayer('level_up.mp3');
+        SoundManager.instance.playSound(SOUND_ACTIONS.levelUp);
+        // _audioCache.play('level_up.mp3');
+        // AudioAssetsPlayer().soundPlayer('level_up.mp3');
 
         /// Set countdownCancel to TRUE (play reached level score)
         context.read(countdownCancelProvider).set(cancelTimer: true);
@@ -91,7 +103,9 @@ void counter(BuildContext context) {
           counter == 30 ||
           counter == 20 ||
           counter == 10) {
-        AudioPlayer().soundPlayer('beep.mp3');
+        SoundManager.instance.playSound(SOUND_ACTIONS.beep);
+        // _audioCache.play('beep.mp3');
+        // AudioAssetsPlayer().soundPlayer('beep.mp3');
       }
 
       /// Get the Goal score for the respective level
@@ -104,9 +118,10 @@ void counter(BuildContext context) {
       if (vMagicLevel != 15 &&
           actualScore >= _scorePointsLevel &&
           actualScore != 0) {
-
         /// Play audio
-        AudioPlayer().soundPlayer('level_up.mp3');
+        SoundManager.instance.playSound(SOUND_ACTIONS.levelUp);
+        // _audioCache.play('level_up.mp3');
+        // AudioAssetsPlayer().soundPlayer('level_up.mp3');
 
         /// Set countdownCancel to TRUE (play reached level score)
         context.read(countdownCancelProvider).set(cancelTimer: true);
@@ -140,7 +155,9 @@ void counter(BuildContext context) {
         /// If _playAudio is TRUE (to play audio only once)
         if (_playAudio) {
           /// Play audio
-          AudioPlayer().soundPlayer('level_up.mp3');
+          SoundManager.instance.playSound(SOUND_ACTIONS.levelUp);
+          // _audioCache.play('level_up.mp3');
+          // AudioAssetsPlayer().soundPlayer('level_up.mp3');
         }
 
         /// Set _playAudio to false to prevent it to play more than once

@@ -15,5 +15,5 @@ class TextNotifier extends StateNotifier<String> {
 class GradientNotifier extends StateNotifier<bool> {
   GradientNotifier() : super(true);
 
-  bool set({bool value}) => state = value;
+  bool set({required bool value}) => state = value;
 }

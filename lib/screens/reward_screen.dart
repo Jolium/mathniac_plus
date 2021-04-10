@@ -28,7 +28,7 @@ class _RewardScreenState extends State<RewardScreen> {
   /// Ad button active
   bool _adButtonActive = false;
 
-  RewardedAd _rewardedAd;
+  RewardedAd? _rewardedAd;
   bool _rewardedReady = false;
 
   static final AdRequest request = AdRequest(
@@ -42,7 +42,7 @@ class _RewardScreenState extends State<RewardScreen> {
   void createRewardedAd() {
     _rewardedAd ??= RewardedAd(
       // adUnitId: RewardedAd.testAdUnitId,
-      adUnitId: _rewardedUnitId,
+      adUnitId: _rewardedUnitId!,
       request: request,
       listener: AdListener(onAdLoaded: (Ad ad) {
         if (kShowPrints) print('${ad.runtimeType} loaded.');
@@ -76,7 +76,7 @@ class _RewardScreenState extends State<RewardScreen> {
   }
 
   /// Rewarded Unit Id
-  final String _rewardedUnitId = AdMobService().getRewardedAdId();
+  late final  String? _rewardedUnitId = AdMobService().getRewardedAdId();
 
   @override
   void initState() {
@@ -221,7 +221,7 @@ class _RewardScreenState extends State<RewardScreen> {
                     // print('\n=== Is Ad loaded onTap: $_rewardedReady ===');
                     if (vWatchAds) {
                       if (_rewardedReady) {
-                        _rewardedAd.show().catchError((e) => showDialog(
+                        _rewardedAd!.show().catchError((e) => showDialog(
                               context: context,
                               builder: (BuildContext context) {
                                 return PopUp(

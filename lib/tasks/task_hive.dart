@@ -13,7 +13,7 @@ class TaskHive {
   }
 
   int get level {
-    final String _level = tasksBox.get('level');
+    final String? _level = tasksBox.get('level');
     if (_level == null) {
       tasksBox.put('level', '1');
       return 1;
@@ -22,13 +22,13 @@ class TaskHive {
     }
   }
 
-  void updateSound({bool value}) {
+  void updateSound({required bool value}) {
     tasksBox.put('sound', '$value');
     vPlaySound = value;
   }
 
   bool get sound {
-    final String _sound = tasksBox.get('sound');
+    final String? _sound = tasksBox.get('sound');
     if (_sound == null) {
       tasksBox.put('sound', 'true');
       return true;
@@ -41,13 +41,13 @@ class TaskHive {
     }
   }
 
-  void updateBackground({bool value}) {
+  void updateBackground({required bool value}) {
     tasksBox.put('background', '$value');
     vBackground = value;
   }
 
   bool get background {
-    final String _background = tasksBox.get('background');
+    final String? _background = tasksBox.get('background');
     if (_background == null) {
       tasksBox.put('background', 'true');
       return true;
@@ -66,7 +66,7 @@ class TaskHive {
   }
 
   int get highScore {
-    final String _highScore = tasksBox.get('highScore');
+    final String? _highScore = tasksBox.get('highScore');
     if (_highScore == null) {
       tasksBox.put('highScore', '0');
       return 0;
@@ -81,7 +81,7 @@ class TaskHive {
   }
 
   String get nickname {
-    final String _nickname = tasksBox.get('nickname');
+    final String? _nickname = tasksBox.get('nickname');
     if (_nickname == null) {
       tasksBox.put('nickname', '');
       return '';
@@ -90,7 +90,7 @@ class TaskHive {
     }
   }
 
-  void uploadScore({bool value}) {
+  void uploadScore({required bool value}) {
     /// If no internet connection it should be TRUE to upload later
     /// If internet connection it should be FALSE and it was already uploaded
     tasksBox.put('uploadScore', '$value');
@@ -98,7 +98,7 @@ class TaskHive {
   }
 
   bool get getUploadScore {
-    final String _uploadScore = tasksBox.get('uploadScore');
+    final String? _uploadScore = tasksBox.get('uploadScore');
     if (_uploadScore == null) {
       tasksBox.put('uploadScore', 'false');
       return false;
