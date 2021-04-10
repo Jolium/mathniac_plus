@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mathniac_plus/settings/constants.dart';
 import 'package:mathniac_plus/settings/vars.dart';
+import 'package:mathniac_plus/tasks/tasks_soundpool.dart';
 
 class LevelUp extends StatelessWidget {
   final double _widthRatio = 5; // 1.1
@@ -12,6 +13,10 @@ class LevelUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    /// Play audio
+    // print('== PLAY LEVEL UP ==');
+    SoundManager.instance.playSound(SOUND_ACTIONS.levelUp);
+
     final Size _screenSize = MediaQuery.of(context).size;
     final double _sizeRatio = _screenSize.height / _screenSize.width / 2;
     final double _buttonHeight = _screenSize.width / _heightRatio * _sizeRatio;

@@ -56,6 +56,9 @@ class _ScoresScreenState extends State<ScoresScreen> {
       listener: AdListener(
         onAdLoaded: (Ad ad) {
           if (kShowPrints) print('$BannerAd loaded.');
+          setState(() {
+            isLoaded = true;
+          });
           bannerCompleter.complete(ad as BannerAd);
         },
         onAdFailedToLoad: (Ad ad, LoadAdError error) {
@@ -75,13 +78,8 @@ class _ScoresScreenState extends State<ScoresScreen> {
       ),
     );
 
-    // _bannerAd?.load();
-    Future<void>.delayed(const Duration(seconds: 1), () {
-      _bannerAd?.load();
-      setState(() {
-        isLoaded = true;
-      });
-    });
+    /// Loads Ads
+    _bannerAd?.load();
   }
 
   @override

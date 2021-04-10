@@ -115,11 +115,15 @@ void counter(BuildContext context) {
       final int actualScore = context.read(scoreProvider.state);
 
       /// Magic level is less than 15 and actual score is >= to the Goal level score
+      // print('vMagicLevel: $vMagicLevel');
+      // print('actualScore: $actualScore');
+      // print('_scorePointsLevel: $_scorePointsLevel');
       if (vMagicLevel != 15 &&
           actualScore >= _scorePointsLevel &&
           actualScore != 0) {
-        /// Play audio
-        SoundManager.instance.playSound(SOUND_ACTIONS.levelUp);
+        // /// Play audio
+        // // print('== PLAY LEVEL UP ==');
+        // SoundManager.instance.playSound(SOUND_ACTIONS.levelUp);
         // _audioCache.play('level_up.mp3');
         // AudioAssetsPlayer().soundPlayer('level_up.mp3');
 

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -31,6 +33,8 @@ class _RewardScreenState extends State<RewardScreen> {
   RewardedAd? _rewardedAd;
   bool _rewardedReady = false;
 
+  int _counter = 5;
+
   static final AdRequest request = AdRequest(
     testDevices: listOfTestDevices, // Android emulators are test devices
     // testDevices: testDevice != null ? <String>[testDevice] : null,
@@ -38,6 +42,17 @@ class _RewardScreenState extends State<RewardScreen> {
     contentUrl: 'https://play.google.com/store/apps/category/GAME_CASUAL',
     nonPersonalizedAds: true,
   );
+
+  void counter() {
+    Timer.periodic(const Duration(seconds: 1), (Timer timer) {
+      setState(() {
+        _counter--;
+      });
+      if (_counter == 0) {
+        timer.cancel();
+      }
+    });
+  }
 
   void createRewardedAd() {
     _rewardedAd ??= RewardedAd(
@@ -76,12 +91,13 @@ class _RewardScreenState extends State<RewardScreen> {
   }
 
   /// Rewarded Unit Id
-  late final  String? _rewardedUnitId = AdMobService().getRewardedAdId();
+  late final String? _rewardedUnitId = AdMobService().getRewardedAdId();
 
   @override
   void initState() {
     super.initState();
     // print('vWatchAds: $vWatchAds');
+    /// Check if allowed to watch ads
     if (vWatchAds) {
       /// load ad in the beginning
       MobileAds.instance.initialize().then((InitializationStatus status) {
@@ -94,6 +110,11 @@ class _RewardScreenState extends State<RewardScreen> {
           createRewardedAd();
         });
       });
+
+      /// Start counter
+      counter();
+
+      /// If NOT allowed to watch ads
     } else {
       /// Activate button to show pop-up showing warning 'You have to play at least 1 time...'
       _adButtonActive = true;
@@ -213,7 +234,7 @@ class _RewardScreenState extends State<RewardScreen> {
                 MyButton(
                   contentColor:
                       _adButtonActive ? Colors.yellowAccent : Colors.grey,
-                  text: ' Watch Ad ',
+                  text: _adButtonActive ? ' Watch Ad ' : ' Loading $_counter ',
                   textRatio: 3.5,
                   active: _adButtonActive,
                   decreaseSizeOnTap: false,

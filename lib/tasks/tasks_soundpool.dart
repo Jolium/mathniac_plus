@@ -26,9 +26,9 @@ class SoundManager {
   SoundManager._internal();
 
   Future initSounds() async {
-    if (sounds.isNotEmpty) {
-      return;
-    }
+    // if (sounds.isNotEmpty) {
+    //   return;
+    // }
     await Future.forEach(actionMapping.keys, (element) async {
       final String path = actionMapping[element]!;
       final ByteData soundData = await rootBundle.load(path);
