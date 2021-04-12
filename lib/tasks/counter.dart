@@ -25,7 +25,7 @@ void counter(BuildContext context) {
   const oneMilli = Duration(milliseconds: 100);
 
   /// Get the Goal score for the respective level
-  final int _scorePointsLevel = listOfScorePoints[vMagicLevel - 1];
+  final int _scoreLevelPoints = listOfScorePoints[vMagicLevel - 1];
 
   Timer.periodic(oneMilli, (Timer timer) {
     /// If counter is less or equal to '0'
@@ -41,7 +41,7 @@ void counter(BuildContext context) {
 
       /// If Magic level is '15' and actual score is > than highest score
       if (vMagicLevel == 15 &&
-          actualScore > _scorePointsLevel &&
+          actualScore > _scoreLevelPoints &&
           actualScore != 0) {
         /// New highest score is ready to upload but not yet upload
         TaskHive().uploadScore(value: true);
@@ -51,7 +51,7 @@ void counter(BuildContext context) {
 
         /// If Magic level is NOT '15' and actual score is >= than Goal level
       } else if (vMagicLevel != 15 &&
-          actualScore >= _scorePointsLevel &&
+          actualScore >= _scoreLevelPoints &&
           actualScore != 0) {
         /// Play audio
         SoundManager.instance.playSound(SOUND_ACTIONS.levelUp);
@@ -108,8 +108,8 @@ void counter(BuildContext context) {
         // AudioAssetsPlayer().soundPlayer('beep.mp3');
       }
 
-      /// Get the Goal score for the respective level
-      final int _scorePointsLevel = listOfScorePoints[vMagicLevel - 1];
+      // /// Get the Goal score for the respective level
+      // final int _scoreLevelPoints = listOfScorePoints[vMagicLevel - 1];
 
       /// Plays sound during game just 1 time when player pass level
       final int actualScore = context.read(scoreProvider.state);
@@ -119,7 +119,7 @@ void counter(BuildContext context) {
       // print('actualScore: $actualScore');
       // print('_scorePointsLevel: $_scorePointsLevel');
       if (vMagicLevel != 15 &&
-          actualScore >= _scorePointsLevel &&
+          actualScore >= _scoreLevelPoints &&
           actualScore != 0) {
         // /// Play audio
         // // print('== PLAY LEVEL UP ==');
@@ -154,7 +154,7 @@ void counter(BuildContext context) {
 
         /// Magic level is equal 15 and actual score is > to the Goal level score
       } else if (vMagicLevel == 15 &&
-          actualScore > _scorePointsLevel &&
+          actualScore > _scoreLevelPoints &&
           actualScore != 0) {
         /// If _playAudio is TRUE (to play audio only once)
         if (_playAudio) {

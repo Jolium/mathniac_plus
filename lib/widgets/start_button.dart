@@ -24,6 +24,7 @@ import '../tasks/tasks_soundpool.dart';
 class StartButton extends StatelessWidget {
   final int _goalLevel = listOfScorePoints[vMagicLevel - 1];
   final int _scoreLevelPoints = listOfScorePoints[vMagicLevel - 1];
+  final int _magicLevel = vMagicLevel;
 
   final Color _contentColor = Colors.white;
   final double _widthRatio = 3.5;
@@ -68,14 +69,15 @@ class StartButton extends StatelessWidget {
           // _audioCache.play('pressed_button.mp3');
           // AudioAssetsPlayer().soundPlayer('pressed_button.mp3');
 
-
-
           /// Set cancelTimer back to false
           context.read(countdownCancelProvider).set(cancelTimer: false);
 
           /// If Magic Level is NOT 15 and actual score is greater or equal score level points
           final int actualScore = context.read(scoreProvider.state);
-          if (vMagicLevel != 15 && actualScore >= _scoreLevelPoints) {
+          // print('vMagicLevel: $_magicLevel');
+          // print('actualScore: $actualScore');
+          // print('_scorePointsLevel: $_scoreLevelPoints');
+          if (_magicLevel != 15 && actualScore >= _scoreLevelPoints) {
             /// Change screen to Levels screen
             /// Show screen with archived levels
             Navigator.of(context).pushReplacement(
@@ -132,7 +134,7 @@ class StartButton extends StatelessWidget {
 
         /// If Magic Level is NOT 15 and actual score is greater or equal score level points
         final int actualScore = context.read(scoreProvider.state);
-        if (vMagicLevel != 15 && actualScore >= _scoreLevelPoints) {
+        if (_magicLevel != 15 && actualScore >= _scoreLevelPoints) {
           /// Change screen to Levels screen
           /// Show screen with archived levels
           Navigator.of(context).pushReplacement(
@@ -143,7 +145,7 @@ class StartButton extends StatelessWidget {
         }
 
         /// If Magic Level is 15 and score is own best score
-        if (vMagicLevel == 15 && actualScore > _scoreLevelPoints) {
+        if (_magicLevel == 15 && actualScore > _scoreLevelPoints) {
 
           /// New best score on level 15
           /// Change screen to Authentication screen
@@ -152,7 +154,7 @@ class StartButton extends StatelessWidget {
         }
 
         /// If Magic Level is 15 or actual score less than score level points
-        if (vMagicLevel == 15 || actualScore < _scoreLevelPoints) {
+        if (_magicLevel == 15 || actualScore < _scoreLevelPoints) {
           /// Set button text to 'Start'
           context.read(textProvider).set(' Start ');
 
@@ -195,8 +197,8 @@ class StartButton extends StatelessWidget {
           final bool isTicking = context.read(gameTickingProvider.state);
           final double _widthRatio = isTicking
               ? 2.5
-              : actualScore >= _goalLevel && vMagicLevel != 15 ||
-                      actualScore > _goalLevel && vMagicLevel == 15
+              : actualScore >= _goalLevel && _magicLevel != 15 ||
+                      actualScore > _goalLevel && _magicLevel == 15
                   ? 2.5
                   : 3.5;
 

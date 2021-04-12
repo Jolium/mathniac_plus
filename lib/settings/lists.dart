@@ -123,7 +123,7 @@ List<bool> listGotLevel = [
 
 /// List of points for each level
 List<int> listOfScorePoints = [
-  130, // 130
+  130,
   150,
   170,
   200,
@@ -142,7 +142,7 @@ List<int> listOfScorePoints = [
 
 /// List of seconds for each level (milliseconds)
 List<int> listOfSeconds = [
-  300, // 300
+  300,
   350,
   400,
   400,
