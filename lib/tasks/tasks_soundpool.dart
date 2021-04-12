@@ -1,4 +1,5 @@
 import 'package:flutter/services.dart';
+import 'package:mathniac_plus/settings/vars.dart';
 import 'package:soundpool/soundpool.dart';
 
 enum SOUND_ACTIONS {
@@ -42,7 +43,9 @@ class SoundManager {
   static final SoundManager instance = SoundManager._internal();
 
   Future<void> playSound(SOUND_ACTIONS action) async {
-    await pool.play(sounds[actionMapping[action]]!);
+    if (vPlaySound){
+      await pool.play(sounds[actionMapping[action]]!);
+    }
   }
 
 

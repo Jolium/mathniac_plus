@@ -153,7 +153,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       widthRatio: 5,
                       icon: vPlaySound ? Icons.volume_up : Icons.volume_off,
                       contentColor:
-                          vPlaySound ? Colors.yellowAccent : Colors.white,
+                          vPlaySound ? Colors.yellowAccent : Colors.black,
                       shadow: vPlaySound ? Colors.yellowAccent : Colors.black,
                       onTap: () {
                         setState(() {
@@ -186,7 +186,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       widthRatio: 5,
                       icon: vBackground ? Icons.check : Icons.close,
                       contentColor:
-                          vBackground ? Colors.yellowAccent : Colors.white,
+                          vBackground ? Colors.yellowAccent : Colors.black,
                       shadow: vBackground ? Colors.yellowAccent : Colors.black,
                       onTap: () {
                         setState(() {

@@ -82,13 +82,13 @@ class _MyButtonState extends State<MyButton> {
     void _onTapDown(_) {
       /// Check if button is active
       if (widget.active) {
+        /// Action on tap
+        widget.onTap();
+
         /// Play audio
         SoundManager.instance.playSound(SOUND_ACTIONS.pressedButton);
         // _audioCache.play('pressed_button.mp3');
         // AudioAssetsPlayer().soundPlayer('pressed_button.mp3');
-
-        /// Action on tap
-        widget.onTap();
 
         setState(() {
           /// Check if button is supposed to decrease size
