@@ -3,9 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>143647895105-s5lrcjp3pjd1m4aeeduff569ua2ricfp.apps.googleusercontent.com</string>
+	<string>143647895105-ga3bs17s13a5tralivvd524iggt3eibv.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.143647895105-s5lrcjp3pjd1m4aeeduff569ua2ricfp</string>
+	<string>com.googleusercontent.apps.143647895105-ga3bs17s13a5tralivvd524iggt3eibv</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>143647895105-h80kdg5mvrfl8hd5jq4evdl5q3r6rdie.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyCk4zAGan44FFCwAn6mB0gYBpQp0auYCxA</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.linchoplus.mathniacPlus</string>
+	<string>com.linchoplus.mathniac</string>
 	<key>PROJECT_ID</key>
 	<string>mathniac-aea8f</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,8 +31,10 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:143647895105:ios:170af54d5e38308fa0e0c0</string>
+	<string>1:143647895105:ios:dc75415c29c890e9a0e0c0</string>
 	<key>DATABASE_URL</key>
 	<string>https://mathniac-aea8f.firebaseio.com</string>
+	<key>ADMOB_APP_ID</key>
+	<string>ca-app-pub-4259634083772880~8976810502</string>
 </dict>
 </plist>
