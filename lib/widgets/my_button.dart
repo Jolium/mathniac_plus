@@ -1,6 +1,9 @@
 // import 'package:audioplayers/audio_cache.dart';
 // import 'package:audioplayers/audioplayers.dart';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:mathniac_plus/tasks/tasks_functions.dart';
 
 import '../settings/constants.dart';
 import '../tasks/custom_route.dart';
@@ -86,9 +89,16 @@ class _MyButtonState extends State<MyButton> {
         widget.onTap();
 
         /// Play audio
-        SoundManager.instance.playSound(SOUND_ACTIONS.pressedButton);
+        if(Platform.isIOS){
+          AudioAssetsPlayer().playSound('pressed_button.mp3');
+          print('== IOS ==');
+        } else if (Platform.isAndroid){
+          SoundManager.instance.playSound(SOUND_ACTIONS.pressedButton);
+          print('== ANDROID ==');
+        }
+        // SoundManager.instance.playSound(SOUND_ACTIONS.pressedButton);
         // _audioCache.play('pressed_button.mp3');
-        // AudioAssetsPlayer().soundPlayer('pressed_button.mp3');
+        // AudioAssetsPlayer().playSound('pressed_button.mp3');
 
         setState(() {
           /// Check if button is supposed to decrease size
