@@ -83,8 +83,8 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             home: MySplash(
               imagePath: 'images/launch_image.png',
-              // home: HomeScreen(),
-              home: TestScreen(),
+              home: HomeScreen(),
+              // home: TestScreen(),
               // backGroundColor: Colors.black,
               // animationEffect: 'zoom-out',
               // logoSize: 300.0,

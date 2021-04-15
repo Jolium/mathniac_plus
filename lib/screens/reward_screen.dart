@@ -69,7 +69,7 @@ class _RewardScreenState extends State<RewardScreen> {
         }, onAdFailedToLoad: (Ad ad, LoadAdError error) {
           if (kShowPrints) print('${ad.runtimeType} failed to load: $error');
           ad.dispose();
-          _rewardedAd = null;
+          // _rewardedAd = null;
           createRewardedAd();
         }, onAdOpened: (Ad ad) {
           if (kShowPrints) print('${ad.runtimeType} onAdOpened.');
@@ -130,7 +130,7 @@ class _RewardScreenState extends State<RewardScreen> {
     _rewardedAd?.dispose();
 
     /// Added myself
-    _rewardedAd = null;
+    // _rewardedAd = null;
 
     super.dispose();
   }
