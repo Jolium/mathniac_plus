@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mathniac_plus/tasks/sound.dart';
 
 import '../screens/authentication.dart';
 import '../screens/levels_screen.dart';
@@ -65,7 +66,8 @@ class StartButton extends StatelessWidget {
         final bool cancelTimer = context.read(countdownCancelProvider.state);
         if (cancelTimer) {
           /// Play audio
-          SoundManager.instance.playSound(SOUND_ACTIONS.pressedButton);
+          Sound.instance.play(TypeAudio.pressedButton);
+          // SoundManager.instance.playSound(SOUND_ACTIONS.pressedButton);
           // _audioCache.play('pressed_button.mp3');
           // AudioAssetsPlayer().soundPlayer('pressed_button.mp3');
 
@@ -90,7 +92,8 @@ class StartButton extends StatelessWidget {
           /// cancelTimer is false (player still NOT reached level score and countdown is NOT stopped)
         } else {
           /// Play audio
-          SoundManager.instance.playSound(SOUND_ACTIONS.startAllButtons);
+          Sound.instance.play(TypeAudio.startAllButtons);
+          // SoundManager.instance.playSound(SOUND_ACTIONS.startAllButtons);
           // _audioCache.play('start_all_buttons.mp3');
           // kAssetsAudioCache.open(Audio('assets/sounds/start_all_buttons.mp3'));
           // AudioAssetsPlayer().soundPlayer('start_all_buttons.mp3');
@@ -127,7 +130,8 @@ class StartButton extends StatelessWidget {
         /// If countdown is equal to 0
       } else {
         /// Play audio
-        SoundManager.instance.playSound(SOUND_ACTIONS.pressedButton);
+        Sound.instance.play(TypeAudio.pressedButton);
+        // SoundManager.instance.playSound(SOUND_ACTIONS.pressedButton);
         // _audioCache.play('pressed_button.mp3');
         // AudioAssetsPlayer().soundPlayer('pressed_button.mp3');
         // kAssetsAudioCache.open(Audio('assets/sounds/pressed_button.mp3'));

@@ -3,6 +3,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:mathniac_plus/tasks/sound.dart';
 import 'package:mathniac_plus/tasks/tasks_functions.dart';
 
 import '../settings/constants.dart';
@@ -89,13 +90,14 @@ class _MyButtonState extends State<MyButton> {
         widget.onTap();
 
         /// Play audio
-        if(Platform.isIOS){
-          AudioAssetsPlayer().playSound('pressed_button.mp3');
-          print('== IOS ==');
-        } else if (Platform.isAndroid){
-          SoundManager.instance.playSound(SOUND_ACTIONS.pressedButton);
-          print('== ANDROID ==');
-        }
+        Sound.instance.play(TypeAudio.pressedButton);
+        // if(Platform.isIOS){
+        //   AudioAssetsPlayer().playSound('pressed_button.mp3');
+        //   print('== IOS ==');
+        // } else if (Platform.isAndroid){
+        //   SoundManager.instance.playSound(SOUND_ACTIONS.pressedButton);
+        //   print('== ANDROID ==');
+        // }
         // SoundManager.instance.playSound(SOUND_ACTIONS.pressedButton);
         // _audioCache.play('pressed_button.mp3');
         // AudioAssetsPlayer().playSound('pressed_button.mp3');
