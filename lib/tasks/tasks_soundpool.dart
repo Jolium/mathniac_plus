@@ -48,6 +48,14 @@ class SoundManager {
     }
   }
 
+  Future<void> sound(SOUND_ACTIONS action, StreamType streamType) async {
+    final Soundpool _pool = Soundpool(streamType: streamType);
+
+    if (vPlaySound){
+      await _pool.play(sounds[actionMapping[action]]!);
+    }
+  }
+
 
   // Future<void>attachToCity(Sloboda city) async {
   //   await initSounds();
