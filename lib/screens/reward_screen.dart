@@ -260,7 +260,7 @@ class _RewardScreenState extends State<RewardScreen> {
                               },
                             ));
                         setState(() => _rewardedReady = false);
-                        _rewardedAd = null;
+                        // _rewardedAd = null;
                       } else {
                         showDialog(
                           context: context,
