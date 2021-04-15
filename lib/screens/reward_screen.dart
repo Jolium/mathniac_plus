@@ -55,39 +55,43 @@ class _RewardScreenState extends State<RewardScreen> {
   }
 
   void createRewardedAd() {
-    _rewardedAd ??= RewardedAd(
-      // adUnitId: RewardedAd.testAdUnitId,
-      adUnitId: _rewardedUnitId!,
-      request: request,
-      listener: AdListener(onAdLoaded: (Ad ad) {
-        if (kShowPrints) print('${ad.runtimeType} loaded.');
-        _rewardedReady = true;
-        setState(() {
-          _adButtonActive = true;
-        });
-      }, onAdFailedToLoad: (Ad ad, LoadAdError error) {
-        if (kShowPrints) print('${ad.runtimeType} failed to load: $error');
-        ad.dispose();
-        _rewardedAd = null;
-        createRewardedAd();
-      }, onAdOpened: (Ad ad) {
-        if (kShowPrints) print('${ad.runtimeType} onAdOpened.');
-      }, onAdClosed: (Ad ad) {
-        if (kShowPrints) print('${ad.runtimeType} closed.');
-        ad.dispose();
-        createRewardedAd();
-      }, onApplicationExit: (Ad ad) {
-        if (kShowPrints) print('${ad.runtimeType} onApplicationExit.');
-      }, onRewardedAdUserEarnedReward: (RewardedAd ad, RewardItem reward) {
-        UpdateValues().getNewLevelValue();
-        vWatchAds = false;
-        if (kShowPrints) {
-          print(
-            '$RewardedAd with reward $RewardItem(${reward.amount}, ${reward.type})',
-          );
-        }
-      }),
-    )..load();
+    try {
+      _rewardedAd ??= RewardedAd(
+        // adUnitId: RewardedAd.testAdUnitId,
+        adUnitId: _rewardedUnitId!,
+        request: request,
+        listener: AdListener(onAdLoaded: (Ad ad) {
+          if (kShowPrints) print('${ad.runtimeType} loaded.');
+          _rewardedReady = true;
+          setState(() {
+            _adButtonActive = true;
+          });
+        }, onAdFailedToLoad: (Ad ad, LoadAdError error) {
+          if (kShowPrints) print('${ad.runtimeType} failed to load: $error');
+          ad.dispose();
+          _rewardedAd = null;
+          createRewardedAd();
+        }, onAdOpened: (Ad ad) {
+          if (kShowPrints) print('${ad.runtimeType} onAdOpened.');
+        }, onAdClosed: (Ad ad) {
+          if (kShowPrints) print('${ad.runtimeType} closed.');
+          ad.dispose();
+          createRewardedAd();
+        }, onApplicationExit: (Ad ad) {
+          if (kShowPrints) print('${ad.runtimeType} onApplicationExit.');
+        }, onRewardedAdUserEarnedReward: (RewardedAd ad, RewardItem reward) {
+          UpdateValues().getNewLevelValue();
+          vWatchAds = false;
+          if (kShowPrints) {
+            print(
+              '$RewardedAd with reward $RewardItem(${reward.amount}, ${reward.type})',
+            );
+          }
+        }),
+      )..load();
+    } catch (e) {
+      print('== ERROR: $e ==');
+    }
   }
 
   /// Rewarded Unit Id

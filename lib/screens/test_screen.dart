@@ -37,28 +37,28 @@ class TestScreen extends StatelessWidget {
                 ),
                 TextButton(
                   onPressed: () {
-                    SoundManager.instance.sound(SOUND_ACTIONS.beep, StreamType.notification);
+                    SoundManager.instance.playSound(SOUND_ACTIONS.beep);
                   },
                   child: const Text(' notification '),
                 ),
-                TextButton(
-                  onPressed: () {
-                    SoundManager.instance.sound(SOUND_ACTIONS.beep, StreamType.alarm);
-                  },
-                  child: const Text(' alarm '),
-                ),
-                TextButton(
-                  onPressed: () {
-                    SoundManager.instance.sound(SOUND_ACTIONS.beep, StreamType.music);
-                  },
-                  child: const Text(' music '),
-                ),
-                TextButton(
-                  onPressed: () {
-                    SoundManager.instance.sound(SOUND_ACTIONS.beep, StreamType.ring);
-                  },
-                  child: const Text(' ring '),
-                ),
+                // TextButton(
+                //   onPressed: () {
+                //     SoundManager.instance.sound(SOUND_ACTIONS.beep, StreamType.alarm);
+                //   },
+                //   child: const Text(' alarm '),
+                // ),
+                // TextButton(
+                //   onPressed: () {
+                //     SoundManager.instance.sound(SOUND_ACTIONS.beep, StreamType.music);
+                //   },
+                //   child: const Text(' music '),
+                // ),
+                // TextButton(
+                //   onPressed: () {
+                //     SoundManager.instance.sound(SOUND_ACTIONS.beep, StreamType.ring);
+                //   },
+                //   child: const Text(' ring '),
+                // ),
                 // TextButton(
                 //   onPressed: () {
                 //     SoundManager.instance.playSound(SOUND_ACTIONS.beepEnd);

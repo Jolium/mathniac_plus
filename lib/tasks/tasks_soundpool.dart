@@ -39,7 +39,7 @@ class SoundManager {
     });
   }
 
-  Soundpool pool = Soundpool(streamType: StreamType.notification);
+  Soundpool pool = Soundpool(streamType: StreamType.alarm);
   static final SoundManager instance = SoundManager._internal();
 
   Future<void> playSound(SOUND_ACTIONS action) async {
@@ -48,13 +48,13 @@ class SoundManager {
     }
   }
 
-  Future<void> sound(SOUND_ACTIONS action, StreamType streamType) async {
-    final Soundpool _pool = Soundpool(streamType: streamType);
-
-    if (vPlaySound){
-      await _pool.play(sounds[actionMapping[action]]!);
-    }
-  }
+  // Future<void> sound(SOUND_ACTIONS action, StreamType streamType) async {
+  //   final Soundpool _pool = Soundpool(streamType: streamType);
+  //
+  //   if (vPlaySound){
+  //     await _pool.play(sounds[actionMapping[action]]!);
+  //   }
+  // }
 
 
   // Future<void>attachToCity(Sloboda city) async {
