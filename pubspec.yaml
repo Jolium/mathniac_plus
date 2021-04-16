@@ -21,7 +21,7 @@ dependencies:
 
 #  audioplayers: '0.16.1'
 #  audioplayers: ^0.18.3 # Null safety
-  assets_audio_player: ^3.0.3+2 # Null safety
+#  assets_audio_player: ^3.0.3+2 # Null safety
 
 #  path_provider: ^1.6.18
   path_provider: ^2.0.1 # Null safety

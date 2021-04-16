@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive/hive.dart';
-import 'package:mathniac_plus/screens/test_screen.dart';
-import 'package:mathniac_plus/tasks/sound.dart';
+// import 'package:mathniac_plus/screens/test_screen.dart';
+// import 'package:mathniac_plus/tasks/sound.dart';
 import 'package:mathniac_plus/tasks/tasks_soundpool.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -63,17 +63,20 @@ Future<void> main() async {
   UpdateValues().getStartTimerValue();
   UpdateGoalValues().getGoalValue();
 
-  if (!Platform.isIOS) {
+  // if (!Platform.isIOS) {
     await SoundManager.instance.initSounds();
-    await Sound.instance.initSounds();
-  }
+    // await Sound.instance.initSounds();
+  // }
 
   runApp(ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
+
+
   @override
   Widget build(BuildContext context) {
+
     // /// Hide bottom bar and top bar
     // SystemChrome.setEnabledSystemUIOverlays([]);
     //

@@ -12,16 +12,18 @@ enum SOUND_ACTIONS {
   startAllButtons,
 }
 
+Map<SOUND_ACTIONS, String> actionMapping = {
+  SOUND_ACTIONS.beep: "assets/sounds/beep.mp3",
+  SOUND_ACTIONS.beepEnd: "assets/sounds/beep_end.mp3",
+  SOUND_ACTIONS.correctSum: "assets/sounds/correct_sum.mp3",
+  SOUND_ACTIONS.levelUp: "assets/sounds/level_up.mp3",
+  SOUND_ACTIONS.pressedButton: "assets/sounds/pressed_button.mp3",
+  SOUND_ACTIONS.repeatedNumber: "assets/sounds/repeated_number.mp3",
+  SOUND_ACTIONS.startAllButtons: "assets/sounds/start_all_buttons.mp3",
+};
+
 class SoundManager {
-  Map<SOUND_ACTIONS, String> actionMapping = {
-    SOUND_ACTIONS.beep: "assets/sounds/beep.mp3",
-    SOUND_ACTIONS.beepEnd: "assets/sounds/beep_end.mp3",
-    SOUND_ACTIONS.correctSum: "assets/sounds/correct_sum.mp3",
-    SOUND_ACTIONS.levelUp: "assets/sounds/level_up.mp3",
-    SOUND_ACTIONS.pressedButton: "assets/sounds/pressed_button.mp3",
-    SOUND_ACTIONS.repeatedNumber: "assets/sounds/repeated_number.mp3",
-    SOUND_ACTIONS.startAllButtons: "assets/sounds/start_all_buttons.mp3",
-  };
+
 
   Map<String, int> sounds = {};
   SoundManager._internal();

@@ -33,6 +33,8 @@ class _RewardScreenState extends State<RewardScreen> {
   RewardedAd? _rewardedAd;
   bool _rewardedReady = false;
 
+  Timer? timer;
+
   int _counter = 5;
 
   static final AdRequest request = AdRequest(
@@ -44,7 +46,7 @@ class _RewardScreenState extends State<RewardScreen> {
   );
 
   void counter() {
-    Timer.periodic(const Duration(seconds: 1), (Timer timer) {
+    timer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
       setState(() {
         _counter--;
       });
@@ -131,6 +133,10 @@ class _RewardScreenState extends State<RewardScreen> {
 
     /// Added myself
     // _rewardedAd = null;
+
+    if(timer!.isActive){
+      timer!.cancel();
+    }
 
     super.dispose();
   }

@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 
-import 'package:assets_audio_player/assets_audio_player.dart';
+// import 'package:assets_audio_player/assets_audio_player.dart';
 // import 'package:audioplayers/audio_cache.dart';
 // import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/foundation.dart';
@@ -111,19 +111,19 @@ void clearSelectedButtons(List<int> randomsList) {
   }
 }
 
-class AudioAssetsPlayer {
-//create a new player
-  final assetsAudioPlayer = AssetsAudioPlayer();
-
-  void playSound(String sound) {
-
-    final String path = 'assets/sounds/$sound';
-
-    if (vPlaySound) {
-      assetsAudioPlayer.open(Audio(path));
-    }
-  }
-}
+// class AudioAssetsPlayer {
+// //create a new player
+//   final assetsAudioPlayer = AssetsAudioPlayer();
+//
+//   void playSound(String sound) {
+//
+//     final String path = 'assets/sounds/$sound';
+//
+//     if (vPlaySound) {
+//       assetsAudioPlayer.open(Audio(path));
+//     }
+//   }
+// }
 
 // class AudioPlayer {
 //   final AssetsAudioPlayer _audioPlayer = AssetsAudioPlayer();
