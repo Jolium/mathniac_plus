@@ -1,5 +1,3 @@
-// import 'package:audioplayers/audio_cache.dart';
-// import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -7,22 +5,16 @@ import '../settings/constants.dart';
 import '../tasks/custom_route.dart';
 import '../tasks/tasks_soundpool.dart';
 
-// final AudioCache _audioCache = AudioCache(
-//   prefix: 'assets/sounds/',
-//   // respectSilence: true,
-//   fixedPlayer: AudioPlayer(),
-// );
-
-class _SizedBoxNotifier extends StateNotifier<double> {
-  _SizedBoxNotifier() : super(1.0);
-
-  double set(double value) => state = value;
-}
-
-final _sizedBoxProvider = StateNotifierProvider((ref) => _SizedBoxNotifier());
+// class _SizedBoxNotifier extends StateNotifier<double> {
+//   _SizedBoxNotifier() : super(1.0);
+//
+//   double set(double value) => state = value;
+// }
+//
+// final _sizedBoxProvider = StateNotifierProvider((ref) => _SizedBoxNotifier());
 
 class MyButton extends StatelessWidget {
-  const MyButton({
+  MyButton({
     this.icon,
     this.text,
     required this.onTap, // () {}
@@ -63,10 +55,11 @@ class MyButton extends StatelessWidget {
   final bool diagonal;
   final bool decreaseSizeOnTap;
 
+  final StateProvider<double> _sizedBoxProvider =
+      StateProvider<double>((ref) => 1.0);
+
   @override
   Widget build(BuildContext context) {
-    // AudioPlayer().checkPlatform();
-
     final Size _screenSize = MediaQuery.of(context).size;
     final double _sizeRatio = _screenSize.height / _screenSize.width / 2;
     final double _buttonHeight = _screenSize.width / heightRatio * _sizeRatio;
@@ -84,8 +77,6 @@ class MyButton extends StatelessWidget {
       if (active) {
         /// Play audio
         SoundManager.instance.playSound(SOUND_ACTIONS.pressedButton);
-        // _audioCache.play('pressed_button.mp3');
-        // AudioAssetsPlayer().soundPlayer('pressed_button.mp3');
 
         /// Action on tap
         onTap();
@@ -93,7 +84,8 @@ class MyButton extends StatelessWidget {
         /// Check if button is supposed to decrease size
         if (decreaseSizeOnTap) {
           /// decreases the button size
-          context.read(_sizedBoxProvider).set(0.95);
+          // context.read(_sizedBoxProvider).set(0.95);
+          context.read(_sizedBoxProvider).state = 0.95;
         }
 
         /// Check if should navigate to other page
@@ -108,7 +100,8 @@ class MyButton extends StatelessWidget {
       /// Check if button is active and is supposed to decrease size
       if (active && decreaseSizeOnTap) {
         /// Restore/Increase the button size
-        context.read(_sizedBoxProvider).set(1.0);
+        // context.read(_sizedBoxProvider).set(1.0);
+        context.read(_sizedBoxProvider).state = 1.0;
       }
     }
 
@@ -122,7 +115,8 @@ class MyButton extends StatelessWidget {
           width: _screenSize.width / widthRatio * _sizeRatio,
           height: _screenSize.width / heightRatio * _sizeRatio,
           child: Consumer(builder: (context, watch, child) {
-            final double _sizedBox = watch(_sizedBoxProvider.state);
+            // final double _sizedBox = watch(_sizedBoxProvider.state);
+            final double _sizedBox = watch(_sizedBoxProvider).state;
             return SizedBox(
               width: _screenSize.width * _sizedBox / widthRatio * _sizeRatio,
               height: _screenSize.width * _sizedBox / heightRatio * _sizeRatio,

@@ -29,6 +29,7 @@ class RandomsNotifier extends StateNotifier<List<int>> {
     for (int index = 0; index < listIsSelected.length; index++) {
       if (listIsSelected[index] == true) {
         final int _value = 1 + _random.nextInt(9);
+        listIsSelected[index] = false;
         _randomsList[index] = _value;
       }
     }

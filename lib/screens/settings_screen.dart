@@ -8,7 +8,7 @@ import '../settings/vars.dart';
 import '../tasks/task_hive.dart';
 import '../tasks/tasks_functions.dart';
 import '../widgets/custom_header.dart';
-import '../widgets/my_button.dart';
+import '../widgets/my_button2.dart';
 import 'home_screen.dart';
 
 class SettingsScreen extends StatefulWidget {

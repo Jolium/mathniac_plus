@@ -6,7 +6,7 @@ import '../settings/backgrounds.dart';
 import '../settings/intro_content.dart';
 import '../settings/vars.dart';
 import '../widgets/custom_header.dart';
-import '../widgets/my_button.dart';
+import '../widgets/my_button2.dart';
 import 'home_screen.dart';
 
 class IntroScreen extends StatelessWidget {

@@ -1,5 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:mathniac_plus/settings/lists.dart';
+import 'package:mathniac_plus/settings/vars.dart';
 
 class GameSizedBoxNotifier extends StateNotifier<List<double>> {
   GameSizedBoxNotifier() : super(listOfSizedBoxes);
@@ -19,7 +21,8 @@ class GameTextNotifier extends StateNotifier<String> {
 class SelectedListNotifier extends StateNotifier<List<bool>> {
   SelectedListNotifier() : super(listIsSelected);
 
-  bool set({required int index, required bool isSelected}) => state[index] = isSelected;
+  bool set({required int index, required bool isSelected}) =>
+      state[index] = isSelected;
 
   List<bool> clear() {
     for (int index = 0; index < listIsSelected.length; index++) {
@@ -27,6 +30,10 @@ class SelectedListNotifier extends StateNotifier<List<bool>> {
         listIsSelected[index] = false;
       }
     }
+
+    /// Clear all selected values
+    vListOfSelectedValues.clear();
+
     return state = listIsSelected;
   }
 }

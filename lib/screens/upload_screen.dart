@@ -12,7 +12,7 @@ import '../tasks/custom_route.dart';
 import '../tasks/task_hive.dart';
 import '../tasks/tasks_functions.dart';
 import '../widgets/custom_header.dart';
-import '../widgets/my_button.dart';
+import '../widgets/my_button2.dart';
 import 'game_screen.dart';
 
 class UploadScreen extends StatefulWidget {
