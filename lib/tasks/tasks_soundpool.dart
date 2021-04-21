@@ -1,6 +1,7 @@
 import 'package:flutter/services.dart';
-import 'package:mathniac_plus/settings/vars.dart';
 import 'package:soundpool/soundpool.dart';
+
+import '../settings/vars.dart';
 
 enum SOUND_ACTIONS {
   beep,
@@ -23,15 +24,10 @@ Map<SOUND_ACTIONS, String> actionMapping = {
 };
 
 class SoundManager {
-
-
   Map<String, int> sounds = {};
   SoundManager._internal();
 
   Future initSounds() async {
-    // if (sounds.isNotEmpty) {
-    //   return;
-    // }
     await Future.forEach(actionMapping.keys, (element) async {
       final String path = actionMapping[element]!;
       final ByteData soundData = await rootBundle.load(path);
@@ -45,32 +41,8 @@ class SoundManager {
   static final SoundManager instance = SoundManager._internal();
 
   Future<void> playSound(SOUND_ACTIONS action) async {
-    if (vPlaySound){
+    if (vPlaySound) {
       await pool.play(sounds[actionMapping[action]]!);
     }
   }
-
-  // Future<void> sound(SOUND_ACTIONS action, StreamType streamType) async {
-  //   final Soundpool _pool = Soundpool(streamType: streamType);
-  //
-  //   if (vPlaySound){
-  //     await _pool.play(sounds[actionMapping[action]]!);
-  //   }
-  // }
-
-
-  // Future<void>attachToCity(Sloboda city) async {
-  //   await initSounds();
-  //   city.changes.where((event) => actionMapping[event] != null).listen((event) {
-  //     playSound(event as SOUND_ACTIONS);
-  //   });
-  // }
-  //
-  // dynamic subscribeSoundManager() {
-  //   return SoundManager.instance.attachToCity(this);
-  // }
 }
-
-
-
-

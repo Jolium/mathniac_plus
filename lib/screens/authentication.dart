@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../settings/constants.dart';
 import '../widgets/pop_up.dart';
 import 'upload_screen.dart';
 
@@ -9,7 +8,7 @@ class Authentication extends StatelessWidget {
   Future<void> _signInAnonymously(BuildContext context) async {
     try {
       await FirebaseAuth.instance.signInAnonymously();
-      if (kShowPrints) print("== Sign In Anonymously ==");
+      // print("== Sign In Anonymously ==");
     } catch (e) {
       showDialog(
           context: context,
@@ -34,10 +33,10 @@ class Authentication extends StatelessWidget {
           final User? user = snapshot.data;
           if (user == null) {
             _signInAnonymously(context);
-            if (kShowPrints) print("== Anonymous User: $user ==");
+            // print("== Anonymous User: $user ==");
             return UploadScreen();
           }
-          if (kShowPrints) print("== == User: $user == ==");
+          // print("== == User: $user == ==");
           return UploadScreen();
         } else {
           return const Scaffold(

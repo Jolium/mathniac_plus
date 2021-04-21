@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mathniac_plus/settings/constants.dart';
-import 'package:mathniac_plus/settings/vars.dart';
-import 'package:mathniac_plus/tasks/tasks_soundpool.dart';
+
+import '../settings/constants.dart';
+import '../settings/vars.dart';
+import '../tasks/tasks_soundpool.dart';
 
 class LevelUp extends StatelessWidget {
   final double _widthRatio = 5; // 1.1
@@ -14,7 +15,6 @@ class LevelUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     /// Play audio
-    // print('== PLAY LEVEL UP ==');
     SoundManager.instance.playSound(SOUND_ACTIONS.levelUp);
 
     final Size _screenSize = MediaQuery.of(context).size;

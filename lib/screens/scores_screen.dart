@@ -10,7 +10,7 @@ import '../settings/lists.dart';
 import '../settings/vars.dart';
 import '../tasks/admob_service.dart';
 import '../widgets/custom_header.dart';
-import '../widgets/my_button2.dart';
+import '../widgets/my_button.dart';
 import '../widgets/pop_up.dart';
 import 'home_screen.dart';
 
@@ -55,7 +55,7 @@ class _ScoresScreenState extends State<ScoresScreen> {
       size: AdSize.banner,
       listener: AdListener(
         onAdLoaded: (Ad ad) {
-          if (kShowPrints) print('$BannerAd loaded.');
+          // print('$BannerAd loaded.');
           setState(() {
             isLoaded = true;
           });
@@ -63,17 +63,17 @@ class _ScoresScreenState extends State<ScoresScreen> {
         },
         onAdFailedToLoad: (Ad ad, LoadAdError error) {
           ad.dispose();
-          if (kShowPrints) print('$BannerAd failedToLoad: $error');
+          // print('$BannerAd failedToLoad: $error');
           bannerCompleter.completeError(error);
         },
         onAdOpened: (Ad ad) {
-          if (kShowPrints) print('$BannerAd onAdOpened.');
+          // print('$BannerAd onAdOpened.');
         },
         onAdClosed: (Ad ad) {
-          if (kShowPrints) print('$BannerAd onAdClosed.');
+          // print('$BannerAd onAdClosed.');
         },
         onApplicationExit: (Ad ad) {
-          if (kShowPrints) print('$BannerAd onApplicationExit.');
+          // print('$BannerAd onApplicationExit.');
         },
       ),
     );
@@ -157,9 +157,7 @@ class _ScoresScreenState extends State<ScoresScreen> {
                           },
                         );
                       });
-                  if (kShowPrints) {
-                    print('\n== ${document.id} has no field [name] ==\n');
-                  }
+                  // print('\n== ${document.id} has no field [name] ==\n');
                 }
 
                 final String _score = document['score'].toString();
@@ -363,7 +361,7 @@ class _ScoresScreenState extends State<ScoresScreen> {
                   ),
                 ),
                 Expanded(child: _scoresListStreamer()),
-                SizedBox(height: _screenSize.height / 30),
+                SizedBox(height: _screenSize.height / 60),
                 MyButton(
                   onTap: () {},
                   text: ' Home ',

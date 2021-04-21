@@ -1,9 +1,6 @@
 import 'dart:io';
 import 'dart:math';
 
-// import 'package:assets_audio_player/assets_audio_player.dart';
-// import 'package:audioplayers/audio_cache.dart';
-// import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -111,6 +108,20 @@ void clearSelectedButtons(List<int> randomsList) {
   }
 }
 
+Color levelColor() {
+  if (vMagicLevel <= 3) {
+    return kColorGreen;
+  } else if (vMagicLevel <= 7) {
+    return kColorBlue;
+  } else if (vMagicLevel <= 11) {
+    return kColorViolet;
+  } else if (vMagicLevel <= 14) {
+    return kColorRed;
+  } else {
+    return kColorSilver;
+  }
+}
+
 // class AudioAssetsPlayer {
 // //create a new player
 //   final assetsAudioPlayer = AssetsAudioPlayer();
@@ -182,16 +193,4 @@ void clearSelectedButtons(List<int> randomsList) {
 //   }
 // }
 
-Color levelColor() {
-  if (vMagicLevel <= 3) {
-    return kColorGreen;
-  } else if (vMagicLevel <= 7) {
-    return kColorBlue;
-  } else if (vMagicLevel <= 11) {
-    return kColorViolet;
-  } else if (vMagicLevel <= 14) {
-    return kColorRed;
-  } else {
-    return kColorSilver;
-  }
-}
+

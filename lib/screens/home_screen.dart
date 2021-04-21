@@ -9,7 +9,7 @@ import '../settings/vars.dart';
 import '../tasks/providers.dart';
 import '../tasks/tasks_functions.dart';
 import '../widgets/custom_header.dart';
-import '../widgets/my_button2.dart';
+import '../widgets/my_button.dart';
 import 'authentication.dart';
 import 'game_screen.dart';
 import 'intro_screen.dart';
@@ -64,7 +64,6 @@ class HomeScreen extends StatelessWidget {
                   onTap: () {},
                   text: ' Settings ',
                   navigator: SettingsScreen(),
-                  // navigator: UploadScreen(),
                 ),
                 MyButton(
                   onTap: () async {
@@ -115,7 +114,7 @@ class HomeScreen extends StatelessWidget {
                     shadowText: levelColor(),
                   ),
                 ),
-                SizedBox(height: _screenSize.width / 30),
+                SizedBox(height: _screenSize.height / 60),
                 MyButton(
                   text: ' Play ',
                   onTap: checkLeaderboard()

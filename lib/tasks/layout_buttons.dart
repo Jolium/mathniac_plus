@@ -170,9 +170,6 @@ class ButtonsLayout extends StatelessWidget {
                       kColorBronze,
                       Colors.black,
                     ];
-
-          print('== Button $value');
-          print('== Button is selected: ${listIsSelected[i]} ==');
           return Container(
             alignment: Alignment.center,
             margin: EdgeInsets.all(_edgeInsets),

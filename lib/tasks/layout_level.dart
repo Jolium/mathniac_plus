@@ -5,9 +5,9 @@ import '../settings/constants.dart';
 import '../settings/lists.dart';
 
 class LevelsLayout extends StatelessWidget {
-  final double _widthRatio = 5; // 1.1
-  final double _heightRatio = 5; // 1.1
-  final double _borderRatio = 3; // 10
+  final double _widthRatio = 5;
+  final double _heightRatio = 5;
+  final double _borderRatio = 3;
   final double _marginRatio = 20;
   final double _textRatio = 3;
   final double _shadowRatio = 15;

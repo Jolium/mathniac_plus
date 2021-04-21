@@ -5,13 +5,12 @@ import 'package:flutter/rendering.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import '../settings/backgrounds.dart';
-import '../settings/constants.dart';
 import '../settings/lists.dart';
 import '../settings/vars.dart';
 import '../tasks/admob_service.dart';
 import '../tasks/tasks_functions.dart';
 import '../widgets/custom_header.dart';
-import '../widgets/my_button2.dart';
+import '../widgets/my_button.dart';
 import '../widgets/pop_up.dart';
 import 'home_screen.dart';
 
@@ -63,36 +62,35 @@ class _RewardScreenState extends State<RewardScreen> {
         adUnitId: _rewardedUnitId!,
         request: request,
         listener: AdListener(onAdLoaded: (Ad ad) {
-          if (kShowPrints) print('${ad.runtimeType} loaded.');
+          // print('${ad.runtimeType} loaded.');
           _rewardedReady = true;
           setState(() {
             _adButtonActive = true;
           });
         }, onAdFailedToLoad: (Ad ad, LoadAdError error) {
-          if (kShowPrints) print('${ad.runtimeType} failed to load: $error');
+          // print('${ad.runtimeType} failed to load: $error');
           ad.dispose();
           // _rewardedAd = null;
           createRewardedAd();
         }, onAdOpened: (Ad ad) {
-          if (kShowPrints) print('${ad.runtimeType} onAdOpened.');
+          // print('${ad.runtimeType} onAdOpened.');
         }, onAdClosed: (Ad ad) {
-          if (kShowPrints) print('${ad.runtimeType} closed.');
+          // print('${ad.runtimeType} closed.');
           ad.dispose();
           createRewardedAd();
         }, onApplicationExit: (Ad ad) {
-          if (kShowPrints) print('${ad.runtimeType} onApplicationExit.');
+          // print('${ad.runtimeType} onApplicationExit.');
         }, onRewardedAdUserEarnedReward: (RewardedAd ad, RewardItem reward) {
           UpdateValues().getNewLevelValue();
           vWatchAds = false;
-          if (kShowPrints) {
-            print(
-              '$RewardedAd with reward $RewardItem(${reward.amount}, ${reward.type})',
-            );
-          }
+          // print(
+          //   '$RewardedAd with reward $RewardItem(${reward.amount}, ${reward.type})',
+          // );
         }),
       )..load();
     } catch (e) {
-      print('== ERROR: $e ==');
+      /// Do something if error
+      // print('== ERROR: $e ==');
     }
   }
 
@@ -131,9 +129,7 @@ class _RewardScreenState extends State<RewardScreen> {
   void dispose() {
     _rewardedAd?.dispose();
 
-    /// Added myself
-    // _rewardedAd = null;
-
+    /// Cancel timer if navigate to other screen before reach 0
     if (timer!.isActive) {
       timer!.cancel();
     }

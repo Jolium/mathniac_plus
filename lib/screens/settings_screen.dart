@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 
 import '../settings/backgrounds.dart';
 import '../settings/constants.dart';
-// import '../settings/lists.dart';
 import '../settings/vars.dart';
 import '../tasks/task_hive.dart';
 import '../tasks/tasks_functions.dart';
 import '../widgets/custom_header.dart';
-import '../widgets/my_button2.dart';
+import '../widgets/my_button.dart';
 import 'home_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -70,11 +69,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
           /// TODO: on production delete from here ///
           onLongPress: () {
             setState(() {
-              /// TODO: change to 15
-              vMagicLevel = 14; // 15
+              vMagicLevel = 15;
               // listOfScorePoints[14] = 0;
               if (!kIsWeb) {
-                TaskHive().updateLevel(14); // 15
+                TaskHive().updateLevel(15);
                 // TaskHive().updateHighScore(0);
               }
               vBackground = true;

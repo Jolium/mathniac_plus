@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 /// AdMob settings
 // const String kTestDevice = 'B9D20103E9FE7FC4F19DD3A0A03C4BB8';
 const bool kTestAds = false; // TODO: In production = false
-const bool kShowPrints = false; // TODO: In production = false
+// const bool kShowPrints = false; // TODO: In production = false
 
 const String kAppName = 'Mathniac';
 

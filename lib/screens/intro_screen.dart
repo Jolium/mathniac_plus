@@ -6,7 +6,7 @@ import '../settings/backgrounds.dart';
 import '../settings/intro_content.dart';
 import '../settings/vars.dart';
 import '../widgets/custom_header.dart';
-import '../widgets/my_button2.dart';
+import '../widgets/my_button.dart';
 import 'home_screen.dart';
 
 class IntroScreen extends StatelessWidget {
@@ -47,7 +47,6 @@ class IntroScreen extends StatelessWidget {
                   const CustomHeader(text: ' Introduction '),
                   SizedBox(height: _screenSize.height / 30),
                   Container(
-                    // width: _buttonWidth,
                     alignment: Alignment.center,
                     padding: EdgeInsets.all(_edgeInsets),
                     decoration: BoxDecoration(
@@ -114,7 +113,6 @@ class IntroScreen extends StatelessWidget {
                     height: _screenSize.height / 30,
                   ),
                   Container(
-                    // width: _buttonWidth,
                     alignment: Alignment.center,
                     padding: EdgeInsets.all(_edgeInsets),
                     decoration: BoxDecoration(

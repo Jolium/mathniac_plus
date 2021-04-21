@@ -12,7 +12,7 @@ import '../tasks/custom_route.dart';
 import '../tasks/task_hive.dart';
 import '../tasks/tasks_functions.dart';
 import '../widgets/custom_header.dart';
-import '../widgets/my_button2.dart';
+import '../widgets/my_button.dart';
 import 'game_screen.dart';
 
 class UploadScreen extends StatefulWidget {
@@ -68,18 +68,18 @@ class _UploadScreenState extends State<UploadScreen> {
         listOfAllNames.add(a.id);
       }
     }
-    if (kShowPrints) print('listOfAllNames: $listOfAllNames');
+    // print('listOfAllNames: $listOfAllNames');
   }
 
   final _firebase = FirebaseFirestore.instance.collection("scores");
   final messageTextController = TextEditingController();
   final String _nickname = vNickname;
 
-  final double _widthRatio = 1.1; // 1.1
+  final double _widthRatio = 1.1;
   final double _heightRatio = 2;
   final double _borderRatio = 10;
   final double _marginRatio = 20;
-  final double _textRatio = 10; // 2.5
+  final double _textRatio = 10;
 
   Color _warningsColor = kColorRed;
   Color _warningsColorText1 = kColorRed;
@@ -355,13 +355,8 @@ class _UploadScreenState extends State<UploadScreen> {
                                   text: ' Upload ',
                                   active: vNickname == '' ? false : true,
                                   onTap: () {
-                                    if (kShowPrints) {
-                                      print('nickname1: $vNickname');
-                                    }
-                                    if (kShowPrints) {
-                                      print('Internet: $vInternetConnection');
-                                    }
-
+                                    // print('nickname1: $vNickname');
+                                    // print('Internet: $vInternetConnection');
                                     if (vInternetConnection) {
                                       if (listOfAllNames.contains(vNickname) &&
                                           _nicknameExist) {
