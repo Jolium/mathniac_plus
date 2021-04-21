@@ -136,7 +136,8 @@ List<int> listOfScorePoints = [
   450,
   500,
   550,
-  600,
+  /// TODO: change to 600
+  100, // 600
   0,
 ];
 

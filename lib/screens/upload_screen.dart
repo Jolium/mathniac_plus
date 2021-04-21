@@ -168,9 +168,7 @@ class _UploadScreenState extends State<UploadScreen> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                SizedBox(
-                                  height: _screenSize.height / 30,
-                                ),
+                                SizedBox(height: _screenSize.height / 60),
                                 const CustomHeader(
                                   text: ' Congratulations ',
                                 ),
@@ -223,9 +221,7 @@ class _UploadScreenState extends State<UploadScreen> {
                                     ),
                                   ),
                                 ),
-                                SizedBox(
-                                  height: _screenSize.height / 30,
-                                ),
+                                SizedBox(height: _screenSize.height / 30),
                                 Column(
                                   children: [
                                     Stack(
@@ -408,9 +404,7 @@ class _UploadScreenState extends State<UploadScreen> {
                                           ? GameScreen()
                                           : null,
                                 ),
-                                SizedBox(
-                                  height: _screenSize.height / 30,
-                                ),
+                                SizedBox(height: _screenSize.height / 80),
                               ],
                             ),
                           ),

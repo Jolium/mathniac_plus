@@ -43,13 +43,9 @@ class IntroScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(
-                    height: _screenSize.height / 30,
-                  ),
+                  SizedBox(height: _screenSize.height / 60),
                   const CustomHeader(text: ' Introduction '),
-                  SizedBox(
-                    height: _screenSize.height / 30,
-                  ),
+                  SizedBox(height: _screenSize.height / 30),
                   Container(
                     // width: _buttonWidth,
                     alignment: Alignment.center,
@@ -159,9 +155,7 @@ class IntroScreen extends StatelessWidget {
                     text: ' Home ',
                     navigator: HomeScreen(),
                   ),
-                  SizedBox(
-                    height: _screenSize.height / 30,
-                  ),
+                  SizedBox(height: _screenSize.height / 80),
                 ],
               ),
             ),

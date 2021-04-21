@@ -70,10 +70,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
           /// TODO: on production delete from here ///
           onLongPress: () {
             setState(() {
-              vMagicLevel = 15;
+              /// TODO: change to 15
+              vMagicLevel = 14; // 15
               // listOfScorePoints[14] = 0;
               if (!kIsWeb) {
-                TaskHive().updateLevel(15);
+                TaskHive().updateLevel(14); // 15
                 // TaskHive().updateHighScore(0);
               }
               vBackground = true;
@@ -135,7 +136,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: _screenSize.height / 30),
+                SizedBox(height: _screenSize.height / 60),
                 const CustomHeader(text: ' Settings '),
                 SizedBox(height: _screenSize.height / 10),
                 Row(
@@ -236,7 +237,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   text: ' Home ',
                   navigator: HomeScreen(),
                 ),
-                SizedBox(height: _screenSize.height / 30),
+                SizedBox(height: _screenSize.height / 80),
               ],
             ),
           ),

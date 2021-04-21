@@ -46,9 +46,7 @@ class GameScreen extends StatelessWidget {
         child: SafeArea(
           child: Column(
             children: [
-              SizedBox(
-                height: _screenSize.height / 60,
-              ),
+              SizedBox(height: _screenSize.height / 60),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -72,8 +70,7 @@ class GameScreen extends StatelessWidget {
                           text: _goalLevel.toString(),
                         ),
                       ),
-                      Consumer(
-                          builder: (context, watch, child) {
+                      Consumer(builder: (context, watch, child) {
                         final int _score = watch(scoreProvider.state);
                         return MyButton(
                           onTap: () {},
@@ -94,8 +91,7 @@ class GameScreen extends StatelessWidget {
                           text: ' Goal ',
                         ),
                       ),
-                      Consumer(
-                          builder: (context, watch, child) {
+                      Consumer(builder: (context, watch, child) {
                         final int _goalValue = watch(goalProvider.state);
                         return MyButton(
                           onTap: () {},
@@ -116,8 +112,7 @@ class GameScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Consumer(
-                      builder: (context, watch, child) {
+                  Consumer(builder: (context, watch, child) {
                     final bool isTicking = watch(gameTickingProvider.state);
                     final int actualScore = context.read(scoreProvider.state);
                     return MyButton(
@@ -142,8 +137,7 @@ class GameScreen extends StatelessWidget {
                     );
                   }),
                   StartButton(),
-                  Consumer(
-                      builder: (context, watch, child) {
+                  Consumer(builder: (context, watch, child) {
                     final bool isTicking = watch(gameTickingProvider.state);
                     final int actualScore = context.read(scoreProvider.state);
                     return MyButton(
@@ -169,9 +163,7 @@ class GameScreen extends StatelessWidget {
                   }),
                 ],
               ),
-              SizedBox(
-                height: _screenSize.height / 80,
-              ),
+              SizedBox(height: _screenSize.height / 80),
             ],
           ),
         ),

@@ -120,7 +120,8 @@ class _ScoresScreenState extends State<ScoresScreen> {
               if (snapshot.hasData) {
                 child = AdWidget(ad: _bannerAd!);
               } else {
-                child = Text('Error loading $BannerAd');
+                // child = Text('Error loading $BannerAd');
+                child = Container();
               }
           }
           return child;
@@ -322,15 +323,11 @@ class _ScoresScreenState extends State<ScoresScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
-                  height: _screenSize.height / 30,
-                ),
+                SizedBox(height: _screenSize.height / 60),
                 const CustomHeader(
                   text: ' Leaderboard ',
                 ),
-                SizedBox(
-                  height: _screenSize.height / 20,
-                ),
+                SizedBox(height: _screenSize.height / 30),
                 Visibility(
                   visible: !vInternetConnection,
                   child: Column(
@@ -361,20 +358,18 @@ class _ScoresScreenState extends State<ScoresScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: _screenSize.height / 30,
-                      ),
+                      SizedBox(height: _screenSize.height / 30),
                     ],
                   ),
                 ),
                 Expanded(child: _scoresListStreamer()),
-                SizedBox(height: _screenSize.height / 20),
+                SizedBox(height: _screenSize.height / 30),
                 MyButton(
                   onTap: () {},
                   text: ' Home ',
                   navigator: HomeScreen(),
                 ),
-                SizedBox(height: _screenSize.height / 30),
+                SizedBox(height: _screenSize.height / 80),
               ],
             ),
           ),

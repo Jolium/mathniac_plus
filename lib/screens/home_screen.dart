@@ -47,13 +47,9 @@ class HomeScreen extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: _screenSize.width / 30),
             child: Column(
               children: [
-                SizedBox(
-                  height: _screenSize.height / 30,
-                ),
+                SizedBox(height: _screenSize.height / 60),
                 const CustomHeader(text: ' Mathniac '),
-                SizedBox(
-                  height: _screenSize.height / 20,
-                ),
+                SizedBox(height: _screenSize.height / 20),
                 MyButton(
                   onTap: () {},
                   text: ' Intro ',
@@ -119,9 +115,7 @@ class HomeScreen extends StatelessWidget {
                     shadowText: levelColor(),
                   ),
                 ),
-                SizedBox(
-                  height: _screenSize.width / 30,
-                ),
+                SizedBox(height: _screenSize.width / 30),
                 MyButton(
                   text: ' Play ',
                   onTap: checkLeaderboard()
@@ -141,9 +135,7 @@ class HomeScreen extends StatelessWidget {
                   navigator:
                       checkLeaderboard() ? Authentication() : GameScreen(),
                 ),
-                SizedBox(
-                  height: _screenSize.height / 30,
-                ),
+                SizedBox(height: _screenSize.height / 80),
               ],
             ),
           ),

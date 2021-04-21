@@ -134,7 +134,7 @@ class _RewardScreenState extends State<RewardScreen> {
     /// Added myself
     // _rewardedAd = null;
 
-    if(timer!.isActive){
+    if (timer!.isActive) {
       timer!.cancel();
     }
 
@@ -167,9 +167,7 @@ class _RewardScreenState extends State<RewardScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
-                  height: _screenSize.height / 30,
-                ),
+                SizedBox(height: _screenSize.height / 60),
                 const CustomHeader(text: ' Level Up '),
                 Visibility(
                   visible: !vInternetConnection,
@@ -302,7 +300,7 @@ class _RewardScreenState extends State<RewardScreen> {
                 ),
                 const Spacer(),
                 MyButton(onTap: () {}, text: ' Home ', navigator: HomeScreen()),
-                SizedBox(height: _screenSize.height / 30),
+                SizedBox(height: _screenSize.height / 80),
               ],
             ),
           ),

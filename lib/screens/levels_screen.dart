@@ -29,9 +29,7 @@ class LevelsScreen extends StatelessWidget {
             : kBackgroundOff,
         child: SafeArea(
           child: Column(children: [
-            SizedBox(
-              height: _screenSize.height / 30,
-            ),
+            SizedBox(height: _screenSize.height / 60),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: _screenSize.width / 30),
               child: const CustomHeader(text: ' Unlocked Levels '),
@@ -123,9 +121,7 @@ class LevelsScreen extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(
-              height: _screenSize.height / 30,
-            ),
+            SizedBox(height: _screenSize.height / 80),
           ]),
         ),
       ),
