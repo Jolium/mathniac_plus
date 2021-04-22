@@ -16,8 +16,8 @@ class MyButton extends StatelessWidget {
     this.colorSecondary = Colors.black,
     this.shadow = Colors.black,
     this.iconRatio = 2,
-    this.widthRatio = 2.8, // 2.8
-    this.heightRatio = 5, // 5
+    this.widthRatio = 2.8,
+    this.heightRatio = 5,
     this.textRatio = 3,
     this.borderRatio = 3,
     this.marginRatio = 20,
@@ -67,11 +67,12 @@ class MyButton extends StatelessWidget {
 
     void _onTapDown(_) {
       if (active) {
+        /// Action on tap
+        /// Action must to come before sound to work properly when muting
+        onTap();
+
         /// Play audio
         SoundManager.instance.playSound(SOUND_ACTIONS.pressedButton);
-
-        /// Action on tap
-        onTap();
 
         /// Check if button is supposed to decrease size
         if (decreaseSizeOnTap) {
@@ -105,7 +106,6 @@ class MyButton extends StatelessWidget {
           width: _screenSize.width / widthRatio * _sizeRatio,
           height: _screenSize.width / heightRatio * _sizeRatio,
           child: Consumer(builder: (context, watch, child) {
-            // final double _sizedBox = watch(_sizedBoxProvider.state);
             final double _sizedBox = watch(_sizedBoxProvider).state;
             return SizedBox(
               width: _screenSize.width * _sizedBox / widthRatio * _sizeRatio,
