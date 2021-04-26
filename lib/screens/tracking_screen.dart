@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
     // Platform messages may fail, so we use a try/catch PlatformException.
     try {
       final TrackingStatus status =
-      await AppTrackingTransparency.trackingAuthorizationStatus;
+          await AppTrackingTransparency.trackingAuthorizationStatus;
       setState(() => _authStatus = '$status');
       // If the system can show an authorization request dialog
       if (status == TrackingStatus.notDetermined) {
@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
           await Future.delayed(const Duration(milliseconds: 200));
           // Request system's tracking authorization dialog
           final TrackingStatus status =
-          await AppTrackingTransparency.requestTrackingAuthorization();
+              await AppTrackingTransparency.requestTrackingAuthorization();
           setState(() => _authStatus = '$status');
         }
       }
@@ -54,14 +54,14 @@ class _HomePageState extends State<HomePage> {
         builder: (context) => AlertDialog(
           title: const Text('Dear User'),
           content: const Text(
-            'We care about your privacy and data security. We keep this app free by showing ads. '
-                'Can we continue to use your data to tailor ads for you?\n\nYou can change your choice anytime in the app settings. '
-                'Our partners will collect data and use a unique identifier on your device to show you ads.',
+            'We keep this app free by showing some few ads. '
+            'Can we continue to use your data to personalize ads for you? '
+            'The number of ads you see will not change.\n\nYou can change your choice anytime in the app settings. ',
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context, false),
-              child: const Text("I'll decide later"),
+              child: const Text("Decide later"),
             ),
             TextButton(
               onPressed: () => Navigator.pop(context, true),
@@ -70,7 +70,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ) ??
-          false;
+      false;
 
   @override
   Widget build(BuildContext context) {
