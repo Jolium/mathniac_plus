@@ -8,6 +8,7 @@ import '../settings/backgrounds.dart';
 import '../settings/vars.dart';
 import '../tasks/providers.dart';
 import '../tasks/tasks_functions.dart';
+import '../tasks/tracking_transparency.dart';
 import '../widgets/custom_header.dart';
 import '../widgets/my_button.dart';
 import 'authentication.dart';
@@ -34,6 +35,11 @@ class HomeScreen extends StatelessWidget {
     SystemChrome.setEnabledSystemUIOverlays([]);
 
     final Size _screenSize = MediaQuery.of(context).size;
+
+    /// App Tracking Transparency is needed for IOS
+    if (Platform.isIOS){
+      TrackingTransparency().initPlugin(context);
+    }
 
     return Scaffold(
       body: Container(
