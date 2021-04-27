@@ -61,8 +61,8 @@ class TrackingTransparency {
             ),
           ),
           content: const Text(
-            'We keep this app free by showing some few ads.\n'
-            'Can we use your data to personalize ads for you? '
+            'We keep this app free by showing some ads.\n'
+            'Tracking allow us to show you ads that match your interests. '
             'The number of ads you see will not change.\n\n'
             'You can change your choice anytime in the app settings.',
             textAlign: TextAlign.justify,
@@ -72,16 +72,16 @@ class TrackingTransparency {
             ),
           ),
           actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context, false),
-              child: const Text("Decide later"),
-            ),
+            // TextButton(
+            //   onPressed: () => Navigator.pop(context, false),
+            //   child: const Text("Decide later"),
+            // ),
             TextButton(
               onPressed: () => Navigator.pop(context, true),
-              child: const Text('Allow tracking'),
+              child: const Text('Continue'),
             ),
           ],
         ),
       ) ??
-      false;
+      true;
 }
