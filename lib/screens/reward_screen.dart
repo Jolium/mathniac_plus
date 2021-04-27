@@ -111,6 +111,9 @@ class _RewardScreenState extends State<RewardScreen> {
         vFirstStart = false;
       }
 
+      /// Start counter
+      counter();
+
       /// load ad in the beginning
       MobileAds.instance.initialize().then((InitializationStatus status) {
         // print('Initialization done: ${status.adapterStatuses}');
@@ -122,9 +125,6 @@ class _RewardScreenState extends State<RewardScreen> {
           createRewardedAd();
         });
       });
-
-      /// Start counter
-      counter();
 
       /// If NOT allowed to watch ads
     } else {

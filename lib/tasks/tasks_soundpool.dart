@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/services.dart';
 import 'package:soundpool/soundpool.dart';
 
@@ -5,6 +7,7 @@ import '../settings/vars.dart';
 
 enum SOUND_ACTIONS {
   beep,
+  beepIOS,
   beepEnd,
   correctSum,
   levelUp,
@@ -15,6 +18,7 @@ enum SOUND_ACTIONS {
 
 Map<SOUND_ACTIONS, String> actionMapping = {
   SOUND_ACTIONS.beep: "assets/sounds/beep.mp3",
+  SOUND_ACTIONS.beepIOS: "assets/sounds/beep.mp3",
   SOUND_ACTIONS.beepEnd: "assets/sounds/beep_end.mp3",
   SOUND_ACTIONS.correctSum: "assets/sounds/correct_sum.mp3",
   SOUND_ACTIONS.levelUp: "assets/sounds/level_up.mp3",
@@ -26,6 +30,7 @@ Map<SOUND_ACTIONS, String> actionMapping = {
 class SoundManager {
   Map<String, int> sounds = {};
   SoundManager._internal();
+  bool even = true;
 
   Future initSounds() async {
     await Future.forEach(actionMapping.keys, (element) async {
@@ -42,7 +47,19 @@ class SoundManager {
 
   Future<void> playSound(SOUND_ACTIONS action) async {
     if (vPlaySound) {
-      await pool.play(sounds[actionMapping[action]]!);
+      /// Permits faster sounds on IOS
+      if (Platform.isIOS && action == SOUND_ACTIONS.beep) {
+        if (even) {
+          await pool.play(sounds[actionMapping[SOUND_ACTIONS.beep]]!);
+        } else {
+          await pool.play(sounds[actionMapping[SOUND_ACTIONS.beepIOS]]!);
+        }
+        even = !even;
+
+        /// For Android and all IOS sounds not beep
+      } else {
+        await pool.play(sounds[actionMapping[action]]!);
+      }
     }
   }
 }
