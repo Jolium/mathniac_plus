@@ -22,7 +22,7 @@ Map<SOUND_ACTIONS, String> actionMapping = {
   SOUND_ACTIONS.correctSum: "assets/sounds/correct_sum.mp3",
   SOUND_ACTIONS.levelUp: "assets/sounds/level_up.mp3",
   SOUND_ACTIONS.pressedButton: "assets/sounds/pressed_button.mp3",
-  SOUND_ACTIONS.pressedButton2: "assets/sounds/pressed_button.mp3",
+  SOUND_ACTIONS.pressedButton2: "assets/sounds/pressed_button2.mp3",
   SOUND_ACTIONS.repeatedNumber: "assets/sounds/repeated_number.mp3",
   SOUND_ACTIONS.startAllButtons: "assets/sounds/start_all_buttons.mp3",
 };
@@ -56,7 +56,7 @@ class SoundManager {
         }
         even = !even;
 
-        /// For Android and all IOS sounds not beep
+        /// For Android and all IOS sounds not 'pressedButton'
       } else {
         await pool.play(sounds[actionMapping[action]]!);
       }
