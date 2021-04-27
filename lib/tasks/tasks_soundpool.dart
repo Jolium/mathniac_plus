@@ -7,22 +7,22 @@ import '../settings/vars.dart';
 
 enum SOUND_ACTIONS {
   beep,
-  beepIOS,
   beepEnd,
   correctSum,
   levelUp,
   pressedButton,
+  pressedButton2,
   repeatedNumber,
   startAllButtons,
 }
 
 Map<SOUND_ACTIONS, String> actionMapping = {
   SOUND_ACTIONS.beep: "assets/sounds/beep.mp3",
-  SOUND_ACTIONS.beepIOS: "assets/sounds/beep.mp3",
   SOUND_ACTIONS.beepEnd: "assets/sounds/beep_end.mp3",
   SOUND_ACTIONS.correctSum: "assets/sounds/correct_sum.mp3",
   SOUND_ACTIONS.levelUp: "assets/sounds/level_up.mp3",
   SOUND_ACTIONS.pressedButton: "assets/sounds/pressed_button.mp3",
+  SOUND_ACTIONS.pressedButton2: "assets/sounds/pressed_button.mp3",
   SOUND_ACTIONS.repeatedNumber: "assets/sounds/repeated_number.mp3",
   SOUND_ACTIONS.startAllButtons: "assets/sounds/start_all_buttons.mp3",
 };
@@ -48,11 +48,11 @@ class SoundManager {
   Future<void> playSound(SOUND_ACTIONS action) async {
     if (vPlaySound) {
       /// Permits faster sounds on IOS
-      if (Platform.isIOS && action == SOUND_ACTIONS.beep) {
+      if (Platform.isIOS && action == SOUND_ACTIONS.pressedButton) {
         if (even) {
-          await pool.play(sounds[actionMapping[SOUND_ACTIONS.beep]]!);
+          await pool.play(sounds[actionMapping[SOUND_ACTIONS.pressedButton]]!);
         } else {
-          await pool.play(sounds[actionMapping[SOUND_ACTIONS.beepIOS]]!);
+          await pool.play(sounds[actionMapping[SOUND_ACTIONS.pressedButton2]]!);
         }
         even = !even;
 
