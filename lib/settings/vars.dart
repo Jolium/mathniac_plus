@@ -29,3 +29,6 @@ int vLeaderboardScore = 0;
 
 /// Ads - only watch new ad after play once
 bool vWatchAds = true;
+
+/// Only ask for Tracking Transparency once after starting app
+bool vFirstStart = true;

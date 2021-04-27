@@ -17,6 +17,9 @@ class TrackingTransparency {
         if (await showCustomTrackingDialog(context)) {
           /// Wait for dialog popping animation
           await Future.delayed(const Duration(milliseconds: 200));
+
+          /// Request system's tracking authorization dialog
+          await AppTrackingTransparency.requestTrackingAuthorization();
         }
       }
     } catch (e) {
@@ -59,7 +62,7 @@ class TrackingTransparency {
           ),
           content: const Text(
             'We keep this app free by showing some few ads.\n'
-            'Can we continue to use your data to personalize ads for you? '
+            'Can we use your data to personalize ads for you? '
             'The number of ads you see will not change.\n\n'
             'You can change your choice anytime in the app settings.',
             textAlign: TextAlign.justify,

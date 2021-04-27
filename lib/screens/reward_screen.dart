@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -9,6 +10,7 @@ import '../settings/lists.dart';
 import '../settings/vars.dart';
 import '../tasks/admob_service.dart';
 import '../tasks/tasks_functions.dart';
+import '../tasks/tracking_transparency.dart';
 import '../widgets/custom_header.dart';
 import '../widgets/my_button.dart';
 import '../widgets/pop_up.dart';
@@ -103,6 +105,12 @@ class _RewardScreenState extends State<RewardScreen> {
     // print('vWatchAds: $vWatchAds');
     /// Check if allowed to watch ads
     if (vWatchAds) {
+      /// App Tracking Transparency is needed for IOS
+      if (Platform.isIOS && vFirstStart){
+        TrackingTransparency().initPlugin(context);
+        vFirstStart = false;
+      }
+
       /// load ad in the beginning
       MobileAds.instance.initialize().then((InitializationStatus status) {
         // print('Initialization done: ${status.adapterStatuses}');

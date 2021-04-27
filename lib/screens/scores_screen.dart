@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ import '../settings/constants.dart';
 import '../settings/lists.dart';
 import '../settings/vars.dart';
 import '../tasks/admob_service.dart';
+import '../tasks/tracking_transparency.dart';
 import '../widgets/custom_header.dart';
 import '../widgets/my_button.dart';
 import '../widgets/pop_up.dart';
@@ -41,6 +43,13 @@ class _ScoresScreenState extends State<ScoresScreen> {
   void initState() {
     super.initState();
 
+    /// App Tracking Transparency is needed for IOS
+    if (Platform.isIOS && vFirstStart){
+      TrackingTransparency().initPlugin(context);
+      vFirstStart = false;
+    }
+
+    /// Initialize mobile ads (AdMob)
     MobileAds.instance.initialize();
 
     _bannerAd = BannerAd(
