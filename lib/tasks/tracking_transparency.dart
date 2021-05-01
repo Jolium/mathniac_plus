@@ -41,6 +41,7 @@ class TrackingTransparency {
 
   Future<bool> showCustomTrackingDialog(BuildContext context) async =>
       await showDialog<bool>(
+        barrierDismissible: false,
         context: context,
         builder: (context) => AlertDialog(
           elevation: 24.0,
@@ -56,19 +57,19 @@ class TrackingTransparency {
             'Dear user',
             style: TextStyle(
               color: Colors.white,
-              fontSize: 16,
+              fontSize: 18.0,
               // fontFamily: kLetterType1,
             ),
           ),
           content: const Text(
-            'We keep this app free by showing some ads.\n'
-            'Tracking allow us to show you ads that match your interests. '
+            'We keep this app free by showing some ads.\n\n'
+            'Tracking allow us to show you ads that match your interests.\n'
             'The number of ads you see will not change.\n\n'
             'You can change your choice anytime in the app settings.',
             textAlign: TextAlign.justify,
             style: TextStyle(
               color: Colors.white,
-              fontSize: 14,
+              fontSize: 16.0,
             ),
           ),
           actions: [
@@ -78,7 +79,10 @@ class TrackingTransparency {
             // ),
             TextButton(
               onPressed: () => Navigator.pop(context, true),
-              child: const Text('Continue'),
+              child: const Text(
+                'Continue',
+                style: TextStyle(fontSize: 18.0),
+              ),
             ),
           ],
         ),
