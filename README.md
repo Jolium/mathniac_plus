@@ -1,4 +1,4 @@
-# mathniac_plus
+# Mathniac
 
 Mathniac the game
 
